@@ -24,7 +24,7 @@ const CallToAction = ({
 
 }: CallToActionProps) => {
     return (
-        <Section className={cn("my-20 lg:my-40", className)}>
+        <Section className={cn("my-20", className)}>
             <Container className='flex items-center min-h-dvh'>
                 <div className='grid md:grid-cols-2 gap-10'>
                     <div className={` flex items-center ${reverse && "col-start-2"}`}>

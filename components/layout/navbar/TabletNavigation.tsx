@@ -55,10 +55,12 @@ const TabletNavigation = ({ className = "" }: TabletNavigation) => {
   return (
     <motion.div
       data-lenis-prevent
-      className={cn("lg:h-[calc(100dvh-128px)] lg:mt-32 h-[calc(100dvh-84px)] mt-21 overflow-y-scroll touch-pan-y fixed bg-primary-lighter  inset-0", className)}
+      className={cn("lg:h-[calc(100dvh-128px)] lg:mt-32 h-[calc(100dvh-84px)] mt-21 overflow-y-scroll touch-pan-y fixed bg-primary-lighter inset-0",
+        isOpen ? "z-100 pointer-events-auto" : "-z-100 pointer-events-none",
+        className)}
       initial={false}
       animate={{
-        opacity: isOpen ? 1 : 0
+        opacity: isOpen ? 1 : 0,
       }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
     >

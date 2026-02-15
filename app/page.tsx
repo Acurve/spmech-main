@@ -8,6 +8,8 @@ import Products from "@/components/home/products/Products";
 import Stats from "@/components/home/stats/Stats";
 import FirstLoader from "@/components/loaders/FirstLoader";
 import CallToAction from "@/components/shared/CallToAction";
+import FAQs from "@/components/shared/faqs/FAQs";
+import { heroFaqData } from "@/constants/faqs";
 
 export default function Home() {
   return (
@@ -21,6 +23,7 @@ export default function Home() {
       <Benefits />
       <Ease />
       <Stats />
+      <FAQs faqList={heroFaqData} />
       <CallToAction />
     </>
   );
