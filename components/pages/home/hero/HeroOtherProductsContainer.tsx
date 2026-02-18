@@ -39,10 +39,10 @@ export const HeroOtherProductImage = () => {
   return (
     <div
       className={cn(
-        "absolute w-full h-full -z-1 flex items-center justify-center p-8 opacity-0 bg-primary-lighter transition-opacity duration-300",
+        "fixed w-full h-full -z-1 flex items-center justify-center opacity-0 transition-opacity duration-300",
         currentImg && "opacity-100"
       )}>
-      <img src={currentImg || undefined} alt="" className="w-full h-full object-contain" />
+      <img src={currentImg || undefined} alt="" className="w-full h-full object-cover" />
     </div>
   )
 }

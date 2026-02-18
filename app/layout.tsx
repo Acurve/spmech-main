@@ -34,6 +34,7 @@ export const metadata: Metadata = {
 };
 import LenisProvider from "@/components/providers/LenisProvider";
 import Footer from "@/components/layout/Footer";
+import { HeroVideoContextProvider } from "@/contexts/heroVideoContext";
 
 export default function RootLayout({
   children,
@@ -46,13 +47,16 @@ export default function RootLayout({
       <body
         className={`${budujSans.className} antialiased`}
       >
-        <Navbar />
-        <div className="main" id="main">
-          <LenisProvider>
-            {children}
-          </LenisProvider>
-          <Footer />
-        </div>
+        <LenisProvider>
+          <HeroVideoContextProvider>
+
+            <Navbar />
+            <div className="main" id="main">
+              {children}
+              <Footer />
+            </div>
+          </HeroVideoContextProvider>
+        </LenisProvider>
       </body>
     </html>
   );

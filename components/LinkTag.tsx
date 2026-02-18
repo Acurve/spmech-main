@@ -7,11 +7,11 @@ import { cn } from '@/lib/utils'
 
 
 type LinkVariant =
-    | "hover-button-primary"
-    | "hover-button-black"
     | "hover-underline"
-    | "hover-primary-color"
+    | "hover-underline-white"
     | "button-black"
+    | "button-primary"
+    | "button-outline"
     | "custom"
 
 type LinkTagProps = PropsWithChildren<{
@@ -21,6 +21,41 @@ type LinkTagProps = PropsWithChildren<{
     notLink?: boolean
 } & HTMLAttributes<HTMLAnchorElement>>
 
+const common = {
+    base: {
+
+        button: "h-[52px] px-6 rounded-full flex items-center transition-all duration-500 w-max",
+        link: "",
+        underLineLink: `
+        relative 
+        
+        transition-all
+        duration-500
+        after:absolute 
+        after:left-0 
+        after:right-0 
+        after:-bottom-1.5   
+        after:h-[1.5px] 
+        after:w-full 
+        after:origin-right  
+        after:scale-x-0  
+        after:bg-current 
+        after:transition-transform  
+        after:duration-500 
+        after:will-change-transform 
+        after:transform-gpu
+        `
+    },
+    hover: {
+        button: "",
+        link: "",
+        underLineLink: `
+            hover:after:origin-left 
+            hover:after:scale-x-100
+        `
+    }
+}
+
 const variantClasses: Record<LinkVariant, {
     base?: string
     hover?: string
@@ -29,54 +64,31 @@ const variantClasses: Record<LinkVariant, {
     custom: {},
 
     "hover-underline": {
-        base: `
-            relative 
-            text-primary-light
-            transition-all
-            duration-500
-            after:absolute 
-            after:left-0 
-            after:right-0 
-            after:-bottom-1.5   
-            after:h-[1.5px] 
-            after:w-full 
-            after:origin-right  
-            after:scale-x-0  
-            after:bg-current 
-            after:transition-transform  
-            after:duration-500 
-            after:will-change-transform 
-            after:transform-gpu`,
-        hover: `
-            hover:text-black
-            hover:after:origin-left 
-            hover:after:scale-x-100
-            `,
+        base: `text-primary-light ${common.base.underLineLink}`,
+        hover: `hover:text-black ${common.hover.underLineLink}`,
         active: "after:scale-x-100 text-black!"
     },
-
-    "hover-primary-color": {
-        base: "transition-all duration-500",
-        hover: "hover:text-primary",
-        active: "text-primary"
+    "hover-underline-white": {
+        base: `text-white ${common.base.underLineLink}`,
+        hover: `${common.hover.underLineLink}`,
+        active: "after:scale-x-100"
     },
 
-    "hover-button-primary": {
-        base: "h-[52px] px-6 rounded-4xl overflow-hidde flex items-center transition-all duration-500 w-max border border-primary text-primary bg-white",
-        hover: "hover:bg-primary hover:text-white",
-        active: "bg-primary text-white"
-    },
-
-    "hover-button-black": {
-        base: "h-[52px] px-6 rounded-full flex items-center transition-all duration-500 w-max border border-primary-foreground text-primary-foreground",
+    "button-outline": {
+        base: `${common.base.button} border border-primary-foreground text-primary-foreground`,
         hover: "hover:bg-primary-foreground hover:text-white",
         active: "bg-primary-foreground text-white"
     },
 
-    "button-black": {
-        base: "h-[52px] px-6 rounded-full flex items-center transition-all duration-500 w-max text-white bg-primary-foreground",
-        hover: "hover:bg-primary-foreground",
+    "button-primary": {
+        base: `${common.base.button} text-primary-foreground bg-primary-orange-lighter`,
+        hover: "hover:bg-primary-foreground hover:text-white",
         active: "bg-primary-foreground text-white"
+    },
+    "button-black": {
+        base: `${common.base.button} text-white bg-primary-foreground`,
+        hover: "",
+        active: ""
     }
 }
 

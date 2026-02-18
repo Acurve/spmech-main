@@ -1,6 +1,6 @@
 import Container from '@/components/layout/Container'
 import Section from '@/components/layout/Section'
-import { PX18, PX24, PX30, PX50 } from '@/components/typography/TextSize'
+import { PX24, PX30, PX50 } from '@/components/typography/TextSize'
 
 type DifferentiatorImageContainerProps = {
     imageSrc: string,

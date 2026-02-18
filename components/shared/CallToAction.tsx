@@ -3,7 +3,7 @@ import Container from '../layout/Container'
 import { CallToActionSectionText, CallToActionText as CallToActionLinkText } from '@/constants/callToAction'
 import { cn } from '@/lib/utils'
 import ImageParallax from '../animations/ImageParallax'
-import { PX18, PX50, PXCustom } from '../typography/TextSize'
+import { PX18, PXCustom } from '../typography/TextSize'
 import LinkTag from '../LinkTag'
 type CallToActionProps = {
     className?: string,

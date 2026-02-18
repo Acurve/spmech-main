@@ -8,9 +8,10 @@ import Container from '../Container'
 
 import { motion } from "motion/react"
 import { useState } from 'react'
+import { useHeroVideoState } from '@/contexts/heroVideoContext'
 const DesktopNavigation = ({ className = "" }: { className?: string }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
-
+    const { currentImg } = useHeroVideoState()
 
     return (
         <div className={cn("", className)}>
@@ -27,6 +28,7 @@ const DesktopNavigation = ({ className = "" }: { className?: string }) => {
                         >
 
                             <LinkTag
+                                variant={currentImg ? "hover-underline-white" : "hover-underline"}
                                 href={link.href}
                                 notLink={link.type === 'dropdown'}>
                                 <PX18 className='font-medium'>

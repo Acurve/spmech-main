@@ -50,19 +50,19 @@ const navigationLinks: NavigationLinks = [
                 id: "019c3190-233b-7b14-8ebb-86593867fe0b",
                 name: "CNC machine",
                 href: "",
-                imageSrc: "images/cnc.webp"
+                imageSrc: "images/hero/cnc.webp"
             },
             {
                 id: "019c3190-233b-d8d4-8ebb-86593867fe0b",
                 name: "Hinges machine",
                 href: "",
-                imageSrc: "images/hinges.webp"
+                imageSrc: "images/hero/hinges.webp"
             },
             {
                 id: "019c3190-233b-6s4d-8ebb-86593867fe0b",
                 name: "Lock machine",
                 href: "",
-                imageSrc: "images/lock.webp"
+                imageSrc: "images/hero/locks.webp"
             },
         ]
     },

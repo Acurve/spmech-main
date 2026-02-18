@@ -1,4 +1,4 @@
-import { StatItemProps } from "@/components/home/stats/StatItem"
+import { StatItemProps } from "@/components/pages/home/stats/StatItem"
 import { Accuracy, CountriesServed, Experience, MachineInstalled } from "./statSvgs"
 
 export type Stat = Pick<StatItemProps, "decimals" | "label" | "value" | "suffix" | "icon"> & { id: string }

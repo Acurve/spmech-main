@@ -5,8 +5,6 @@ import Section from '@/components/layout/Section'
 import LinkTag from '@/components/LinkTag'
 import { PX16, PX18, PX50, PX30 } from '@/components/typography/TextSize'
 
-
-
 const Introduction = () => {
 
     return (
@@ -23,7 +21,7 @@ const Introduction = () => {
                         </Fade>
                         <Fade from='down'>
 
-                            <LinkTag href='/about' variant='hover-button-black' className='bg-primary-orange-lighter border-none hidden! lg:flex!'>
+                            <LinkTag href='/about' variant='button-black' className='hidden! lg:flex!'>
                                 <PX16 className='font-medium'>
 
                                     about our company
@@ -70,7 +68,7 @@ const Introduction = () => {
                         </div>
                     </div>
                     <div className='flex lg:hidden'>
-                        <LinkTag href='/about' variant='hover-button-black' className='bg-primary-lighter border-none '>
+                        <LinkTag href='/about' variant='button-black'>
                             <PX16 className='font-medium'>
 
                                 about our company

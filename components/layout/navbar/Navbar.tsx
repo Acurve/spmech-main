@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Container from "../Container"
 import LinkTag from "@/components/LinkTag"
-import { PX16, PX18 } from "@/components/typography/TextSize"
+import { PX18 } from "@/components/typography/TextSize"
 import { cn } from "@/lib/utils"
 import NavbarHamBurger from "./NabarHamburger"
 import DesktopNavigation from "./DesktopNavigation"
@@ -36,7 +36,7 @@ const NavbarCTA = ({ className = "" }: { className?: string }) => {
 
     return (
         <div className={cn("flex items-center gap-8", className)}>
-            <LinkTag variant="hover-button-black" className="hidden! bg-primary-orange-lighter border-none sm:flex!">
+            <LinkTag variant="button-primary" className="hidden! sm:flex!">
                 <PX18 className="font-bold px-12!">{CallToActionText}</PX18>
             </LinkTag>
 

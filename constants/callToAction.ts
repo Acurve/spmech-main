@@ -1,2 +1,2 @@
-export const CallToActionSectionText = "Let’s build something precise, powerful, and reliable"
+export const CallToActionSectionText = "Let’s build something Precise, Powerful, and Reliable"
 export const CallToActionText = "start your project"

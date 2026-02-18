@@ -2,6 +2,8 @@
 import { ReactNode } from 'react'
 import { motion, useInView } from 'motion/react'
 import { useRef } from 'react'
+import { useHeroVideoState } from '@/contexts/heroVideoContext'
+import { cn } from '@/lib/utils'
 
 type FadeProps = {
     from: "up" | "down" | "right" | "left"
@@ -49,6 +51,8 @@ const Fade = ({
         return { x: 0, y: 0, opacity: 1 }
     }
 
+    const {currentImg} = useHeroVideoState()
+
     return (
         <motion.div
             ref={ref}
@@ -59,7 +63,7 @@ const Fade = ({
                 delay,
                 ease: "easeOut"
             }}
-            className={className}
+            className={cn("",currentImg && "text-white transition-colors duration-500",className)}
         >
             {children}
         </motion.div>

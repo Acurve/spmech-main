@@ -39,17 +39,17 @@ const ProductsContainer = ({ className = "" }: { className?: string }) => {
         <div className={cn('grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-4', className)}>
             <div>
                 <LinkTag className='group/product' href='' variant='custom'>
-                    <SingleProductContainer imageSrc='images/cnc.webp' text='CNC Machines' />
+                    <SingleProductContainer imageSrc='images/products/cnc.webp' text='CNC Machines' />
                 </LinkTag>
             </div>
             <div>
                 <LinkTag className='group/product' href='' variant='custom'>
-                    <SingleProductContainer imageSrc='images/hinges.webp' text='Hinges Machines' />
+                    <SingleProductContainer imageSrc='images/products/hinges.webp' text='Hinges Machines' />
                 </LinkTag>
             </div>
             <div>
                 <LinkTag className='group/product' href='' variant='custom'>
-                    <SingleProductContainer imageSrc='images/lock.webp' text='Lock Machines' />
+                    <SingleProductContainer imageSrc='images/products/lock.webp' text='Lock Machines' />
                 </LinkTag>
             </div>
         </div>
