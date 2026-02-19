@@ -30,7 +30,7 @@ const CardContainer = ({
     }, [scrollYProgress, onVisible, src])
 
     return (
-        <div className='relative h-[200dvh]'>
+        <div className='relative h-[150dvh]'>
 
             <Section className='sticky flex justify-center items-center  top-0 h-screen'>
                 <motion.div
@@ -51,7 +51,7 @@ const DesktopBenefits = ({ className = "" }: { className?: string }) => {
 
     return (
         <div>
-            <Section className={cn('relative h-[600dvh]', className)}>
+            <Section className={cn('relative h-[450dvh]', className)}>
                 <div className='sticky top-0 h-screen w-full -z-10'>
                     <div className='absolute w-full h-full z-1000 flex items-center'>
 

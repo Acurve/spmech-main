@@ -31,9 +31,9 @@ const FooterContactDetails = ({ className = '' }: { className?: string }) => {
     <div className={cn('flex flex-col gap-8', className)}>
       <PX18 className='font-bold text-primary-orange'>Get In Touch</PX18>
       <ul className='space-y-4'>
-        <FooterContactDetailsItem href='' icon={<IconMail />} itemName='Email' itemValue='contact@spmech.com' />
-        <FooterContactDetailsItem href='' icon={<IconPhone />} itemName='Phone' itemValue='+91 953157682' />
-        <FooterContactDetailsItem href='' icon={<IconLocation />} itemName='Address' itemValue='Jamnagar, gujarat, india - 361005' />
+        <FooterContactDetailsItem href='mailto:contact@spmech.com' icon={<IconMail />} itemName='Email' itemValue='contact@spmech.com' />
+        <FooterContactDetailsItem href='tel:+919531576820' icon={<IconPhone />} itemName='Phone' itemValue='+91 95315 76820' />
+        <FooterContactDetailsItem href='https://maps.google.com/?q=Jamnagar+Gujarat+India' icon={<IconLocation />} itemName='Address' itemValue='Jamnagar, Gujarat, India - 361005' />
       </ul>
     </div>
   )
@@ -53,11 +53,11 @@ const FooterTop = () => {
         </div>
         <div id='footer links' className=''>
           <ul className='flex flex-col min-[360px]:flex-row gap-4 font-medium'>
-            <li><LinkTag className='text-black!'><PX16>Home</PX16></LinkTag></li>
-            <li><LinkTag className='text-black!'><PX16>About</PX16></LinkTag></li>
-            <li><LinkTag className='text-black!'><PX16>contact</PX16></LinkTag></li>
-            <li><LinkTag className='text-black!'><PX16>Blog</PX16></LinkTag></li>
-            <li><LinkTag className='text-black!'><PX16>products</PX16></LinkTag></li>
+            <li><LinkTag href='/' className='text-black!'><PX16>Home</PX16></LinkTag></li>
+            <li><LinkTag href='/about' className='text-black!'><PX16>About</PX16></LinkTag></li>
+            <li><LinkTag href='/contact' className='text-black!'><PX16>Contact</PX16></LinkTag></li>
+            <li><LinkTag href='/blog' className='text-black!'><PX16>Blog</PX16></LinkTag></li>
+            <li><LinkTag href='/products' className='text-black!'><PX16>Products</PX16></LinkTag></li>
           </ul>
         </div>
       </div>
@@ -78,8 +78,8 @@ const FooterMiddle = () => {
       </div>
       <div className='flex justify-between lg:w-[50%] flex-col gap-10 sm:gap-0 sm:flex-row'>
         <div className='space-x-8 font-medium '>
-          <LinkTag className='text-black!'><PX16>Privacy policy</PX16></LinkTag>
-          <LinkTag className='text-black!'><PX16>Terms and condition</PX16></LinkTag>
+          <LinkTag href='/privacy-policy' className='text-black!'><PX16>Privacy Policy</PX16></LinkTag>
+          <LinkTag href='/terms-and-conditions' className='text-black!'><PX16>Terms & Conditions</PX16></LinkTag>
         </div>
         <div>
           <PX16 className='font-medium'>&copy; 2026 SP Mech</PX16>
@@ -94,7 +94,7 @@ const FooterBottom = () => {
     <div>
       <div className='flex justify-center space-x-2'>
         <PX16 className='text-muted-foreground'>Designed & Developed by:</PX16>
-        <LinkTag className='text-black! font-medium'>
+        <LinkTag href='https://acurve.in' className='text-black! font-medium'>
           <PX16>Acurve.in</PX16>
         </LinkTag>
 

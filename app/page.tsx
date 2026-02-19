@@ -1,5 +1,5 @@
 import Benefits from "@/components/pages/home/benefits/Benefits";
-import Differentiator from "@/components/pages/home/differentiator/Differentiator";
+
 import Ease from "@/components/pages/home/ease/Ease";
 import Features from "@/components/pages/home/features/Features";
 import Hero from "@/components/pages/home/hero/Hero";
@@ -19,7 +19,6 @@ export default function Home() {
       <Introduction />
       <Products />
       <Features />
-      <Differentiator />
       <Benefits />
       <Ease />
       <Stats />

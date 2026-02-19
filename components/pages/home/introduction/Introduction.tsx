@@ -63,7 +63,7 @@ const Introduction = () => {
                                 <PX30 className=' w-max font-medium leading-[1.2] text-muted-foreground/20'>service of</PX30>
                             </TextReveal>
                             <TextReveal>
-                                <PX30 className=' w-max font-medium leading-[1.2] text-muted-foreground/20'>heat pumps.</PX30>
+                                <PX30 className=' w-max font-medium leading-[1.2] text-muted-foreground/20'>CNC machines.</PX30>
                             </TextReveal>
                         </div>
                     </div>
