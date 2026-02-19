@@ -70,10 +70,18 @@ const FooterMiddle = () => {
     <div className='flex flex-col lg:flex-row gap-10 lg:gap-0'>
       <div className='lg:w-[50%]'>
         <div className='flex gap-8'>
-          <IconBrandFacebook />
-          <IconBrandInstagram />
-          <IconBrandYoutube />
-          <IconBrandLinkedin />
+          <a href='https://facebook.com/spmech' target='_blank' rel='noopener noreferrer' aria-label='Facebook' className='hover:text-primary-orange transition-colors duration-300'>
+            <IconBrandFacebook />
+          </a>
+          <a href='https://instagram.com/spmech' target='_blank' rel='noopener noreferrer' aria-label='Instagram' className='hover:text-primary-orange transition-colors duration-300'>
+            <IconBrandInstagram />
+          </a>
+          <a href='https://youtube.com/@spmech' target='_blank' rel='noopener noreferrer' aria-label='YouTube' className='hover:text-primary-orange transition-colors duration-300'>
+            <IconBrandYoutube />
+          </a>
+          <a href='https://linkedin.com/company/spmech' target='_blank' rel='noopener noreferrer' aria-label='LinkedIn' className='hover:text-primary-orange transition-colors duration-300'>
+            <IconBrandLinkedin />
+          </a>
         </div>
       </div>
       <div className='flex justify-between lg:w-[50%] flex-col gap-10 sm:gap-0 sm:flex-row'>

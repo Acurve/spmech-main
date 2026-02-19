@@ -18,11 +18,11 @@ const NavbarBranding = () => {
     }
     return (
         <div>
-            <LinkTag href="" variant="custom" className="hidden md:flex flex-col items-center">
+            <LinkTag href="/" variant="custom" className="hidden md:flex flex-col items-center">
                 <Image src={"brandLogo.svg"} alt="SP Mech" width={logoDimension.width} height={logoDimension.height} />
                 {/* <PX18 className="font-medium text-black">SP Engineering</PX18> */}
             </LinkTag>
-            <LinkTag href="" variant="custom" className="flex flex-col items-center md:hidden">
+            <LinkTag href="/" variant="custom" className="flex flex-col items-center md:hidden">
                 <Image src={"brandLogo.svg"} alt="SP Mech" width={logoDimension.width - 10} height={logoDimension.height - 10} />
                 {/* <PX16 className="font-medium text-white">SP Engineering</PX16> */}
             </LinkTag>
@@ -36,7 +36,7 @@ const NavbarCTA = ({ className = "" }: { className?: string }) => {
 
     return (
         <div className={cn("flex items-center gap-8", className)}>
-            <LinkTag variant="button-primary" className="hidden! sm:flex!">
+            <LinkTag href="/contact" variant="button-primary" className="hidden! sm:flex!">
                 <PX18 className="font-bold px-12!">{CallToActionText}</PX18>
             </LinkTag>
 
