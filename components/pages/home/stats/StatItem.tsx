@@ -50,7 +50,7 @@ const StatItem = ({
             <div className=" flex justify-center w-28  mx-auto">
                 {icon}
             </div>
-            <PX50 className="font-bold leading-none">
+            <PX50 className="font-bold leading-none text-primary-orange">
                 <motion.span>
                     {formatted}
                 </motion.span>
