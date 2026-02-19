@@ -30,7 +30,7 @@ const CallToAction = ({
                     <div className={` flex items-center ${reverse && "col-start-2"}`}>
                         <div className='space-y-8 md:pr-10 xl:px-16'>
                             <PXCustom tag='h2' className='font-medium leading-[1.1] text-[40px]! xl:text-[50px]!'>{text}</PXCustom>
-                            <LinkTag href={linkHref} variant='button-black' className='w-full! md:w-max! '>
+                            <LinkTag href={linkHref} variant='button-primary' className='w-full! md:w-max! '>
                                 <PX18 className='text-center font-medium w-full'>
                                     {linkText}
                                 </PX18>

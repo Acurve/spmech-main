@@ -29,7 +29,7 @@ const FooterContactDetailsItem = ({ icon, itemName, itemValue, href }: FooterCon
 const FooterContactDetails = ({ className = '' }: { className?: string }) => {
   return (
     <div className={cn('flex flex-col gap-8', className)}>
-      <PX18 className='font-bold'>Get In Touch</PX18>
+      <PX18 className='font-bold text-primary-orange'>Get In Touch</PX18>
       <ul className='space-y-4'>
         <FooterContactDetailsItem href='' icon={<IconMail />} itemName='Email' itemValue='contact@spmech.com' />
         <FooterContactDetailsItem href='' icon={<IconPhone />} itemName='Phone' itemValue='+91 953157682' />
@@ -107,7 +107,7 @@ const Footer = () => {
   return (
     <footer>
       <Container>
-        <hr className='border border-muted-foreground'/>
+        <hr className='border border-primary-orange/30'/>
         <div className='pt-20 pb-10 space-y-20'>
 
           <FooterTop />

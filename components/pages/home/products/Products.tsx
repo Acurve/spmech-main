@@ -22,7 +22,7 @@ const SingleProductContainer = ({ imageSrc, text, className = "" }: SingleProduc
             <div className='absolute bottom-4 right-0 left-0 z-3'>
                 <div
                     className='h-13 px-6 rounded-full flex items-center transition-all duration-500 border border-black group-hover/product:mx-4 group-hover/product:border-white group-hover/product:bg-white justify-between'>
-                    <PX18 className='font-bold'>View all</PX18>
+                    <PX18 className='font-bold group-hover/product:text-primary-orange'>View all</PX18>
                     <div className='flex h-full items-center w-6 overflow-hidden'>
                         <IconArrowRight className='flex-none -translate-x-full group-hover/product:translate-x-0 transition-transform duration-500' />
                         <IconArrowRight className='flex-none -translate-x-full group-hover/product:translate-x-0 transition-transform duration-500' />
@@ -62,7 +62,7 @@ const Products = () => {
             <Container className='px-0! md:px-8!'>
                 <div className='bg-primary-lighter rounded-3xl p-6 md:p-19 py-12 lg::pb-35.5 space-y-12'>
                     <div>
-                        <PX18 className="font-bold">Products</PX18>
+                        <PX18 className="font-bold text-primary-orange">Products</PX18>
                     </div>
                     <ProductsContainer />
                 </div>

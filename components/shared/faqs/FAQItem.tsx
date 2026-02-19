@@ -33,7 +33,7 @@ const FAQItem = ({
                     className="w-full py-8 flex items-start justify-between text-left focus:outline-none"
                 >
                     <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-12">
-                        <PX14 className="uppercase tracking-widest text-muted-foreground group-hover:text-primary-foreground transition-colors duration-300 w-12 my-auto shrink-0">
+                        <PX14 className="uppercase tracking-widest text-primary-orange group-hover:text-primary-orange transition-colors duration-300 w-12 my-auto shrink-0">
                             0{index}
                         </PX14>
                         <span className="text-xl md:text-3xl font-light tracking-tight group-hover:translate-x-2 transition-transform duration-500 ease-out text-primary-foreground">

@@ -11,12 +11,12 @@ const BenefitCard = ({ heading, description, mainBenefitStat, className = "" }: 
         <>
             <div className={cn('p-6 lg:w-140 w-102 bg-white rounded-xl md:flex flex-col gap-4 hidden', className)}>
                 <PX30 className='font-medium capitalize'>{heading}</PX30>
-                <PX50 className='font-bold'>{mainBenefitStat}</PX50>
+                <PX50 className='font-bold text-primary-orange'>{mainBenefitStat}</PX50>
                 <PX18 className='font-medium'>{description}</PX18>
             </div>
             <div className={cn('p-6 lg:w-140 w-102 bg-white rounded-xl flex flex-col md:hidden gap-4', className)}>
                 <PX24 className='font-medium capitalize'>{heading}</PX24>
-                <PX30 className='font-bold'>{mainBenefitStat}</PX30>
+                <PX30 className='font-bold text-primary-orange'>{mainBenefitStat}</PX30>
                 <PX18 className='font-medium'>{description}</PX18>
             </div>
         </>

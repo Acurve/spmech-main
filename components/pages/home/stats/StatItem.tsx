@@ -58,7 +58,7 @@ const StatItem = ({
                     {suffix}
                 </motion.span>
             </PX50>
-            <div className="w-12 h-1 bg-primary-orange-lighter mx-auto" />
+            <div className="w-12 h-1 bg-primary-orange mx-auto" />
             <PX18 className="font-medium">{label}</PX18>
         </div>
     )

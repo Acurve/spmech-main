@@ -26,7 +26,7 @@ const Hero = () => {
             </Fade>
             <div className='mb-8 w-full grid grid-cols-3 items-center'>
               <HeroVideoPlayPauseBtn />
-              <a href='#introduction' className='px-8 h-13 w-max mx-auto rounded-full text-white bg-black/90 hover:bg-black flex justify-center items-center'>
+              <a href='#introduction' className='px-8 h-13 w-max mx-auto rounded-full text-white bg-primary-orange hover:bg-primary-orange/90 flex justify-center items-center'>
                 <IconArrowDown className='animate-bounce' size={28} />
               </a>
               <HeroOtherProductsContainer />

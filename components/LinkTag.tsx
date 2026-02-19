@@ -81,7 +81,7 @@ const variantClasses: Record<LinkVariant, {
     },
 
     "button-primary": {
-        base: `${common.base.button} text-primary-foreground bg-primary-orange-lighter`,
+        base: `${common.base.button} text-white bg-primary-orange`,
         hover: "hover:bg-primary-foreground hover:text-white",
         active: "bg-primary-foreground text-white"
     },

@@ -21,7 +21,7 @@ const Introduction = () => {
                         </Fade>
                         <Fade from='down'>
 
-                            <LinkTag href='/about' variant='button-black' className='hidden! lg:flex!'>
+                            <LinkTag href='/about' variant='button-primary' className='hidden! lg:flex!'>
                                 <PX16 className='font-medium'>
 
                                     about our company
@@ -68,7 +68,7 @@ const Introduction = () => {
                         </div>
                     </div>
                     <div className='flex lg:hidden'>
-                        <LinkTag href='/about' variant='button-black'>
+                        <LinkTag href='/about' variant='button-primary'>
                             <PX16 className='font-medium'>
 
                                 about our company

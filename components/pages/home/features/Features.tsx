@@ -10,7 +10,7 @@ import Expand from "@/public/icons/expand.json"
 const FeatureIcon = ({ icon, text }: { icon: ReactNode, text: string }) => {
     return (
         <div className='space-y-2 text-center'>
-            <div className='w-24 aspect-square rounded-4xl border-white border flex items-center justify-center'>
+            <div className='w-24 aspect-square rounded-4xl border-primary-orange border flex items-center justify-center'>
                 {icon}
             </div>
             <PX18 className='font-medium' >{text}</PX18>
