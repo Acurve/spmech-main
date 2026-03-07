@@ -3,7 +3,7 @@ import TabletBenefits from './TabletBenefits'
 
 const Benefits = () => {
   return (
-    <div className='mt-20 lg:mt-40'>
+    <div>
       <DesktopBenefits className='hidden md:block' />
       <TabletBenefits className='block md:hidden' />
     </div>

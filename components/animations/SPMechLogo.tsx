@@ -135,8 +135,13 @@ const SPMechLogo = ({ className = "w-72 aspect-square" }) => {
 
     }
     useEffect(() => {
-        playAnimation()
-    }, [])
+    playAnimation()
+
+    const interval = setInterval(playAnimation, 3000)
+
+    return () => clearInterval(interval)
+}, [])
+
 
     return (
         <div>
@@ -227,4 +232,3 @@ const SPMechLogo = ({ className = "w-72 aspect-square" }) => {
 };
 
 export default SPMechLogo;
-

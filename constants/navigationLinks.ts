@@ -1,3 +1,5 @@
+import { categoriesList as source, CategoryDetails } from "./categories"
+
 type BaseNavigationItems = {
     id: string,
     name: string,
@@ -9,14 +11,11 @@ type LinkNavigationItems = BaseNavigationItems & {
     href: string
     subLinks?: never
 }
+
+export type SubLink = Pick<CategoryDetails, "name" | "description" | "href"> & { id: string, imageSrc: string }
 export type DropdownNavigationItems = BaseNavigationItems & {
     type: "dropdown"
-    subLinks: {
-        id: string,
-        name: string,
-        href: string,
-        imageSrc: string,
-    }[],
+    subLinks: SubLink[],
     href?: never
 }
 
@@ -43,26 +42,29 @@ const navigationLinks: NavigationLinks = [
     },
     {
         id: "019c3190-233b-7b6b-88e4-cc51e6b91907",
-        name: "products",
+        name: "machines",
         type: "dropdown",
         subLinks: [
             {
                 id: "019c3190-233b-7b14-8ebb-86593867fe0b",
-                name: "CNC machine",
-                href: "",
-                imageSrc: "images/hero/cnc.webp"
+                name: source.cnc.name,
+                href: source.cnc.description,
+                imageSrc: source.cnc.image.outline,
+                description: source.cnc.description
             },
             {
                 id: "019c3190-233b-d8d4-8ebb-86593867fe0b",
-                name: "Hinges machine",
-                href: "",
-                imageSrc: "images/hero/hinges.webp"
+                name: source.hinges.name,
+                href: source.hinges.description,
+                imageSrc: source.hinges.image.outline,
+                description: source.hinges.description
             },
             {
                 id: "019c3190-233b-6s4d-8ebb-86593867fe0b",
-                name: "Lock machine",
-                href: "",
-                imageSrc: "images/hero/locks.webp"
+                name: source.locks.name,
+                href: source.locks.description,
+                imageSrc: source.locks.image.outline,
+                description: source.locks.description
             },
         ]
     },

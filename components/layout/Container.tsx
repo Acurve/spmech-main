@@ -7,7 +7,7 @@ type ContainerProps = PropsWithChildren<{
 
 const Container = ({ className = "", children }: ContainerProps) => {
     return (
-        <div className={cn("px-6 sm:px-8", className)}>
+        <div className={cn("px-6 sm:px-12", className)}>
             {children}
         </div>
     )

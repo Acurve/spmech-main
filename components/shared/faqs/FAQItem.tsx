@@ -1,6 +1,6 @@
 "use client"
 import Fade from '@/components/animations/Fade'
-import { PX14, PX18 } from '@/components/typography/TextSize'
+import { Text } from '@/components/typography/Text'
 import { cn } from '@/lib/utils'
 import { AnimatePresence, motion } from 'motion/react'
 
@@ -27,23 +27,23 @@ const FAQItem = ({
 }: FAQItemProps) => {
     return (
         <Fade from='down'>
-            <div className={cn("border-b border-primary-foreground group cursor-pointer", className)}>
+            <div className={cn("border-b border-foreground! group cursor-pointer", className)}>
                 <button
                     onClick={onClick}
                     className="w-full py-8 flex items-start justify-between text-left focus:outline-none"
                 >
                     <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-12">
-                        <PX14 className="uppercase tracking-widest text-muted-foreground group-hover:text-primary-foreground transition-colors duration-300 w-12 my-auto shrink-0">
-                            0{index}
-                        </PX14>
-                        <span className="text-xl md:text-3xl font-light tracking-tight group-hover:translate-x-2 transition-transform duration-500 ease-out text-primary-foreground">
+                        <Text size='xs' className="uppercase tracking-widest font-bold text-brand  w-12 my-auto shrink-0">
+                            _0{index}
+                        </Text>
+                        <Text size='base' className="font-medium tracking-tight group-hover:translate-x-2 transition-transform duration-500 ease-out text-primary">
                             {faq.question}
-                        </span>
+                        </Text>
                     </div>
                     <div className="relative flex items-center justify-center w-8 h-8 shrink-0 ml-4">
                         <div className='relative ml-auto mr-6'>
-                            <span className='w-4 sm:w-6 h-0.5 bg-primary-foreground absolute' />
-                            <span className={`w-4 sm:w-6 h-0.5 bg-primary-foreground absolute ${isOpen ? "" : "rotate-90"} transition-transform duration-300`} />
+                            <span className='w-4 sm:w-6 h-0.5 bg-foreground absolute' />
+                            <span className={`w-4 sm:w-6 h-0.5 bg-foreground absolute ${isOpen ? "" : "rotate-90"} transition-transform duration-300`} />
                         </div>
 
                     </div>
@@ -58,9 +58,9 @@ const FAQItem = ({
                             transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
                         >
                             <div className="pb-10 md:pl-24 pr-4 md:pr-24">
-                                <PX18 className="text-gray-600 leading-relaxed font-light">
+                                <Text size='base' className="text-gray-600 leading-relaxed font-light">
                                     {faq.answer}
-                                </PX18>
+                                </Text>
                             </div>
                         </motion.div>
                     )}

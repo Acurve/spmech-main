@@ -9,7 +9,7 @@ const Section = ({ children, className = "", ...sectionProps }: SectionProps) =>
     return (
         <div
             {...sectionProps}
-            className={cn("min-h-screen", className)}
+            className={cn("min-h-screen py-16", className)}
         >
             {children}
         </div>

@@ -1,28 +1,30 @@
-import Container from '@/components/layout/Container'
-import Section from '@/components/layout/Section'
-import LinkTag from '@/components/LinkTag'
-import { PX18, PX30 } from '@/components/typography/TextSize'
-import { cn } from '@/lib/utils'
-import { IconArrowRight } from '@tabler/icons-react'
+"use client"
+import Container from '@/components/layout/Container';
+import Section from '@/components/layout/Section';
+import { Text } from '@/components/typography/Text';
+import LinkTag from '@/components/LinkTag';
+import { cn } from '@/lib/utils';
+import { IconArrowRight } from '@tabler/icons-react';
+import SectionHeader from '@/components/shared/SectionHeader';
+import { useCategories } from '@/hooks/useCategories';
 
 
 type SingleProductContainerProps = {
     className?: string,
-    imageSrc: string,
-    text: string,
-}
-const SingleProductContainer = ({ imageSrc, text, className = "" }: SingleProductContainerProps) => {
+} & Omit<Category, "linkHref">
+const SingleProductContainer = ({ image, name, className = "" }: SingleProductContainerProps) => {
     return (
         <div className={cn('relative h-128 sm:h-152 lg:h-128 xl:h-152', className)}>
-            <div className=' relative h-108 sm:h-128 lg:h-108 xl:h-128 bg-primary-light md:group-hover/product:h-full flex rounded-xl justify-center overflow-hidden transition-all duration-300'>
+            <div className=' relative h-108 sm:h-128 lg:h-108 xl:h-128 bg-background md:group-hover/product:h-full flex rounded-xl justify-center overflow-hidden transition-all duration-300'>
                 <div className="absolute w-full h-full z-2 bg-linear-to-b from-transparent to-black via-transparent" />
-                <img src={imageSrc} alt="Product Image" className='object-cover w-full transition-all duration-300' />
+                <img src={image.secondary} alt="Product Image" className='object-cover w-full transition-all duration-300 bg-secondary absolute' />
+                <img src={image.primary} alt="Product Image" className='object-cover w-full transition-all duration-300 absolute opacity-0 group-hover/product:opacity-100' />
             </div>
-            <PX30 className="font-bold absolute mx-4 bottom-28 z-3 text-white">{text}</PX30>
+            <Text as='span' size='lg' className="font-bold absolute mx-4 bottom-28 z-3 text-background capitalize">{name}</Text>
             <div className='absolute bottom-4 right-0 left-0 z-3'>
                 <div
-                    className='h-13 px-6 rounded-full flex items-center transition-all duration-500 border border-black group-hover/product:mx-4 group-hover/product:border-white group-hover/product:bg-white justify-between'>
-                    <PX18 className='font-bold'>View all</PX18>
+                    className='h-13 px-6 rounded-full flex items-center transition-all duration-500 border border-primary! group-hover/product:mx-4 group-hover/product:border-white group-hover/product:bg-white justify-between'>
+                    <Text size='base' className='font-medium'>View all</Text>
                     <div className='flex h-full items-center w-6 overflow-hidden'>
                         <IconArrowRight className='flex-none -translate-x-full group-hover/product:translate-x-0 transition-transform duration-500' />
                         <IconArrowRight className='flex-none -translate-x-full group-hover/product:translate-x-0 transition-transform duration-500' />
@@ -34,42 +36,43 @@ const SingleProductContainer = ({ imageSrc, text, className = "" }: SingleProduc
     )
 }
 
-const ProductsContainer = ({ className = "" }: { className?: string }) => {
-    return (
-        <div className={cn('grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-4', className)}>
-            <div>
-                <LinkTag className='group/product' href='' variant='custom'>
-                    <SingleProductContainer imageSrc='images/products/cnc.webp' text='CNC Machines' />
-                </LinkTag>
-            </div>
-            <div>
-                <LinkTag className='group/product' href='' variant='custom'>
-                    <SingleProductContainer imageSrc='images/products/hinges.webp' text='Hinges Machines' />
-                </LinkTag>
-            </div>
-            <div>
-                <LinkTag className='group/product' href='' variant='custom'>
-                    <SingleProductContainer imageSrc='images/products/lock.webp' text='Lock Machines' />
-                </LinkTag>
-            </div>
-        </div>
-    )
+type Category = {
+    image: {
+        primary: string,
+        secondary: string
+    },
+    name: string,
+    href: string
 }
 
 const Products = () => {
+    const { data: machineCategories } = useCategories()
+    if (!machineCategories) return null
+    const products = Object.values(machineCategories)
     return (
-        <Section className='min-h-max!'>
-            <Container className='px-0! md:px-8!'>
-                <div className='bg-primary-lighter rounded-3xl p-6 md:p-19 py-12 lg::pb-35.5 space-y-12'>
-                    <div>
-                        <PX18 className="font-bold">Products</PX18>
+
+        <Section className='py-0'>
+            <Container >
+                <div className='space-y-8 bg-border p-12 rounded-3xl'>
+                    <SectionHeader heading="CNC & SPMs" eyeBrow='_products' />
+
+                    <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-4'>
+                        {products.map((product, index) => (
+                            <LinkTag href={product.href} variant='custom' key={`category-${index}`} className='group/product'>
+                                <SingleProductContainer  {...product} />
+                            </LinkTag>
+                        ))
+
+                        }
                     </div>
-                    <ProductsContainer />
+
                 </div>
             </Container>
-
         </Section>
     )
 }
 
 export default Products
+
+
+

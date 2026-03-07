@@ -1,6 +1,6 @@
 "use client"
 
-import { PX18, PX50 } from "@/components/typography/TextSize"
+import { Text } from "@/components/typography/Text"
 import {
     motion,
     useInView,
@@ -13,7 +13,7 @@ import { ReactNode, useEffect, useRef } from "react"
 export type StatItemProps = {
     value: number
     label: string,
-    icon: ReactNode,
+    icon?: ReactNode,
     suffix?: string
     duration?: number
     decimals?: number
@@ -46,20 +46,28 @@ const StatItem = ({
     }, [isInView, value, duration, count])
 
     return (
-        <div ref={ref} className="text-center space-y-6">
-            <div className=" flex justify-center w-28  mx-auto">
+        <div ref={ref} className="text-center flex flex-col gap-2">
+            <div className=" flex justify-center text-primary w-24  mx-auto">
                 {icon}
             </div>
-            <PX50 className="font-bold leading-none">
+            <Text as="span" size="3xl" className="font-medium leading-none text-brand hidden md:block">
                 <motion.span>
                     {formatted}
                 </motion.span>
                 <motion.span>
                     {suffix}
                 </motion.span>
-            </PX50>
-            <div className="w-12 h-1 bg-primary-orange-lighter mx-auto" />
-            <PX18 className="font-medium">{label}</PX18>
+            </Text>
+            <Text as="span" size="4xl" className="font-medium leading-none text-brand md:hidden">
+                <motion.span>
+                    {formatted}
+                </motion.span>
+                <motion.span>
+                    {suffix}
+                </motion.span>
+            </Text>
+            <Text as="span" size="2xl" className="font-medium text-primary hidden md:block">{label}</Text>
+            <Text as="span" size="4xl" className="font-medium text-primary md:hidden">{label}</Text>
         </div>
     )
 }

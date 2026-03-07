@@ -1,10 +1,10 @@
 const CountriesServed = () => {
     return (
-        <svg version="1.0" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 128.000000 128.000000"
+        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" className="fill-current"  viewBox="0 0 128.000000 128.000000"
             preserveAspectRatio="xMidYMid meet">
 
             <g transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)"
-                fill="#fff" stroke="none">
+                 stroke="none">
                 <path d="M433 1186 c-141 -35 -268 -137 -333 -270 -48 -96 -64 -176 -57 -271
 17 -219 166 -398 381 -460 95 -28 239 -17 336 23 41 18 77 28 80 24 4 -4 30
 -40 59 -80 29 -39 59 -72 66 -72 25 0 183 231 236 343 35 75 45 138 30 192
@@ -44,11 +44,11 @@ m227 -35 c24 -7 23 -8 -15 -19 -22 -6 -53 -14 -68 -18 -38 -9 -61 -45 -52 -84
 
 const Accuracy = () => {
     return (
-        <svg version="1.0" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 128.000000 128.000000"
+        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" className="fill-current"  viewBox="0 0 128.000000 128.000000"
             preserveAspectRatio="xMidYMid meet">
 
             <g transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)"
-                fill="#fff" stroke="none">
+                 stroke="none">
                 <path d="M744 1112 c-5 -27 -11 -30 -55 -36 -62 -8 -129 -37 -191 -81 l-48
 -35 0 60 0 60 -215 0 -215 0 0 -232 0 -233 70 -79 69 -78 3 -112 3 -111 69 -3
 c49 -2 72 1 77 10 5 7 9 60 9 119 0 131 12 149 48 76 56 -112 203 -220 321
@@ -89,10 +89,10 @@ const MachineInstalled = () => {
     return (
         <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
            viewBox="0 0 128.000000 128.000000"
-            preserveAspectRatio="xMidYMid meet">
+            preserveAspectRatio="xMidYMid meet" className="fill-current">
 
             <g transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)"
-                fill="#fff" stroke="none">
+                 stroke="none">
                 <path d="M187 1273 c-4 -3 -7 -23 -7 -43 0 -46 32 -90 66 -90 24 0 24 -1 24
 -100 0 -94 2 -103 25 -125 21 -21 33 -25 89 -25 l65 0 3 -72 c3 -72 3 -72 36
 -82 32 -9 32 -10 32 -71 0 -47 4 -66 18 -78 10 -10 23 -17 29 -17 7 0 12 -36
@@ -144,11 +144,11 @@ const MachineInstalled = () => {
 }
 const Experience = () => {
     return (
-        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128.000000 128.000000"
+        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" className="fill-current" viewBox="0 0 128.000000 128.000000"
             preserveAspectRatio="xMidYMid meet">
 
             <g transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)"
-                fill="#fff" stroke="none">
+                 stroke="none">
                 <path d="M618 1178 c-7 -13 -18 -32 -24 -43 -7 -13 -27 -22 -54 -27 -65 -11
 -70 -22 -28 -66 34 -35 36 -40 31 -89 -6 -61 -1 -64 58 -31 l39 22 39 -22 c59
 -33 64 -30 58 31 -5 49 -3 54 31 89 41 43 37 52 -28 65 -39 7 -48 14 -65 48

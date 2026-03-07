@@ -3,6 +3,14 @@ import "./globals.css";
 
 import localFont from "next/font/local"
 import Navbar from "@/components/layout/navbar/Navbar";
+
+import { Google_Sans_Flex } from "next/font/google"
+
+const googleSansFlex = Google_Sans_Flex({
+  subsets: ["latin"]
+})
+
+
 const budujSans = localFont({
   src: [
     {
@@ -35,6 +43,10 @@ export const metadata: Metadata = {
 import LenisProvider from "@/components/providers/LenisProvider";
 import Footer from "@/components/layout/Footer";
 import { HeroVideoContextProvider } from "@/contexts/heroVideoContext";
+import QueryClientProviderFile from "@/components/providers/QueryClientProviderFile";
+import CategoriesProvider from "@/components/providers/CategoriesProvider";
+
+
 
 export default function RootLayout({
   children,
@@ -45,18 +57,23 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${budujSans.className} antialiased`}
+        className={`${googleSansFlex.className} antialiased`}
       >
-        <LenisProvider>
-          <HeroVideoContextProvider>
 
-            <Navbar />
-            <div className="main" id="main">
-              {children}
-              <Footer />
-            </div>
-          </HeroVideoContextProvider>
-        </LenisProvider>
+        <QueryClientProviderFile>
+          <CategoriesProvider>
+            <LenisProvider>
+              <HeroVideoContextProvider>
+
+                <Navbar />
+                <div className="main" id="main">
+                  {children}
+                  <Footer />
+                </div>
+              </HeroVideoContextProvider>
+            </LenisProvider>
+          </CategoriesProvider>
+        </QueryClientProviderFile>
       </body>
     </html>
   );

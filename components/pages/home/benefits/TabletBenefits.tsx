@@ -1,6 +1,6 @@
 import Container from '@/components/layout/Container'
 import Section from '@/components/layout/Section'
-import { PX30 } from '@/components/typography/TextSize'
+import { Text } from '@/components/typography/Text'
 import benefits, { benefitsSectionheading } from '@/constants/benefits'
 import { cn } from '@/lib/utils'
 import BenefitCard from './BenefitCard'
@@ -11,7 +11,7 @@ const TabletBenefits = ({ className = "" }: { className?: string }) => {
       <Container className='rounded-2xl py-10 bg-primary-lighter'>
         <div className='space-y-14'>
 
-          <PX30 className='font-medium leading-[1.2] min-[544px]:w-[60%]'>{benefitsSectionheading}</PX30>
+          <Text size='xl' className='font-medium leading-[1.2] min-[544px]:w-[60%]'>{benefitsSectionheading}</Text>
           <div className='space-y-10'>
             {benefits.map((benefit) => (
               <BenefitCard

@@ -1,25 +1,23 @@
 "use client"
-import { motion } from 'motion/react'
-import { default as SPMechLogoAnimation } from '../animations/SPMechLogo'
+import { motion } from "motion/react"
+import SPMechLogoAnimation from "../animations/SPMechLogo"
 
 const FirstLoader = () => {
     return (
         <motion.div
-            initial={{
-                translateY: 0
-            }}
-            animate={{
+            initial={{ translateY: 0 }}
+            exit={{
                 translateY: "-100%",
                 transition: {
-                    delay: 2.5,
-                    duration: 0.5,
-                    ease: "easeInOut"
-                }
+                    duration: 0.6,
+                    ease: "easeInOut",
+                },
             }}
-            className='fixed w-dvw h-dvh bg-white z-1000 flex items-center justify-center'
+            className="fixed w-dvw h-dvh bg-white z-1000 flex items-center justify-center"
         >
             <SPMechLogoAnimation />
         </motion.div>
+
     )
 }
 

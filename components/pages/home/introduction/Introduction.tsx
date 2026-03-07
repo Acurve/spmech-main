@@ -3,76 +3,59 @@ import TextReveal from '@/components/animations/TextReveal'
 import Container from '@/components/layout/Container'
 import Section from '@/components/layout/Section'
 import LinkTag from '@/components/LinkTag'
-import { PX16, PX18, PX50, PX30 } from '@/components/typography/TextSize'
+import { Text } from '@/components/typography/Text'
 
 const Introduction = () => {
 
     return (
-        <Section className='min-h-max! bg-white' id='introduction'>
-            <Container className='py-40'>
+        <Section className='min-h-max py-40' id='introduction'>
+            <Container>
                 <div className='grid gap-12 lg:grid-cols-2'>
 
                     <div className='gap-4 flex flex-col'>
                         <Fade from='down' className='sm:w-[50%] '>
 
-                            <PX18 className='font-bold sm:w-[50%]- '>
+                            <Text size='sm' className='font-semibold sm:w-[50%]- '>
                                 SP Mech is an Indian manufacturer of CNC and Special Purpose machines, that has been offering not only product quality but also customer peace of mind.
-                            </PX18>
+                            </Text>
                         </Fade>
                         <Fade from='down'>
 
-                            <LinkTag href='/about' variant='button-black' className='hidden! lg:flex!'>
-                                <PX16 className='font-medium'>
+                            <LinkTag href='/about' variant='button' className='hidden! lg:flex!'>
+                                <Text size='base' className='font-medium'>
 
                                     about our company
-                                </PX16>
+                                </Text>
                             </LinkTag>
                         </Fade>
                     </div>
                     <div>
-                        <div className='relative -top-2 hidden sm:block'>
+                        <div className='relative -top-2 '>
                             <TextReveal>
 
-                                <PX50 className=' w-max font-medium leading-[1.2] text-muted-foreground/20'>Development,</PX50>
+                                <Text size='2xl' className=' w-max font-medium leading-[1.2] text-muted-foreground/20'>Development,</Text>
                             </TextReveal>
                             <TextReveal>
-                                <PX50 className=' w-max font-medium leading-[1.2] text-muted-foreground/20'>installation,</PX50>
+                                <Text size='2xl' className=' w-max font-medium leading-[1.2] text-muted-foreground/20'>installation,</Text>
                             </TextReveal>
                             <TextReveal>
-                                <PX50 className=' w-max font-medium leading-[1.2] text-muted-foreground/20'>support and</PX50>
+                                <Text size='2xl' className=' w-max font-medium leading-[1.2] text-muted-foreground/20'>support and</Text>
                             </TextReveal>
                             <TextReveal>
-                                <PX50 className=' w-max font-medium leading-[1.2] text-muted-foreground/20'>service of</PX50>
+                                <Text size='2xl' className=' w-max font-medium leading-[1.2] text-muted-foreground/20'>service of</Text>
                             </TextReveal>
                             <TextReveal>
-                                <PX50 className=' w-max font-medium leading-[1.2] text-muted-foreground/20'>CNC machines.</PX50>
+                                <Text size='2xl' className=' w-max font-medium leading-[1.2] text-muted-foreground/20'>CNC machines.</Text>
                             </TextReveal>
                         </div>
-                        <div className='relative -top-2 block sm:hidden'>
-                            <TextReveal>
 
-                                <PX30 className=' w-max font-medium leading-[1.2] text-muted-foreground/20'>Development,</PX30>
-                            </TextReveal>
-                            <TextReveal>
-                                <PX30 className=' w-max font-medium leading-[1.2] text-muted-foreground/20'>installation,</PX30>
-                            </TextReveal>
-                            <TextReveal>
-                                <PX30 className=' w-max font-medium leading-[1.2] text-muted-foreground/20'>support and</PX30>
-                            </TextReveal>
-                            <TextReveal>
-                                <PX30 className=' w-max font-medium leading-[1.2] text-muted-foreground/20'>service of</PX30>
-                            </TextReveal>
-                            <TextReveal>
-                                <PX30 className=' w-max font-medium leading-[1.2] text-muted-foreground/20'>heat pumps.</PX30>
-                            </TextReveal>
-                        </div>
                     </div>
                     <div className='flex lg:hidden'>
-                        <LinkTag href='/about' variant='button-black'>
-                            <PX16 className='font-medium'>
+                        <LinkTag href='/about' variant='button'>
+                            <Text size='base' className='font-medium'>
 
                                 about our company
-                            </PX16>
+                            </Text>
                         </LinkTag>
                     </div>
                 </div>

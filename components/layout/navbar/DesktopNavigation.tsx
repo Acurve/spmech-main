@@ -1,18 +1,20 @@
 "use client"
 import LinkTag from '@/components/LinkTag'
-import { PX16, PX18, PX30 } from '@/components/typography/TextSize'
-import navigationLinks, { DropdownNavigationItems } from '@/constants/navigationLinks'
+import navigationLinks from '@/constants/navigationLinks'
 import { cn } from '@/lib/utils'
 import Container from '../Container'
-
-
 import { motion } from "motion/react"
 import { useState } from 'react'
-import { useHeroVideoState } from '@/contexts/heroVideoContext'
-const DesktopNavigation = ({ className = "" }: { className?: string }) => {
-    const [isOpen, setIsOpen] = useState<boolean>(false)
-    const { currentImg } = useHeroVideoState()
+import { Text } from '@/components/typography/Text'
+import { CategoriesList, CategoryDetails, CategoryKey, useCategories } from '@/hooks/useCategories'
 
+
+
+const DesktopNavigation = ({ className = "" }: { className?: string }) => {
+    const { data: machineCategories } = useCategories()
+    const [isOpen, setIsOpen] = useState<boolean>(false)
+
+    if (!machineCategories) return null
     return (
         <div className={cn("", className)}>
             <ul className='flex gap-8'>
@@ -24,20 +26,20 @@ const DesktopNavigation = ({ className = "" }: { className?: string }) => {
                             onMouseEnter={() => link.type === "dropdown" ? setIsOpen(true) : null}
                             onMouseLeave={() => link.type === "dropdown" ? setIsOpen(false) : null}
                             onClick={() => link.type === "dropdown" ? setIsOpen(!isOpen) : null}
-                            className='relative'
+                            className=''
                         >
 
                             <LinkTag
-                                variant={currentImg ? "hover-underline-white" : "hover-underline"}
+                                className='after:bg-brand'
                                 href={link.href}
                                 notLink={link.type === 'dropdown'}>
-                                <PX18 className='font-medium'>
+                                <Text as="span" size='sm' className='font-medium'>
 
                                     {link.name}
-                                </PX18>
+                                </Text>
                             </LinkTag>
                             {link.type === "dropdown" && (
-                                <DesktopNavigationDropdown subLinks={link.subLinks} isOpen={isOpen} />
+                                <DesktopNavigationDropdown subLinks={machineCategories!} isOpen={isOpen} />
                             )}
                         </li>
                     ))
@@ -48,22 +50,27 @@ const DesktopNavigation = ({ className = "" }: { className?: string }) => {
 }
 
 
-type DropdownSubLinks = DropdownNavigationItems["subLinks"][number]
+type DropdownSubLinks = CategoryDetails
 type DesktopNavigationDropdownProps = {
     className?: string,
-    subLinks: DropdownSubLinks[],
+    subLinks: CategoriesList,
     isOpen: boolean
 }
+
 
 export const DesktopNavigationDropdown = ({
     className,
     subLinks,
     isOpen,
 }: DesktopNavigationDropdownProps) => {
+    const firstCategory = Object.values(subLinks)[0]
+
+    const [currentProduct, setCurrentProduct] = useState<DropdownSubLinks>(firstCategory)
+
     return (
         <motion.div
             className={cn(
-                "bg-primary-lighter absolute left-0 right-0 top-full w-max overflow-hidden mt-4 rounded-xl shadow-2xl",
+                "bg-background absolute left-0 right-0 top-full w-full  overflow-hidden shadow-xl",
                 className
             )}
             initial={false}
@@ -77,51 +84,79 @@ export const DesktopNavigationDropdown = ({
             }}
 
         >
-            <Container className="flex w-full">
-                <div className='space-y-8'>
-                    <motion.div
-                        className='mt-8'
-                        initial={{
-                            y: -10,
-                            opacity: 0,
-                        }}
-                        animate={{
-                            opacity: isOpen ? 1 : 0,
-                            y: isOpen ? 0 : -10,
-                            transition: {
-                                duration: 0.5,
-                                ease: "easeInOut"
-                            }
-                        }}
-                    >
-                        <PX16 className='font-medium'>Products</PX16>
-                    </motion.div>
+            <Container className="flex w-full py-8 mt-4">
+                <div className='flex justify-center gap-16 w-full'>
 
-                    <div className='flex flex-col gap-8 mb-8'>
-                        {subLinks.map((link, index) => (
-                            <motion.div
-                                key={link.id}
-                                initial={{ opacity: 0, y: 30 }}
-                                animate={{
-                                    opacity: isOpen ? 1 : 0,
-                                    y: isOpen ? 0 : 50,
-                                }}
-                                transition={{
+                    <div className='space-y-8'>
+                        <motion.div
+                            className=' flex-nowrap shrink-0'
+                            initial={{
+                                y: -10,
+                                opacity: 0,
+                            }}
+                            animate={{
+                                opacity: isOpen ? 1 : 0,
+                                y: isOpen ? 0 : -10,
+                                transition: {
                                     duration: 0.5,
-                                    delay: isOpen ? index * 0.1 : 0,
                                     ease: "easeInOut"
-                                }}
-                            >
-                                <LinkTag href={link.href} variant='custom' className='text-muted-foreground hover:text-black transition-colors duration-300'>
-                                    {/* <ImageContainer src={link.imageSrc} alt="" width={300} height={180} /> */}
-                                    <PX30 className='font-medium'>{link.name}</PX30>
-                                </LinkTag>
-                            </motion.div>
-                        ))}
+                                }
+                            }}
+                        >
+                            <Text as='span' size='xs' className='font-medium'>Machines</Text>
+                        </motion.div>
+
+                        <div className='flex flex-col gap-8 mb-8'>
+                            {Object.keys(subLinks).map((link, index) => (
+                                <motion.div
+                                    key={`link-${link}`}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    animate={{
+                                        opacity: isOpen ? 1 : 0,
+                                        y: isOpen ? 0 : 50,
+                                    }}
+                                    transition={{
+                                        duration: 0.5,
+                                        delay: isOpen ? index * 0.1 : 0,
+                                        ease: "easeInOut"
+                                    }}
+                                >
+                                    <LinkTag href={subLinks[link as CategoryKey].href}
+                                        onMouseEnter={() => setCurrentProduct(subLinks[link as CategoryKey])}
+                                        variant='custom'
+                                        className={cn(
+                                            "text-foreground/70 hover:text-brand transition-colors duration-300",
+                                            currentProduct.id === subLinks[link as CategoryKey].id && "text-brand")}>
+
+                                        <Text as='span' size='xl' className='font-medium'>{subLinks[link as CategoryKey].name}</Text>
+                                    </LinkTag>
+                                </motion.div>
+                            ))}
+                        </div>
                     </div>
+                    <DesktopNavigationDropdownImageContainer product={currentProduct} />
                 </div>
             </Container>
+
+
         </motion.div >
+    )
+}
+
+const DesktopNavigationDropdownImageContainer = ({ product }: { product: DropdownSubLinks }) => {
+    return (
+        <div className='px-12 pb-4 border-l-2  border-foreground/60! max-w-xl space-y-4'>
+            {/* image container */}
+            <div className='py-4 border-b-2  border-foreground/40!'>
+                <img src={product.image.outline} alt="" className='' />
+            </div>
+
+
+            <div>
+                {product.description}
+            </div>
+
+        </div>
     )
 }
 

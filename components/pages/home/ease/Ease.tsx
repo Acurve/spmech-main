@@ -1,7 +1,7 @@
 import Container from '@/components/layout/Container'
 import Section from '@/components/layout/Section'
 import ImageParallax from '@/components/animations/ImageParallax'
-import { PX18, PX30, PX50 } from '@/components/typography/TextSize'
+import {  Text } from '@/components/typography/Text'
 import { easeSectionDescription, easeSectionHeading } from '@/constants/ease'
 
 const Ease = () => {
@@ -13,9 +13,8 @@ const Ease = () => {
                     <div className='flex items-center'>
                         <div className='space-y-7'>
 
-                            <PX50 className='font-medium leading-[1.1] hidden lg:block'>{easeSectionHeading}</PX50>
-                            <PX30 className='font-semibold leading-[1.1] md:text-[36px] block lg:hidden'>{easeSectionHeading}</PX30>
-                            <PX18 className='font-medium'>{easeSectionDescription}</PX18>
+                            <Text as='h2' size='2xl' className='font-medium leading-[1.1]'>{easeSectionHeading}</Text>
+                            <Text size="base" className='font-medium'>{easeSectionDescription}</Text>
                         </div>
                     </div>
                 </div>

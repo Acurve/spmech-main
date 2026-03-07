@@ -35,7 +35,7 @@ const LordiconAnimation = ({
         };
     }, [delay, interval]);
 
-    return <Player ref={playerRef} icon={icon} size={56} />;
+    return <Player ref={playerRef} icon={icon} size={64} />;
 }
 
 export default LordiconAnimation;

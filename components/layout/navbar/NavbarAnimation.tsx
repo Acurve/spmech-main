@@ -1,6 +1,5 @@
 "use client"
 
-import { useHeroVideoState } from "@/contexts/heroVideoContext"
 import { useTabletNavigation } from "@/contexts/tabletNavigationContext"
 import { motion, useMotionValueEvent, useScroll } from "motion/react"
 import { PropsWithChildren, useState } from "react"
@@ -11,7 +10,6 @@ const NavbarAnimation = ({ children }: PropsWithChildren) => {
     const { scrollY } = useScroll()
     const [hidden, setHidden] = useState(false)
     const { isOpen } = useTabletNavigation()
-    const { currentImg } = useHeroVideoState()
 
     useMotionValueEvent(scrollY, "change", (latest) => {
         const previous = scrollY.getPrevious() ?? 0
@@ -37,7 +35,7 @@ const NavbarAnimation = ({ children }: PropsWithChildren) => {
             }}
             animate={hidden ? "hidden" : "visible"}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className={`fixed w-full z-100 ${currentImg ? "bg-transparent" : "bg-primary-lighter"}`}
+            className={`fixed w-full z-100`}
         >
             {children}
         </motion.div>

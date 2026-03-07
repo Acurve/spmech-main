@@ -8,7 +8,7 @@ const NavbarHamBurger = ({ className = "" }: { className?: string }) => {
 
         <button
             onClick={() => setIsOpen(!isOpen)}
-            className={cn("relative aspect-square border border-black rounded-full h-10 flex flex-col items-center justify-center focus:outline-none group hover:bg-black transition-all duration-300", className)}
+            className={cn("relative aspect-square border border-black rounded-full h-12 flex flex-col items-center justify-center focus:outline-none group hover:bg-black transition-all duration-300", className)}
             aria-label={isOpen ? "Close menu" : "Open menu"}
         >
 

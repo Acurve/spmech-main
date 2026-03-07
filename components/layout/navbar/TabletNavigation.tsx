@@ -4,10 +4,11 @@ import Container from '../Container'
 import { useTabletNavigation } from '@/contexts/tabletNavigationContext'
 import { motion } from 'motion/react'
 import LinkTag from '@/components/LinkTag'
-import { PX18, PX30, PX50 } from '@/components/typography/TextSize'
 import navigationLinks, { DropdownNavigationItems } from '@/constants/navigationLinks'
 import { useEffect, useRef, useState } from 'react'
 import { useLenis } from 'lenis/react'
+import { Text } from '@/components/typography/Text'
+import { CallToActionText } from '@/constants/callToAction'
 
 
 
@@ -55,7 +56,7 @@ const TabletNavigation = ({ className = "" }: TabletNavigation) => {
   return (
     <motion.div
       data-lenis-prevent
-      className={cn("lg:h-[calc(100dvh-128px)] lg:mt-32 h-[calc(100dvh-84px)] mt-21 overflow-y-scroll touch-pan-y fixed bg-primary-lighter inset-0",
+      className={cn("h-[calc(100dvh-84px)] mt-21 overflow-y-scroll touch-pan-y fixed bg-background inset-0",
         isOpen ? "z-100 pointer-events-auto" : "-z-100 pointer-events-none",
         className)}
       initial={false}
@@ -92,18 +93,10 @@ const TabletNavigation = ({ className = "" }: TabletNavigation) => {
                     variant='custom'
                     notLink={link.type === 'dropdown'}
                   >
-                    <div className='sm:flex hidden'>
-                      <PX50 tag='span' className='capitalize font-medium'>
+                    <Text as='span' size='2xl' className='capitalize font-medium'>
 
-                        {link.name}
-                      </PX50>
-                    </div>
-                    <div className='flex sm:hidden'>
-                      <PX30 tag='span' className='capitalize font-medium'>
-
-                        {link.name}
-                      </PX30>
-                    </div>
+                      {link.name}
+                    </Text>
                     {/* plus and minus sign */}
                     {link.type === "dropdown" && (
                       <div className='relative ml-auto mr-6'>
@@ -136,8 +129,8 @@ const TabletNavigation = ({ className = "" }: TabletNavigation) => {
             }}
           >
 
-            <LinkTag variant="button-black" className="w-full! justify-center">
-              <PX18 className="font-medium">Get in touch</PX18>
+            <LinkTag variant="button-brand" className="w-full! justify-center">
+              <Text as='span' size='base' className="font-medium">{CallToActionText}</Text>
             </LinkTag>
           </motion.div>
         </div>
@@ -191,11 +184,9 @@ export const TabletNavigationDropdown = ({
             >
               <LinkTag href={link.href} variant="custom" className='text-muted-foreground hover:text-black'>
                 <div className='sm:flex hidden'>
-                  <PX30 className='font-medium'>{link.name}</PX30>
+                  <Text as='span' size='xl' className='font-medium'>{link.name}</Text>
                 </div>
-                <div className='sm:hidden flex'>
-                  <PX18 className='font-medium'>{link.name}</PX18>
-                </div>
+
               </LinkTag>
             </motion.div>
           ))}

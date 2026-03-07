@@ -1,101 +1,183 @@
 "use client"
+import Container from '@/components/layout/Container'
 import Section from '@/components/layout/Section'
-import { PX18, PX30, PX50 } from '@/components/typography/TextSize'
-import { motion, useInView, useScroll, useTransform } from 'motion/react'
-import { PropsWithChildren, useRef, useState, useEffect } from 'react'
-import BenefitCard from './BenefitCard'
-import benefits, { benefitsSectionheading } from '@/constants/benefits'
+import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
+import { useEffect, useRef, useState } from 'react'
+import type { Benefits } from '@/constants/benefits'
+import benefits from '@/constants/benefits'
+import BackgroundVideo from '@/components/shared/BackgroundVideo'
 import { cn } from '@/lib/utils'
+import { useInView } from 'motion/react'
+import { Text } from '@/components/typography/Text'
+import SectionHeader from '@/components/shared/SectionHeader'
+import TypewriterEffect from '@/components/TypeWriterEffect'
 
-const CardContainer = ({
-    children,
-    onVisible,
-    src
-}: PropsWithChildren<{ onVisible: (src: string) => void, src: string }>) => {
-    const ref = useRef(null)
-    const { scrollYProgress } = useScroll({
-        target: ref,
-        offset: ["start end", "end start"]
+
+type Benefit = Pick<Benefits, "id" | "description" | "heading" | "mainBenefitStat" | "icon">
+type CardContainerProps = {
+    benefits: Benefit[],
+    className?: string,
+    changeActiveIndex: (activeIndex: number) => void
+}
+
+
+
+const CardItem = ({
+    benefit,
+    index,
+    changeActiveIndex,
+    className
+}: {
+    benefit: Benefit
+    index: number
+    changeActiveIndex: (i: number) => void
+    className?: string
+}) => {
+    const ref = useRef<HTMLDivElement>(null)
+
+    const isInView = useInView(ref, {
+        amount: 0.6, // 80% visible = active
     })
 
-    const opacity = useTransform(scrollYProgress, [0, 0.3, 0.5, 0.7, 1], [0, 0, 1, 0, 0])
     useEffect(() => {
-        const unsubscribe = scrollYProgress.on("change", (latest) => {
-            if (latest > 0.1 && latest < 0.9) {
-                onVisible(src)
-            }
-        })
-
-        return () => unsubscribe()
-    }, [scrollYProgress, onVisible, src])
+        if (isInView) {
+            changeActiveIndex(index)
+        }
+    }, [isInView, index, changeActiveIndex])
 
     return (
-        <div className='relative h-[200dvh]'>
-
-            <Section className='sticky flex justify-center items-center  top-0 h-screen'>
-                <motion.div
-                    ref={ref}
-                    className='ml-auto mr-8'
-                    style={{ opacity }}
+        <div className={cn("h-[150dvh]", className)}>
+            <div ref={ref} className="h-dvh flex items-center sticky top-0">
+                <div
+                    className={cn(
+                        `
+        lg:w-140 w-102
+        p-8 lg:p-10
+        rounded-2xl
+        flex flex-col gap-6
+        transition-all duration-300
+        `,
+                        className
+                    )}
                 >
-                    {children}
-                </motion.div>
-            </Section>
+
+                    {/* Heading */}
+                    <Text
+                        as="h3"
+                        size="lg"
+                        className="font-semibold leading-tight tracking-tight flex items-center gap-2 capitalize text-foreground"
+                    >
+                        <benefit.icon />
+                        {benefit.heading}
+                    </Text>
+
+                    {/* Stat */}
+                    <Text
+                        size="2xl"
+                        className="font-bold tracking-tight text-brand"
+                    >
+                        {benefit.mainBenefitStat}
+                    </Text>
+
+                    {/* Description */}
+                    <Text
+                        size="base"
+                        className="leading-relaxed max-w-prose"
+                    >
+                        {/* <TypewriterEffect delay={0} speed={0}> */}
+
+                            {benefit.description}
+                        {/* </TypewriterEffect> */}
+                    </Text>
+                </div>
+            </div>
         </div>
     )
 }
 
+const CardContainer = ({
+    benefits,
+    changeActiveIndex,
+    className = "",
+}: CardContainerProps) => {
+    return (
+        <div className={className}>
+            {benefits.map((benefit, index) => (
+                <CardItem
+                    key={benefit.id}
+                    benefit={benefit}
+                    index={index}
+                    changeActiveIndex={changeActiveIndex}
+                />
+            ))}
+        </div>
+    )
+}
 
-const DesktopBenefits = ({ className = "" }: { className?: string }) => {
-    const [currentSrc, setCurrentSrc] = useState("images/benefits/increase_production.webp")
+type Item = Pick<Benefits, "id" | "videoSrc">
+
+type CarouselContainerProps = {
+    items: Item[],
+    className?: string
+    activeIndex: number
+}
+
+
+
+const CarouselContainer = ({ items, activeIndex, className = "" }: CarouselContainerProps) => {
+    const [api, setApi] = useState<CarouselApi>()
+    useEffect(() => {
+        if (!api) return
+        api.scrollTo(activeIndex, false)
+    }, [activeIndex, api])
 
     return (
-        <div>
-            <Section className={cn('relative h-[600dvh]', className)}>
-                <div className='sticky top-0 h-screen w-full -z-10'>
-                    <div className='absolute w-full h-full z-1000 flex items-center'>
+        <div className={cn('relative', className)}>
+            <div className="h-max w-full sticky top-12">
+                <Carousel
+                    setApi={setApi}
+                    opts={{ watchDrag: false }}
+                >
 
-                        <PX30 className='w-68 min-[800px]:w-96 text-white ml-8 xl:ml-28 font-bold z-20'>
-                            {benefitsSectionheading}
-                        </PX30>
-                    </div>
-                    <div className="relative h-screen">
-
+                    <CarouselContent className='h-[calc(100dvh-48px-48px)]'>
                         {
-                            benefits.map((benefit) => (
-
-                                <img
-                                    key={benefit.id}
-                                    src={benefit.imageSrc || ""}
-                                    alt=""
-                                    className='w-full h-full object-cover transition-opacity duration-500 absolute'
-                                    style={{
-                                        opacity: `${currentSrc === benefit.imageSrc ? 1 : 0}`
-                                    }}
-                                />
+                            items.map((item) => (
+                                <CarouselItem key={item.id} className='flex w-full'>
+                                    <div className='w-full rounded-2xl overflow-hidden  relative'>
+                                        <BackgroundVideo videoSrc='https://robojob-usa.com/media/documents/19791092-uhd_3840_2160_60fps_processed_0TGr4LR_ENUQU21.webm' className='border-2' withOverLay withPlayPauseBtn />
+                                    </div>
+                                </CarouselItem>
                             ))
                         }
-                        <div className="absolute z-10 w-full h-full bg-black/60" />
-                    </div>
-                </div>
 
-                {/* Scroll hijack content */}
-                <div className='absolute inset-0 w-full'>
-                    {benefits.map((benefit) => (
-
-                        <CardContainer
-                            key={benefit.id}
-                            onVisible={setCurrentSrc}
-                            src={benefit.imageSrc || ""}>
-                            <BenefitCard
-                                heading={benefit.heading}
-                                description={benefit.description}
-                                mainBenefitStat={benefit.mainBenefitStat} />
-                        </CardContainer>
-                    ))}
-                </div>
-            </Section>
+                    </CarouselContent>
+                </Carousel>
+            </div>
         </div>
+    )
+}
+
+const DesktopBenefits = ({ className }: { className?: string }) => {
+
+
+    const carouselItems = benefits.map((benefit) => ({ id: benefit.id, videoSrc: benefit.videoSrc }))
+    const cardItems = benefits.map(({ id, description, mainBenefitStat, heading, icon }) => ({ id, heading, mainBenefitStat, description, icon }))
+    const [activeIndex, setActiveIndex] = useState<number>(0)
+    return (
+        <Section className={cn("bg-border mt-24", className)}>
+            <Container className='space-y-16'>
+
+                <SectionHeader
+                    eyeBrow='_benefits'
+                    heading={<>Even more reason to <br className="hidden md:block" /> consider SP &nbsp;Engineering</>}
+                />
+
+                <div className='grid grid-cols-2'>
+                    <CardContainer changeActiveIndex={setActiveIndex} className='pr-8' benefits={cardItems} />
+                    <CarouselContainer activeIndex={activeIndex} items={carouselItems} />
+                </div>
+            </Container>
+        </Section>
     )
 }
 
