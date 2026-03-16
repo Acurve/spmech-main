@@ -152,8 +152,14 @@ const FooterBottom = () => {
 
 const Footer = async () => {
   const response = await getManufacturerInfo()
-  if (!response) return null
-  const footerDetails: ManufacturerInfo = response.data
+  const footerDetails: ManufacturerInfo = response?.data ?? {
+    name: "SP Engineering",
+    contactDetails: {
+      email: "",
+      mobileNo: "",
+      address: "",
+    }
+  }
   return (
     <footer>
       <Container>

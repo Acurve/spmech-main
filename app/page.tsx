@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 
 const Home = async () => {
   const catRes = await getAllCategories();
-  const categories = catRes.data.data
+  const categories = catRes?.data?.data ?? []
   const categoriesShaped: CategoryShaped[] = categories.map((cat: Category) => (
     {
       id: cat._id,
