@@ -13,19 +13,19 @@ type PageProps = {
 export const revalidate = false;
 export const dynamicParams = true;
 
-export async function generateStaticParams() {
-    const response = await getAllMachines()
-    const machines = response.data.data
-    const paths: { category: any; slug: string; }[] = []
+// export async function generateStaticParams() {
+//     const response = await getAllMachines()
+//     const machines = response.data.data
+//     const paths: { category: any; slug: string; }[] = []
 
-    machines.forEach((mac: Machine) => {
-        paths.push({
-            category: typeof mac.categoryId !== "string" ? mac.categoryId.slug : "",
-            slug: mac.slug
-        })
-    })
-    return paths;
-}
+//     machines.forEach((mac: Machine) => {
+//         paths.push({
+//             category: typeof mac.categoryId !== "string" ? mac.categoryId.slug : "",
+//             slug: mac.slug
+//         })
+//     })
+//     return paths;
+// }
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { slug,category } = await params;
 
