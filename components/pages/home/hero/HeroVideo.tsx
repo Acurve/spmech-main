@@ -11,12 +11,12 @@ import useIsMobile from "@/hooks/useIsMobile";
 import Fade from "@/components/animations/Fade";
 import { Category } from "@/constants/categories";
 import { useCategories } from "@/hooks/useCategories";
+import { CategoryShaped } from "@/types/category";
 
 
 const BackgroundVideo = () => {
     const videoRef = useRef<HTMLVideoElement>(null);
     const { isPlaying, currentCategory } = useHeroVideo()
-    const { data: machineCategories } = useCategories()
     useEffect(() => {
         if (!videoRef.current) return;
         if (isPlaying) {
@@ -27,8 +27,7 @@ const BackgroundVideo = () => {
             videoRef.current.pause();
         }
     }, [isPlaying]);
-    
-    if (!machineCategories) return null
+
     return (
         <motion.video
             ref={videoRef}
@@ -42,7 +41,7 @@ const BackgroundVideo = () => {
             loop
             playsInline
         >
-            <source src={machineCategories[currentCategory].videoSrc} />
+            <source src={currentCategory!.videoSrc} />
             Your browser does not support the video tag.
         </motion.video>
     );
@@ -72,7 +71,7 @@ export const HeroVideo = ({ className = "" }) => {
         >
             {/* Smoothly crossfade between videos on activeIndex change */}
             <AnimatePresence initial={false}>
-                <BackgroundVideo key={currentCategory} />
+                <BackgroundVideo key={currentCategory.name} />
             </AnimatePresence>
 
             <HeroVideoOverlay />
@@ -99,7 +98,7 @@ const HeroVideoOverlay = () => {
             {/* Gradient overlay for readability */}
             <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent pointer-events-none -z-10" />
 
-            <Container className="py-12 flex flex-col lg:flex-row items-end lg:items-end justify-between w-full gap-10">
+            <Container className="py-12 flex flex-col lg:flex-row lg:justify-between w-full gap-10">
                 <div className="flex items-start lg:items-center gap-6 w-max lg:max-w-xl">
                     <div className="mt-2 lg:mt-0">
                         <HeroVideoPlayPauseBtn />
@@ -115,22 +114,20 @@ const HeroVideoOverlay = () => {
 
 const HeroVideoOverlayText = () => {
     const { currentCategory } = useHeroVideo()
-    const { data: machineCategories } = useCategories()
-    if (!machineCategories) return null
     return (
         <div className="text-white max-w-xl  flex flex-col justify-center">
             {/* mode="wait" ensures text smoothly swaps out before swapping in */}
             <AnimatePresence mode="wait">
                 <Fade
-                    key={currentCategory}
+                    key={currentCategory.name}
                     from="down"
                     ease="easeInOut"
                     duration={0.4}
                     exit={{ opacity: 0, y: -15 }}
                 >
 
-                    <Text as="h3" size="xl">{machineCategories[currentCategory].name}</Text>
-                    <Text size="base">{machineCategories[currentCategory].description}</Text>
+                    <Text as="h3" size="xl">{currentCategory.name}</Text>
+                    <Text size="base">{currentCategory.description}</Text>
                 </Fade>
 
             </AnimatePresence>
@@ -140,40 +137,35 @@ const HeroVideoOverlayText = () => {
 
 
 const HeroVideoOverlayOtherMachines = () => {
-    const { currentCategory, setCurrentCategory } = useHeroVideo()
+    const { currentCategory, setCurrentCategory, categories } = useHeroVideo()
     const isMobile = useIsMobile()
-    const { data: machineCategories } = useCategories()
-    if (!machineCategories) return null
-    const categories = Object.keys(machineCategories).sort()
     return (
         <div className="w-max lg:w-auto">
-            <ul className="flex   snap-x no-scrollbar">
+            <ul className="flex gap-2 snap-x no-scrollbar">
                 {categories.map((category) => {
                     const isActive = currentCategory === category;
                     return (
-                        <li key={category} className="snap-start">
+                        <li key={category.id} className="snap-start relative">
                             {/* Trigger the state change smoothly upon hover */}
                             <LinkTag
-                                href="#"
+                                href={category.href}
                                 notLink={isMobile ? true : false}
-                                onMouseEnter={() => setCurrentCategory(category as Category)}
+                                onMouseEnter={() => setCurrentCategory(category)}
                                 className={cn(
-                                    "flex flex-col items-center justify-center w-28 md:w-36 h-max    transition-all duration-300 overflow-hidden  text-center group border-x border-primary!",
+                                    "flex w-28 aspect-square md:w-36  transition-all duration-300 overflow-hidden group text-background rounded-2xl bg-foreground",
                                     isActive
-                                        ? "bg-primary text-background"
-                                        : "bg-muted text-foreground hover:bg-primary hover:text-background!"
+                                        ? "bg-primary"
+                                        : "bg-muted hover:bg-primary"
                                 )}
                             >
-                                <div className="aspect- w-full shrink-0 overflow-hidden p-3">
-                                    <img
-                                        src={machineCategories[category as Category].image.primary}
-                                        className={`w-full h-full  transition-transform duration-700  ${category === "cnc" ? "scale-100 group-hover:scale-110" : "scale-115 group-hover:scale-125"}`}
-                                        alt={machineCategories[category as Category].name}
-                                    />
-                                </div>
-                                <div className="flex-1 group-hover:text-white pb-3">
-                                    <Text size="xs" className="font-semibold transition-all duration-300">
-                                        {machineCategories[category as Category].name}
+                                <img
+                                    src={category.image.primary}
+                                    className={`absolute h-full  bottom-0 object-contain w-full transition-transform duration-700  group-hover:scale-105`}
+                                    alt={category.name}
+                                />
+                                <div className="bg-linear-to-b from-transparent to-black w-full h-full absolute group-hover:text-white flex items-end justify-center">
+                                    <Text size="xs" className="font-semibold transition-all duration-300 mb-3">
+                                        {category.name}
                                     </Text>
 
                                 </div>

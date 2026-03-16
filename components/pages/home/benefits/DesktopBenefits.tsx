@@ -119,7 +119,7 @@ type Item = Pick<Benefits, "id" | "videoSrc">
 type CarouselContainerProps = {
     items: Item[],
     className?: string
-    activeIndex: number
+    activeIndex: number,
 }
 
 
@@ -144,7 +144,7 @@ const CarouselContainer = ({ items, activeIndex, className = "" }: CarouselConta
                             items.map((item) => (
                                 <CarouselItem key={item.id} className='flex w-full'>
                                     <div className='w-full rounded-2xl overflow-hidden  relative'>
-                                        <BackgroundVideo videoSrc='https://robojob-usa.com/media/documents/19791092-uhd_3840_2160_60fps_processed_0TGr4LR_ENUQU21.webm' className='border-2' withOverLay withPlayPauseBtn />
+                                        <BackgroundVideo videoSrc={item.videoSrc} className='border-2' withOverLay withPlayPauseBtn />
                                     </div>
                                 </CarouselItem>
                             ))
@@ -161,7 +161,7 @@ const DesktopBenefits = ({ className }: { className?: string }) => {
 
 
     const carouselItems = benefits.map((benefit) => ({ id: benefit.id, videoSrc: benefit.videoSrc }))
-    const cardItems = benefits.map(({ id, description, mainBenefitStat, heading, icon }) => ({ id, heading, mainBenefitStat, description, icon }))
+    const cardItems = benefits.map(({ id, description, mainBenefitStat, heading, icon,videoSrc }) => ({ id, heading, mainBenefitStat, description, icon,videoSrc }))
     const [activeIndex, setActiveIndex] = useState<number>(0)
     return (
         <Section className={cn("bg-border mt-24", className)}>

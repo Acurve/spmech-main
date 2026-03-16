@@ -1,44 +1,35 @@
-"use client"
-import MachinePageLoader from '@/components/loaders/MachinePageLoader';
 import Hero from './hero/Hero'
-import { getMachineBySlug } from '@/utils/api/api';
-import { useQuery } from '@tanstack/react-query';
 import Container from '@/components/layout/Container';
 import BreadCrumb, { type BreadCrumb as BreadCrumbType } from "@/components/shared/BreadCrumb";
 import { IconHome } from "@tabler/icons-react";
 import Specifications from './Specifications';
 import MachineInAction from './MachineInAction';
 import { CallToActionSideVideo } from '@/components/shared/CallToAction';
+import { Machine } from '@/types/machine';
 
 export type HeroMachineDetails = {
     images: string[],
     modelName?: string,
     advantages: string[],
-    category: string,
-    description?:string
+    description?: string
 }
 
-const MachineMain = ({ slug }: { slug: string }) => {
+const MachineMain = ({ machine }: { machine: Machine }) => {
 
+    const category = (machine.categoryId && typeof machine.categoryId !== 'string')
+        ? {
+            slug: machine.categoryId.slug,
+            categoryName: machine.categoryId.categoryName,
+            commonAdvantages: machine.categoryId.commonAdvantages
+        }
+        : null;
 
-    const { isPending, error, data } = useQuery({
-        queryKey: ['machine', slug],
-        queryFn: () => getMachineBySlug(slug),
-    })
-
-    if (isPending) return <MachinePageLoader />;
-
-    if (error) return 'An error has occurred: ' + error.message
-
-
-    const actualMachineData = data.data.data.machine
     const heroMachineDetails: HeroMachineDetails = {
-        images: actualMachineData.images,
-        modelName: actualMachineData.modelName,
-        advantages: actualMachineData.categoryId.commonAdvantages,
-        category: actualMachineData.categoryId.categoryName,
-        
+        images: [machine.image1, machine.image2, machine.image3],
+        modelName: machine.modelName,
+        advantages: category?.commonAdvantages || []
     }
+
 
 
     const specificProductCrumbs: BreadCrumbType[] = [
@@ -53,17 +44,16 @@ const MachineMain = ({ slug }: { slug: string }) => {
             notLink: true
         },
         {
-            name: actualMachineData.categoryId.categoryName,
-            href: `/machines/${actualMachineData.categoryId.slug}`,
+            name: category?.categoryName || "",
+            href: `/machines/${category?.slug}`,
         },
         {
-            name: actualMachineData.modelName,
-            href: `/machines/${actualMachineData.categoryId.slug}/${slug}`
+            name: machine.modelName,
+            href: `/machines/${category?.slug}/${machine.slug}`
         }
     ]
 
 
-    const machineSpecs = actualMachineData.specifications
 
 
     return (
@@ -72,8 +62,8 @@ const MachineMain = ({ slug }: { slug: string }) => {
                 <BreadCrumb links={specificProductCrumbs} isAnimated />
             </Container>
             <Hero machineDetails={heroMachineDetails} />
-            <Specifications specifications={machineSpecs} />
-            <MachineInAction />
+            <Specifications specifications={machine.specifications!} image={machine.outlineImage ? machine.outlineImage : ""} />
+            <MachineInAction videoUrl={machine.videoUrl} />
             <CallToActionSideVideo />
         </div>
     )

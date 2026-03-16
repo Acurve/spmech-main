@@ -1,10 +1,13 @@
+"use client"
+
 import Container from "@/components/layout/Container";
 import Section from "@/components/layout/Section";
 import LinkTag from "@/components/LinkTag";
 import { Text } from "@/components/typography/Text";
 import { cn } from "@/lib/utils";
 import { IconArrowRight } from "@tabler/icons-react";
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useRef } from "react";
 
 type ProductContainerProps = {
     imageSrc: string,
@@ -17,73 +20,102 @@ type ProductContainerProps = {
 }
 
 export const ProductContainer = ({ index, imageSrc, machineName, href, description="", className = "", reversed = false }: ProductContainerProps) => {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end start"]
+    });
+
+    // True parallax effect for the image
+    const imageY = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
+
     return (
-        <Section className={cn(" bg-white", className)}>
-            <Container>
-                <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                    <div className={`flex flex-col items-center gap-16 lg:gap-24 ${reversed ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}>
+        <Section className={cn("bg-white py-16 lg:py-32", className)}>
+            <div ref={containerRef}>
+                <Container>
+                    <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                        <div className={`flex flex-col items-center gap-16 lg:gap-24 ${reversed ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}>
 
-                        {/* Image Container with Parallax effect simulation */}
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                            className="w-full lg:w-1/2"
-                        >
-                            <div className="group relative aspect-4/5 w-full overflow-hidden bg-gray-50 md:aspect-3/4">
-                                <img
-                                    src={imageSrc}
-                                    alt={machineName}
-                                    className="h-full w-full object-cover transition-transform duration-1000 ease-in-out group-hover:scale-105"
-                                />
-                                {/* Overlay subtle shadow */}
-                                <div className="absolute inset-0 bg-black/5 transition-opacity duration-500 group-hover:bg-transparent" />
-                            </div>
-                        </motion.div>
-
-                        {/* Content Container */}
-                        <div className="flex w-full flex-col lg:w-1/2">
-                            <motion.div
-                                initial={{ opacity: 0, y: 40 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: "-100px" }}
-                                transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                            >
-                                <Text as="span" size="base" className="mb-4 block font-bold text-brand">
-                                    {index}
-                                </Text>
-                                <h2 className="mb-2 text-4xl font-medium tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
-                                    {machineName}
-                                </h2>
-
-
-                                <p className="mb-10 text-lg leading-relaxed text-gray-500">
-                                    {description}
-                                </p>
-
-
-                                {/* Call to Action to Dedicated Page */}
-                                <LinkTag
-                                    href={href}
-                                    variant="custom"
-                                    className="group  tracking-[0.15em] text-gray-900 transition-colors hover:text-brand flex gap-2 items-center"
+                            {/* Image Container with Curtain Reveal & Parallax */}
+                            <div className="w-full lg:w-1/2 relative">
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    whileInView={{ opacity: 1 }}
+                                    viewport={{ once: true, margin: "-100px" }}
+                                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                                    className="group relative aspect-4/5 w-full overflow-hidden bg-gray-50 md:aspect-3/4"
                                 >
-                                    <Text as="span" size="base" className="relative overflow-hidden pb-1">
-                                        See details
-                                        {/* Custom underline animation */}
-                                        <span className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 transform bg-brand transition-transform duration-300 group-hover:scale-x-100" />
-                                    </Text>
-                                    <span className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 transition-colors duration-300 group-hover:border-brand group-hover:bg-brand group-hover:text-white">
-                                        <IconArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:-rotate-45" />
-                                    </span>
-                                </LinkTag>
-                            </motion.div>
-                        </div>
+                                    {/* Curtain Reveal Animation */}
+                                    <motion.div 
+                                        className="absolute inset-0 z-10 bg-white"
+                                        initial={{ height: "100%" }}
+                                        whileInView={{ height: "0%" }}
+                                        viewport={{ once: true, margin: "-100px" }}
+                                        transition={{ duration: 1.2, ease: [0.77, 0, 0.175, 1] }}
+                                    />
+                                    
+                                    <motion.img
+                                        src={imageSrc}
+                                        alt={machineName}
+                                        style={{ y: imageY, scale: 1.15 }}
+                                        className="h-full w-full object-cover origin-center transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-125"
+                                    />
+                                    {/* Overlay subtle shadow */}
+                                    <div className="absolute inset-0 bg-black/5 transition-opacity duration-700 group-hover:bg-transparent pointer-events-none" />
+                                </motion.div>
+                            </div>
 
+                            {/* Content Container */}
+                            <div className="flex w-full flex-col lg:w-1/2">
+                                <motion.div
+                                    initial={{ opacity: 0, y: 40 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true, margin: "-100px" }}
+                                    transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                                    className="relative"
+                                >
+                                    {/* Background Watermark Number */}
+                                    <div className="absolute -top-12 -left-6 z-0 md:-left-12 md:-top-16 opacity-[0.03] select-none pointer-events-none">
+                                        <span className="font-bold text-gray-900 text-8xl md:text-[12rem] leading-none tracking-tighter">
+                                            {index.toString().padStart(2, '0')}
+                                        </span>
+                                    </div>
+
+                                    <div className="relative z-10">
+                                        <Text as="span" size="sm" className="mb-5 block font-bold text-brand uppercase tracking-[0.2em]">
+                                            {index.toString().padStart(2, '0')} — Model
+                                        </Text>
+                                        <h2 className="mb-6 text-4xl font-medium tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
+                                            {machineName}
+                                        </h2>
+
+                                        <p className="mb-12 text-lg leading-relaxed text-gray-500 max-w-xl">
+                                            {description}
+                                        </p>
+
+                                        {/* Call to Action to Dedicated Page */}
+                                        <LinkTag
+                                            href={href}
+                                            variant="custom"
+                                            className="group inline-flex gap-4 items-center tracking-widest text-gray-900 transition-colors hover:text-brand"
+                                        >
+                                            <Text as="span" size="sm" className="relative pb-1 uppercase font-semibold">
+                                                See details
+                                                <span className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 transform bg-brand transition-transform duration-500 ease-out group-hover:scale-x-100" />
+                                            </Text>
+                                            <span className="flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 transition-all duration-500 ease-out group-hover:border-brand group-hover:bg-brand group-hover:text-white group-hover:scale-110">
+                                                <IconArrowRight className="h-5 w-5 transition-transform duration-500 ease-out group-hover:-rotate-45" />
+                                            </span>
+                                        </LinkTag>
+                                    </div>
+                                </motion.div>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
-            </Container>
+                </Container>
+            </div>
         </Section>
     )
 }
+

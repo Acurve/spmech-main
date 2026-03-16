@@ -6,15 +6,13 @@ import Container from '../Container'
 import { motion } from "motion/react"
 import { useState } from 'react'
 import { Text } from '@/components/typography/Text'
-import { CategoriesList, CategoryDetails, CategoryKey, useCategories } from '@/hooks/useCategories'
+import { DesktopNavigationProps } from './Navbar'
 
 
+const DesktopNavigation = ({ className = "", categories }: { className?: string } & { categories: DesktopNavigationProps[] }) => {
 
-const DesktopNavigation = ({ className = "" }: { className?: string }) => {
-    const { data: machineCategories } = useCategories()
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
-    if (!machineCategories) return null
     return (
         <div className={cn("", className)}>
             <ul className='flex gap-8'>
@@ -39,7 +37,7 @@ const DesktopNavigation = ({ className = "" }: { className?: string }) => {
                                 </Text>
                             </LinkTag>
                             {link.type === "dropdown" && (
-                                <DesktopNavigationDropdown subLinks={machineCategories!} isOpen={isOpen} />
+                                <DesktopNavigationDropdown subLinks={categories} isOpen={isOpen} />
                             )}
                         </li>
                     ))
@@ -49,23 +47,20 @@ const DesktopNavigation = ({ className = "" }: { className?: string }) => {
     )
 }
 
-
-type DropdownSubLinks = CategoryDetails
 type DesktopNavigationDropdownProps = {
     className?: string,
-    subLinks: CategoriesList,
+    subLinks: DesktopNavigationProps[],
     isOpen: boolean
 }
-
 
 export const DesktopNavigationDropdown = ({
     className,
     subLinks,
     isOpen,
 }: DesktopNavigationDropdownProps) => {
-    const firstCategory = Object.values(subLinks)[0]
+    const firstCategory = subLinks[0]
 
-    const [currentProduct, setCurrentProduct] = useState<DropdownSubLinks>(firstCategory)
+    const [currentCategory, setCurrentCategory] = useState<DesktopNavigationProps>(firstCategory)
 
     return (
         <motion.div
@@ -107,9 +102,9 @@ export const DesktopNavigationDropdown = ({
                         </motion.div>
 
                         <div className='flex flex-col gap-8 mb-8'>
-                            {Object.keys(subLinks).map((link, index) => (
+                            {subLinks.map((cat, index) => (
                                 <motion.div
-                                    key={`link-${link}`}
+                                    key={cat.id}
                                     initial={{ opacity: 0, y: 30 }}
                                     animate={{
                                         opacity: isOpen ? 1 : 0,
@@ -121,20 +116,22 @@ export const DesktopNavigationDropdown = ({
                                         ease: "easeInOut"
                                     }}
                                 >
-                                    <LinkTag href={subLinks[link as CategoryKey].href}
-                                        onMouseEnter={() => setCurrentProduct(subLinks[link as CategoryKey])}
+                                    <LinkTag href={cat.href}
+                                        onMouseEnter={() => setCurrentCategory(cat)}
                                         variant='custom'
                                         className={cn(
                                             "text-foreground/70 hover:text-brand transition-colors duration-300",
-                                            currentProduct.id === subLinks[link as CategoryKey].id && "text-brand")}>
+                                            currentCategory.id === cat.id && "text-brand")}>
 
-                                        <Text as='span' size='xl' className='font-medium'>{subLinks[link as CategoryKey].name}</Text>
+                                        <Text as='span' size='xl' className='font-medium'>{cat.name}</Text>
                                     </LinkTag>
                                 </motion.div>
                             ))}
                         </div>
                     </div>
-                    <DesktopNavigationDropdownImageContainer product={currentProduct} />
+                    <DesktopNavigationDropdownImageContainer
+                        description={currentCategory.description}
+                        image={currentCategory.image} />
                 </div>
             </Container>
 
@@ -143,17 +140,19 @@ export const DesktopNavigationDropdown = ({
     )
 }
 
-const DesktopNavigationDropdownImageContainer = ({ product }: { product: DropdownSubLinks }) => {
+type DesktopNavigationDropdownImageContainerProps = Pick<DesktopNavigationProps, "image" | "description">
+
+const DesktopNavigationDropdownImageContainer = ({ image, description }: DesktopNavigationDropdownImageContainerProps) => {
     return (
         <div className='px-12 pb-4 border-l-2  border-foreground/60! max-w-xl space-y-4'>
             {/* image container */}
             <div className='py-4 border-b-2  border-foreground/40!'>
-                <img src={product.image.outline} alt="" className='' />
+                <img src={image.outline} alt="" className='' />
             </div>
 
 
             <div>
-                {product.description}
+                {description}
             </div>
 
         </div>

@@ -1,4 +1,3 @@
-"use client"
 import Container from '@/components/layout/Container';
 import Section from '@/components/layout/Section';
 import { Text } from '@/components/typography/Text';
@@ -6,16 +5,17 @@ import LinkTag from '@/components/LinkTag';
 import { cn } from '@/lib/utils';
 import { IconArrowRight } from '@tabler/icons-react';
 import SectionHeader from '@/components/shared/SectionHeader';
-import { useCategories } from '@/hooks/useCategories';
+import { CategoryShaped } from '@/types/category';
 
+type CategoryShapedForProductSection = Pick<CategoryShaped,"image"|"name"|"href">
 
 type SingleProductContainerProps = {
     className?: string,
-} & Omit<Category, "linkHref">
+} & CategoryShapedForProductSection
 const SingleProductContainer = ({ image, name, className = "" }: SingleProductContainerProps) => {
     return (
         <div className={cn('relative h-128 sm:h-152 lg:h-128 xl:h-152', className)}>
-            <div className=' relative h-108 sm:h-128 lg:h-108 xl:h-128 bg-background md:group-hover/product:h-full flex rounded-xl justify-center overflow-hidden transition-all duration-300'>
+            <div className=' relative h-108 sm:h-128 lg:h-108 xl:h-128 bg-secondary md:group-hover/product:h-full flex rounded-xl justify-center overflow-hidden transition-all duration-300'>
                 <div className="absolute w-full h-full z-2 bg-linear-to-b from-transparent to-black via-transparent" />
                 <img src={image.secondary} alt="Product Image" className='object-cover w-full transition-all duration-300 bg-secondary absolute' />
                 <img src={image.primary} alt="Product Image" className='object-cover w-full transition-all duration-300 absolute opacity-0 group-hover/product:opacity-100' />
@@ -36,19 +36,13 @@ const SingleProductContainer = ({ image, name, className = "" }: SingleProductCo
     )
 }
 
-type Category = {
-    image: {
-        primary: string,
-        secondary: string
-    },
-    name: string,
-    href: string
+
+
+type ProductsProps = {
+    categories:CategoryShapedForProductSection[],
 }
 
-const Products = () => {
-    const { data: machineCategories } = useCategories()
-    if (!machineCategories) return null
-    const products = Object.values(machineCategories)
+const Products = ({categories}:ProductsProps) => {
     return (
 
         <Section className='py-0'>
@@ -57,9 +51,9 @@ const Products = () => {
                     <SectionHeader heading="CNC & SPMs" eyeBrow='_products' />
 
                     <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-4'>
-                        {products.map((product, index) => (
-                            <LinkTag href={product.href} variant='custom' key={`category-${index}`} className='group/product'>
-                                <SingleProductContainer  {...product} />
+                        {categories.map((category) => (
+                            <LinkTag href={category.href} variant='custom' key={`category-${category.name}`} className='group/product'>
+                                <SingleProductContainer  {...category} />
                             </LinkTag>
                         ))
 

@@ -1,10 +1,47 @@
+"use client"
 import ScrollRevealParagraph from '@/components/animations/ScrollRevealParagraph'
 
 import Container from '@/components/layout/Container'
 import Section from '@/components/layout/Section'
+import MachinePageLoader from '@/components/loaders/MachinePageLoader'
 import { Text } from '@/components/typography/Text'
+import { useQuery } from '@tanstack/react-query'
+import axios from 'axios'
+
+type AboutDetails = {
+    success: boolean,
+    message: string,
+    data: {
+        _id: string,
+        name: string,
+        logoText: string,
+        tagline: string,
+        profileText: string[],
+        contactDetails: {
+            address: string,
+            email: string,
+            customerCareNo: string,
+            mobileNo: string
+        },
+        createdAt: string,
+        updatedAt: string,
+        __v: number
+    }
+}
 
 const AboutParagraphs = () => {
+    const { isLoading, data, isError } = useQuery({
+        queryKey: ["about"],
+        queryFn: () => axios.get("/api/products/manufacturer")
+    })
+
+
+    if (isLoading) return <MachinePageLoader />
+
+    if (isError) return <>something went wrong retry again</>
+    
+
+    const about:AboutDetails = data!.data
     return (
         <Section className=''>
             <Container className='md:flex gap-8 '>
@@ -15,12 +52,16 @@ const AboutParagraphs = () => {
                     </Text>
                 </div>
                 <div className='flex-1'>
-                    <ScrollRevealParagraph
-                        text="This animation now tracks lines rather than just words. As you scroll, the first line reveals from left to right completely. Because each line has its own scroll trigger, the second line will only start its sequential reveal once it reaches the specific threshold in the viewport, making every line break feel like a fresh start for the animation."
-                    />
-                    <ScrollRevealParagraph
-                        text="Sequential flow is powerful for storytelling. It guides the eye naturally across the page. By detecting line wraps dynamically, this component stays responsive—whether you are on a mobile device with many short lines or a desktop with a few long ones, the flow remains consistent."
-                    />
+                    {
+                        about.data.profileText.map((text, index) => (
+
+                            <ScrollRevealParagraph
+                                key={index}
+                                text={text}
+                            />
+                        ))
+                    }
+
 
                 </div>
             </Container>

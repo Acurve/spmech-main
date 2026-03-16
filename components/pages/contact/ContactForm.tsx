@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import contactFormSchema, { contactFormSchemaType } from "@/schemas/contact.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IconLoader, IconSend } from "@tabler/icons-react";
+import axios from "axios";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -34,12 +35,9 @@ const ContactForm = ({className=""}:{className?:string}) => {
 
     const onSubmit = async (data: contactFormSchemaType) => {
         // Simulate API Call
-        await new Promise((resolve) => setTimeout(resolve, 1500));
+        await axios.post("/api/contacts");
         console.log("Form submitted successfully:", data);
         setIsSuccess(true);
-
-        // Reset success message after 5 seconds
-        setTimeout(() => setIsSuccess(false), 5000);
     };
 
     return (

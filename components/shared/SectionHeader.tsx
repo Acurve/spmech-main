@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { Text } from '../typography/Text'
 import { cn } from '@/lib/utils'
 

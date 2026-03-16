@@ -1,94 +1,76 @@
 "use client"
+
 import Fade from '@/components/animations/Fade'
 import Container from '@/components/layout/Container'
-import MachinePageLoader from '@/components/loaders/MachinePageLoader'
 import BreadCrumb, { type BreadCrumb as BreadCrumbType } from '@/components/shared/BreadCrumb'
 import { Text } from '@/components/typography/Text'
-import { getAllMachines } from '@/utils/api/api'
 import { IconHome } from '@tabler/icons-react'
-import { useQuery } from '@tanstack/react-query'
 import { ProductContainer } from './CategoryPageProducts'
-import { usePathname } from 'next/navigation'
+import { type Category } from '@/types/category'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'motion/react'
 
-
-
-type categoryMachines = {
+type CategoryMachines = {
     imageSrc: string,
     href: string,
     machineName: string,
     description?: string,
-    categoryName?: string
 }
-
-type categoryWhole = {
-    categoryName: string,
-    categoryHref: string,
-    machines: categoryMachines[]
-}
-
 
 type CategoryHeaderProps = {
     categoryName: string,
     categoryDescription: string,
     CategoryType: string
 }
+
 const CategoryHeader = ({ categoryName, categoryDescription, CategoryType }: CategoryHeaderProps) => {
+    const ref = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: ref,
+        offset: ["start start", "end start"]
+    });
+    
+    // Parallax effect for the background text
+    const textY = useTransform(scrollYProgress, [0, 1], ["0%", "80%"]);
+
     return (
-        <div className="relative flex min-h-[60vh] flex-col items-center justify-center overflow-hidden bg-[#FAFAFA] px-6 text-center">
+        <div ref={ref} className="relative flex min-h-[70vh] lg:min-h-[85vh] flex-col items-center justify-center overflow-hidden bg-linear-to-b from-gray-50 to-white px-6 text-center">
             <Fade
                 from='down'
                 className="relative z-10 mx-auto max-w-4xl"
             >
-
-                <Text as='h1' size='3xl' className="mb-8 tracking-tighter font-medium">
+                <Text as='h1' size='3xl' className="mb-6 tracking-tighter font-medium md:text-6xl lg:text-7xl">
                     {categoryName}
                 </Text>
-                <Text as='p' size='base' className="mx-auto max-w-xl  leading-relaxed text-gray-500">
+                <Text as='p' size='base' className="mx-auto max-w-xl leading-relaxed text-gray-500 md:text-lg">
                     {categoryDescription}
                 </Text>
             </Fade>
 
-            {/* Decorative subtle background element */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.03]">
-                <Text as='span' size='custom' className="text-[20vw] font-bold tracking-tighter text-gray-900">{CategoryType}</Text>
+            {/* Decorative subtle background element with TRUE parallax */}
+            <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden">
+                <motion.div style={{ y: textY }} className="opacity-[0.03]">
+                    <Text as='span' size='custom' className="text-[20vw] font-bold tracking-tighter text-gray-900 whitespace-nowrap leading-none">
+                        {CategoryType}
+                    </Text>
+                </motion.div>
             </div>
         </div>
     );
 };
 
-const CategoryMain = ({ categorySlug }: { categorySlug: string }) => {
+const CategoryMain = ({ category }: { category: Category }) => {
 
-    const pathName = usePathname()
+    
 
-    const { isPending, error, data } = useQuery({
-        queryKey: ['category-machines'],
-        queryFn: getAllMachines,
-    })
-
-    if (isPending) return <MachinePageLoader />;
-
-    if (error) return 'An error has occurred: ' + error.message
-
-
-    const response = data.data.data.data
-
-    const finalMachines: categoryMachines[] = response
-        .filter((machine: any) => machine.categoryId.slug === categorySlug)
-        .map((machine: any) => ({
-            imageSrc: machine.images[0],
-            href: `${pathName.replace(/\/$/, "")}/${machine.slug}`,
-            machineName: machine.modelName,
-            categoryName: machine.categoryId.categoryName
-        }));
-
-
-    const finalCategoryMachines: categoryWhole = {
-        categoryName: finalMachines[0].categoryName!,
-        categoryHref: `/${categorySlug}`,
-        machines: finalMachines
-    }
-
-
+    const finalMachines: CategoryMachines[] = category.machines.map((mac) => (
+        {
+            imageSrc: mac.image1,
+            href: `${category.slug}/${mac.slug}`,
+            machineName: mac.modelName,
+            description: mac.description
+        }
+    ))
 
     const specificProductCrumbs: BreadCrumbType[] = [
         {
@@ -102,8 +84,8 @@ const CategoryMain = ({ categorySlug }: { categorySlug: string }) => {
             notLink: true
         },
         {
-            name: finalCategoryMachines.categoryName,
-            href: `/machines/${categorySlug}`,
+            name: category.categoryName,
+            href: `/machines/${category.slug}`,
         },
     ]
     return (
@@ -111,9 +93,9 @@ const CategoryMain = ({ categorySlug }: { categorySlug: string }) => {
             <Container className='pt-16 space-y-16'>
                 <BreadCrumb links={specificProductCrumbs} isAnimated />
                 <CategoryHeader
-                    categoryName={finalCategoryMachines.categoryName}
-                    categoryDescription={`Discover our wide range of ${finalCategoryMachines.categoryName}s designed for accuracy and scale`}
-                    CategoryType={finalCategoryMachines.categoryName.split(" ")[0]}
+                    categoryName={category.categoryName}
+                    categoryDescription={`Discover our wide range of ${category.categoryName}s designed for accuracy and scale`}
+                    CategoryType={category.categoryName.split(" ")[0]}
                 />
             </Container>
             {

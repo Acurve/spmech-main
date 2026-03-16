@@ -53,7 +53,7 @@ const LinkTag = ({
   const pathname = usePathname();
 
   // Strict check for active state; handles empty hrefs safely
-  
+
   const isActive = href ? pathname === href : false
 
   const styles = variantClasses[variant];

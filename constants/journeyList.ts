@@ -1,69 +1,55 @@
-
 export type Snap = { // snapshot of the journey
     year: number,
     description: string,
     imageSrc: string
 }
+
 const journeyList: Snap[] = [
     {
-        year: 2010,
-        imageSrc: "",
-        description: "Company founded with a vision to deliver reliable and precise industrial machinery."
-    },
-    {
-        year: 2012,
-        imageSrc: "",
-        description: "Started manufacturing conventional machines and built the first local client base."
+        year: 2013,
+        imageSrc: "https://ik.imagekit.io/spmech/journey/2013.webp?updatedAt=1773047077709",
+        description: "Began manufacturing Hinges Slotting Machines."
     },
     {
         year: 2014,
-        imageSrc: "",
-        description: "Expanded production capacity and introduced advanced machining processes."
+        imageSrc: "https://ik.imagekit.io/spmech/journey/2013.webp?updatedAt=1773047077709",
+        description: "Expanded manufacturing to Railway Hinges Slotting Machines."
     },
     {
         year: 2016,
-        imageSrc: "",
-        description: "Entered CNC machine manufacturing with a focus on accuracy and durability."
+        imageSrc: "https://ik.imagekit.io/spmech/journey/2016.webp?updatedAt=1773046980204",
+        description: "Introduced Hinges Face Machines and Hinges Hole Double Drill Machines."
+    },
+    {
+        year: 2017,
+        imageSrc: "https://ik.imagekit.io/spmech/journey/2017.webp?updatedAt=1773046980182",
+        description: "Launched the Hinges Hole Quotation Machine."
     },
     {
         year: 2018,
-        imageSrc: "",
-        description: "Launched specialized machines for hinges and lock manufacturing."
-    },
-    {
-        year: 2019,
-        imageSrc: "",
-        description: "Adopted modern quality control systems to ensure consistent performance."
+        imageSrc: "https://ik.imagekit.io/spmech/journey/2018.webp?updatedAt=1773046980044",
+        description: "Started a new project focused on Lock Machines."
     },
     {
         year: 2020,
-        imageSrc: "",
-        description: "Upgraded factory infrastructure and automation despite industry challenges."
-    },
-    {
-        year: 2021,
-        imageSrc: "",
-        description: "Expanded product portfolio to serve diverse industrial requirements."
-    },
-    {
-        year: 2022,
-        imageSrc: "",
-        description: "Strengthened R&D to improve machine efficiency and reduce downtime."
-    },
-    {
-        year: 2023,
-        imageSrc: "",
-        description: "Delivered machines to clients across multiple regions with strong service support."
+        imageSrc: "https://ik.imagekit.io/spmech/journey/2018.webp?updatedAt=1773046980044",
+        description: "Successfully developed the complete Lock Machine series."
     },
     {
         year: 2024,
-        imageSrc: "",
-        description: "Focused on precision engineering, reliability, and long-term partnerships."
+        imageSrc: "https://ik.imagekit.io/spmech/journey/2025.webp?updatedAt=1773047292673",
+        description: "Initiated a new project for CNC Machines."
     },
     {
         year: 2025,
+        imageSrc: "https://ik.imagekit.io/spmech/journey/2025.webp?updatedAt=1773047292673",
+        description: "Launched our first CNC Machine with a 400mm chuck, 1.0 meter travel, and a heavy-duty body design."
+    },
+    {
+        year: 2026,
         imageSrc: "",
-        description: "Continuing to innovate with smarter, more efficient manufacturing solutions."
+        description: "Participated in an industrial exhibition."
     }
 ]
+
 export default journeyList

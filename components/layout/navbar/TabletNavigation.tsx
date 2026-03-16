@@ -9,15 +9,17 @@ import { useEffect, useRef, useState } from 'react'
 import { useLenis } from 'lenis/react'
 import { Text } from '@/components/typography/Text'
 import { CallToActionText } from '@/constants/callToAction'
+import { DesktopNavigationProps } from './Navbar'
 
 
 
 
 type TabletNavigation = {
   className?: string,
+  categories: DesktopNavigationProps[]
 }
 
-const TabletNavigation = ({ className = "" }: TabletNavigation) => {
+const TabletNavigation = ({ className = "",categories }: TabletNavigation) => {
   const { isOpen } = useTabletNavigation()
 
   const [isTabletNavigationDropdownOpen, setIsTabletNavigationDropdownOpen] = useState(false)
@@ -107,7 +109,7 @@ const TabletNavigation = ({ className = "" }: TabletNavigation) => {
 
                   </LinkTag>
                   {link.type === "dropdown" && (
-                    <TabletNavigationDropdown subLinks={link.subLinks} isOpen={isTabletNavigationDropdownOpen} />
+                    <TabletNavigationDropdown subLinks={categories} isOpen={isTabletNavigationDropdownOpen} />
                   )}
                 </motion.li>
               ))
@@ -140,10 +142,9 @@ const TabletNavigation = ({ className = "" }: TabletNavigation) => {
 }
 
 
-type DropdownSubLinks = DropdownNavigationItems["subLinks"][number]
 type TabletNavigationDropdownProps = {
   className?: string,
-  subLinks: DropdownSubLinks[],
+  subLinks: DesktopNavigationProps[],
   isOpen: boolean
 }
 

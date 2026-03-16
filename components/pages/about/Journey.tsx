@@ -31,7 +31,7 @@ const SingleJourneyCard = ({ className, snap }: SingleJourneyCardProps) => {
                     </RevealText>
                 </div>
                 <div className="absolute hidden lg:flex h-max justify-end w-max left-full transition-opacity duration-500 ml-8 -translate-y-[40%] group-hover/journeyCard:opacity-100 opacity-0 rounded-2xl overflow-hidden">
-                    <img src="images/vmv/values.webp" alt="" className='w-84 aspect-4/5 object-cover' />
+                    <img src={snap.imageSrc} alt="" className='w-120  object-contain bg-border' />
                 </div>
             </div>
         </ScrollRevealWrapper>

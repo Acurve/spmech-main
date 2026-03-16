@@ -4,7 +4,6 @@ import Container from "@/components/layout/Container"
 import Section from "@/components/layout/Section"
 import BreadCrumb, { type BreadCrumb as BreadCrumbType } from "@/components/shared/BreadCrumb"
 import { Text } from "@/components/typography/Text"
-import useIsMobile from "@/hooks/useIsMobile"
 import { IconHome } from "@tabler/icons-react"
 
 const Hero = () => {
@@ -30,10 +29,10 @@ const Hero = () => {
                             <ImageParallax
                                 offset={["start center", "end start"]}
                                 className='hidden w-[35%] md:flex'
-                                imageSrc='https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2000&auto=format&fit=crop' />
+                                imageSrc='42NPeS5Q4XJSBKB9WVXmoZUS39DmsBoQRS77rB6mpjYf4AYw4eKcZg4WeK2hgeUyGrPxtWF8mkfxUiEiKTi3i8pUPwz9muX' />
                             <ImageParallax
                                 className='md:flex-1 '
-                                imageSrc='https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2000&auto=format&fit=crop' />
+                                imageSrc='https://d3fmssennfe86p.cloudfront.net/en-us/wp-content/uploads/sites/4/2023/10/CNC-MANUFACTURERS-IN-INDIA-1.webp' />
                         </div>
                         <Fade from='down' delay={0.5} triggerOnce>
                             <Text as='h1' size='2xl' className='font-medium md:w-[calc(65%-32px)] ml-auto'>About SP Engineering</Text>

@@ -7,7 +7,7 @@ export type Benefits = {
     description: string,
     mainBenefitStat: string,
     imageSrc?: string,
-    videoSrc?: string,
+    videoSrc: string,
     icon: ComponentType
 }
 const benefits: Benefits[] = [
@@ -17,7 +17,7 @@ const benefits: Benefits[] = [
         description: "high-speed machining designed to increase output and reduce cycle time.",
         mainBenefitStat: "⬆ by 160%",
         imageSrc: "images/benefits/increase_production.webp",
-        videoSrc: "",
+        videoSrc: "https://robojob-usa.com/media/documents/19791092-uhd_3840_2160_60fps_processed_0TGr4LR_ENUQU21.webm",
         icon: IconPackages 
     },
     {
@@ -26,7 +26,7 @@ const benefits: Benefits[] = [
         description: "optimized power consumption lowers energy usage without affecting performance.",
         mainBenefitStat: "⬇ 3kw",
         imageSrc: "images/benefits/energy_saving.webp",
-        videoSrc: "",
+        videoSrc: "https://www.pexels.com/download/video/5161379/",
         icon:IconBolt
     },
     {
@@ -35,7 +35,7 @@ const benefits: Benefits[] = [
         description: "efficient setup and smooth operation minimize delays across production runs.",
         mainBenefitStat: "⬇ upto 3 hours",
         imageSrc: "images/benefits/time_saving.webp",
-        videoSrc: "",
+        videoSrc: "https://www.pexels.com/download/video/852341/",
         icon:IconClockCheck
     },
 ]

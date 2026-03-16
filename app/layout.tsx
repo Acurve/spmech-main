@@ -42,7 +42,6 @@ export const metadata: Metadata = {
 };
 import LenisProvider from "@/components/providers/LenisProvider";
 import Footer from "@/components/layout/Footer";
-import { HeroVideoContextProvider } from "@/contexts/heroVideoContext";
 import QueryClientProviderFile from "@/components/providers/QueryClientProviderFile";
 import CategoriesProvider from "@/components/providers/CategoriesProvider";
 
@@ -63,14 +62,13 @@ export default function RootLayout({
         <QueryClientProviderFile>
           <CategoriesProvider>
             <LenisProvider>
-              <HeroVideoContextProvider>
+              
 
                 <Navbar />
                 <div className="main" id="main">
                   {children}
                   <Footer />
                 </div>
-              </HeroVideoContextProvider>
             </LenisProvider>
           </CategoriesProvider>
         </QueryClientProviderFile>

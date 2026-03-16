@@ -1,6 +1,6 @@
 "use client"
 
-import { Category } from "@/constants/categories"
+import { CategoryShaped } from "@/types/category"
 import { createContext, useContext, useState } from "react"
 
 
@@ -8,8 +8,9 @@ import { createContext, useContext, useState } from "react"
 type HeroVideoContextType = {
     isPlaying: boolean,
     setIsPlaying: (value: boolean) => void,
-    currentCategory: Category,
-    setCurrentCategory: (value: Category) => void
+    currentCategory: CategoryShaped,
+    setCurrentCategory: (value: CategoryShaped) => void,
+    categories: CategoryShaped[]
 }
 
 const HeroVideoContext =
@@ -17,14 +18,16 @@ const HeroVideoContext =
 
 export const HeroVideoContextProvider = ({
     children,
+    categories
 }: {
-    children: React.ReactNode
+    children: React.ReactNode,
+    categories: CategoryShaped[]
 }) => {
     const [isPlaying, setIsPlaying] = useState(true)
-    const [currentCategory, setCurrentCategory] = useState<Category>("cnc")
+    const [currentCategory, setCurrentCategory] = useState<CategoryShaped>(categories[0])
 
     return (
-        <HeroVideoContext.Provider value={{ isPlaying, setIsPlaying, currentCategory, setCurrentCategory }}>
+        <HeroVideoContext.Provider value={{ isPlaying, setIsPlaying, categories, currentCategory, setCurrentCategory }}>
             {children}
         </HeroVideoContext.Provider>
     )

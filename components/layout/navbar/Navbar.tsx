@@ -11,6 +11,8 @@ import Fade from "@/components/animations/Fade"
 import { CallToActionText } from "@/constants/callToAction"
 import { Text } from "@/components/typography/Text"
 import InteractiveHoverButton from "@/components/ui/InteractiveHoverButton"
+import { BACKEND_URL } from "@/constants/backendUrl"
+import { Category, CategoryShaped } from "@/types/category"
 
 const NavbarBranding = () => {
     const logoDimension = {
@@ -49,8 +51,38 @@ const NavbarCTA = ({ className = "" }: { className?: string }) => {
     )
 }
 
-const Navbar = () => {
 
+export type DesktopNavigationProps = {
+    id: string,
+    videoSrc: string,
+    name: string,
+    description: string,
+    href: string,
+    image: {
+        primary: string,
+        secondary: string,
+        outline: string
+    }
+}
+
+const Navbar = async () => {
+    const catRes = await fetch(`${BACKEND_URL}/products/categories`);
+    const rawCategories = await catRes.json();
+    const categories = rawCategories.data.data
+    const categoriesForDesktopNavigation:CategoryShaped[] = categories.map((cat:Category)=>(
+        {
+            id:cat._id,
+            videoSrc:cat.videoUrl,
+            name:cat.categoryName,
+            description:cat.description,
+            href:`/machines/${cat.slug}`,
+            image:{
+                primary:cat.primaryImage,
+                secondary:cat.secondaryImage,
+                outline:cat.thirdImage,
+            }
+        }
+    ))
     return (
         <TabletNavigationContextProvider>
             <NavbarAnimation>
@@ -61,8 +93,8 @@ const Navbar = () => {
                             <div className="min-h-21 gap-16 flex items-center w-full">
 
                                 <NavbarBranding />
-                                <DesktopNavigation className="lg:flex justify-center  hidden" />
-                                <TabletNavigation className="lg:hidden flex" />
+                                <DesktopNavigation categories={categoriesForDesktopNavigation} className="lg:flex justify-center  hidden" />
+                                <TabletNavigation categories={categoriesForDesktopNavigation} className="lg:hidden flex" />
                                 <NavbarCTA className="ml-auto" />
                             </div>
                         </Container>
