@@ -4,9 +4,12 @@ import "./globals.css";
 import localFont from "next/font/local"
 import Navbar from "@/components/layout/navbar/Navbar";
 
-import { Google_Sans_Flex } from "next/font/google"
+import { Google_Sans_Flex, Space_Grotesk } from "next/font/google"
 
 const googleSansFlex = Google_Sans_Flex({
+  subsets: ["latin"]
+})
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"]
 })
 
@@ -44,7 +47,7 @@ import LenisProvider from "@/components/providers/LenisProvider";
 import Footer from "@/components/layout/Footer";
 import QueryClientProviderFile from "@/components/providers/QueryClientProviderFile";
 import CategoriesProvider from "@/components/providers/CategoriesProvider";
-
+import { Toaster } from "sonner";
 
 
 export default function RootLayout({
@@ -56,19 +59,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${googleSansFlex.className} antialiased`}
+        className={`${budujSans.className} antialiased`}
       >
 
         <QueryClientProviderFile>
           <CategoriesProvider>
             <LenisProvider>
-              
 
-                <Navbar />
-                <div className="main" id="main">
-                  {children}
-                  <Footer />
-                </div>
+              <Toaster position="top-center" richColors />
+              <Navbar />
+              <div className="main" id="main">
+                {children}
+                <Footer />
+              </div>
             </LenisProvider>
           </CategoriesProvider>
         </QueryClientProviderFile>

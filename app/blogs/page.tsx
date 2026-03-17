@@ -20,9 +20,9 @@ export const metadata: Metadata = {
 
 const Page = async () => {
     const response = await getAllBlogs();
-    
+
     // Default to empty array if fetch fails to allow UI to render empty state
-    const blogs = response?.data || [];
+    const blogs = response?.data.data || [];
 
     return <BlogsMain blogs={blogs} />;
 }

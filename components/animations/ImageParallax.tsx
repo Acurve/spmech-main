@@ -60,7 +60,7 @@ const ImageParallax = ({
         <div
             ref={containerRef}
             className={cn(
-                "relative overflow-hidden rounded-2xl isolate",
+                "relative overflow-hidden h-[90dvh] rounded-2xl isolate",
                 aspectRatio,
                 className
             )}
@@ -71,7 +71,7 @@ const ImageParallax = ({
                 loading="lazy"
                 decoding="async"
                 className={cn(
-                    "absolute inset-x-0 top-0 w-full h-[115%] object-cover",
+                    "absolute inset-x-0 top-0 w-full h-[125%] object-cover",
                     "will-change-transform min-h-full",
                     imageClassName
                 )}

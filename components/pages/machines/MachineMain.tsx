@@ -6,6 +6,7 @@ import Specifications from './Specifications';
 import MachineInAction from './MachineInAction';
 import { CallToActionSideVideo } from '@/components/shared/CallToAction';
 import { Machine } from '@/types/machine';
+import FeatureDescription from './FeatureDescription';
 
 export type HeroMachineDetails = {
     images: string[],
@@ -14,7 +15,7 @@ export type HeroMachineDetails = {
     description?: string
 }
 
-const MachineMain = ({ machine }: { machine: Machine }) => {
+const MachineMain = ({ machine, pdfUrl }: { machine: Machine, pdfUrl: string }) => {
 
     const category = (machine.categoryId && typeof machine.categoryId !== 'string')
         ? {
@@ -62,7 +63,8 @@ const MachineMain = ({ machine }: { machine: Machine }) => {
                 <BreadCrumb links={specificProductCrumbs} isAnimated />
             </Container>
             <Hero machineDetails={heroMachineDetails} />
-            <Specifications specifications={machine.specifications!} image={machine.outlineImage ? machine.outlineImage : ""} />
+            <FeatureDescription features={machine.featureDescription || {}} />
+            <Specifications specifications={machine.specifications!} pdfUrl={pdfUrl} image={machine.outlineImage ? machine.outlineImage : ""} />
             <MachineInAction videoUrl={machine.videoUrl} />
             <CallToActionSideVideo />
         </div>

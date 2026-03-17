@@ -9,15 +9,24 @@ import { cn } from '@/lib/utils'
 import { IconArrowRight } from '@tabler/icons-react'
 import { motion, useScroll, useTransform } from 'motion/react'
 import { useRef } from 'react'
+import { Machine } from '@/types/machine'
 
 type SpecificationsProps = {
     className?: string,
-    specifications: Record<string, string>,
+    specifications: Machine['specifications'],
+    image?: string,
+    pdfUrl: string,
 }
 
-const SpecificationsTable = ({ className = "", specifications }: SpecificationsProps) => {
+const SpecificationsTable = ({ className = "", title, specifications }: { className?: string, title?: string, specifications: Record<string, string> }) => {
     return (
         <div className={cn("overflow-hidden w-full", className)}>
+            {title && (
+                <Fade from='down'>
+                    <Text as='h3' size='xl' className='font-semibold tracking-tight text-gray-900 mt-8 mb-6'>{title}</Text>
+                </Fade>
+            )}
+
             <div className="flex border-b border-gray-200/50 pb-4 mb-2">
                 <div className="flex-1">
                     <Fade from='down'>
@@ -33,9 +42,9 @@ const SpecificationsTable = ({ className = "", specifications }: SpecificationsP
 
             <div className="flex flex-col">
                 {Object.keys(specifications).map((spec, index) => (
-                    <Fade 
-                        from='down' 
-                        className="group flex items-center justify-between py-5 border-b border-gray-100 last:border-0 transition-colors duration-300 hover:bg-gray-50/50 px-2 -mx-2 rounded-lg" 
+                    <Fade
+                        from='down'
+                        className="group flex items-center justify-between py-5 border-b border-gray-100 last:border-0 transition-colors duration-300 hover:bg-gray-50/50 px-2 -mx-2 rounded-lg"
                         delay={index * 0.05}
                         key={index}
                     >
@@ -48,23 +57,11 @@ const SpecificationsTable = ({ className = "", specifications }: SpecificationsP
                     </Fade>
                 ))}
             </div>
-
-            {/* Table Footer / Note */}
-            <Fade from='up' delay={0.3} className="pt-10 flex items-center">
-                <a className="group flex items-center gap-4 text-brand font-medium hover:text-orange-600 transition-colors cursor-pointer">
-                    <span className="flex h-12 w-12 items-center justify-center rounded-full border border-brand/30 bg-brand/5 transition-all duration-300 group-hover:bg-brand group-hover:border-brand text-brand group-hover:text-white">
-                        <IconArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5" />
-                    </span>
-                    <Text as='span' size='sm' className='font-semibold tracking-wide uppercase'>
-                        Download Full PDF Catalog
-                    </Text>
-                </a>
-            </Fade>
         </div>
     )
 }
 
-const Specifications = ({ className = "", specifications, image }: SpecificationsProps & { image: string }) => {
+const Specifications = ({ className = "", specifications, image, pdfUrl }: SpecificationsProps) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -73,37 +70,76 @@ const Specifications = ({ className = "", specifications, image }: Specification
 
     const imageY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
+    if (!specifications || Object.keys(specifications).length === 0) return null;
+
+    // Detect if specifications is an object containing nested objects (grouped)
+    const isGrouped = Object.values(specifications).some((value) => typeof value === 'object' && value !== null);
+
     return (
         <Section className={cn("py-16 lg:py-24", className)}>
             <div ref={containerRef}>
                 <Container className='overflow-hidden'>
-                    <div className='relative space-y-12 bg-gray-50/50 border border-gray-100 p-8 md:p-12 lg:p-16 rounded-[2rem] overflow-hidden'>
-                    
-                    {/* Abstract Grid Pattern Background */}
-                    <div 
-                        className="absolute inset-0 opacity-[0.02] pointer-events-none" 
-                        style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, black 1px, transparent 0)', backgroundSize: '40px 40px' }}
-                    />
-                    
-                    <div className="relative z-10 space-y-12">
-                        <Fade from='down'>
-                            <SectionHeader heading="Technical Specifications" className="mb-0" />
-                        </Fade>
-                        <div className='w-full flex flex-col lg:flex-row gap-16 lg:gap-24 items-center'>
-                            <SpecificationsTable specifications={specifications} className='w-full lg:w-[55%]' />
-                            
-                            <Fade from='up' className='w-full lg:w-[45%] lg:flex hidden items-center justify-center relative h-[500px]'>
-                                <motion.img 
-                                    src={image} 
-                                    alt="Machine outline specification" 
-                                    style={{ y: imageY }}
-                                    className='w-full h-full object-contain opacity-60 mix-blend-multiply drop-shadow-xl' 
-                                />
-                            </Fade>
-                        </div>
-                    </div>
+                    <div className=' bg-white relative space-y-12 bg-gray-50/50 border border-gray-100 p-8 md:p-12 lg:p-16 rounded-[2rem] overflow-hidden'>
 
-                </div>
+                        {/* Abstract Grid Pattern Background */}
+                        <div
+                            className="absolute inset-0 opacity-[0.02] pointer-events-none"
+                            style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, black 1px, transparent 0)', backgroundSize: '40px 40px' }}
+                        />
+
+                        <div className="relative  z-10 space-y-12">
+                            <Fade from='down'>
+                                <SectionHeader heading="Technical Specifications" className="mb-0" />
+                            </Fade>
+
+                            <div className={cn('w-full flex gap-16 lg:gap-24', isGrouped ? 'flex-col' : 'flex-col lg:flex-row items-center')}>
+
+                                {/* Render either Grouped specs or Simple specs */}
+                                <div className={cn("w-full space-y-8", isGrouped ? 'lg:w-[100%]' : 'lg:w-[55%]')}>
+                                    {isGrouped ? (
+                                        Object.entries(specifications).map(([groupName, groupSpecs], index) => {
+                                            if (typeof groupSpecs !== 'object' || groupSpecs === null) return null;
+                                            return (
+                                                <SpecificationsTable
+                                                    key={index}
+                                                    title={groupName}
+                                                    specifications={groupSpecs as Record<string, string>}
+                                                />
+                                            )
+                                        })
+                                    ) : (
+                                        <SpecificationsTable specifications={specifications as Record<string, string>} />
+                                    )}
+
+                                    {/* Table Footer / Note */}
+                                    <Fade from='up' delay={0.3} className="pt-10 flex items-center">
+                                        <a href={pdfUrl} download target='_blank' className="group flex items-center gap-4 text-brand font-medium hover:text-orange-600 transition-colors cursor-pointer">
+                                            <span className="flex h-12 w-12 items-center justify-center rounded-full border border-brand/30 bg-brand/5 transition-all duration-300 group-hover:bg-brand group-hover:border-brand text-brand group-hover:text-white">
+                                                <IconArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5" />
+                                            </span>
+                                            <Text as='span' size='sm' className='font-semibold tracking-wide uppercase'>
+                                                View Full PDF Catalog
+                                            </Text>
+                                        </a>
+                                    </Fade>
+                                </div>
+
+                                {/* Outline Image rendering based on layout mode */}
+                                {image && (
+                                    <Fade from='up' className={cn('w-full relative', isGrouped ? 'lg:w-full mt-12 bg-white/50 rounded-3xl p-8 border border-gray-100 flex items-center justify-center' : 'lg:w-[45%] lg:flex hidden items-center justify-center h-[500px]')}>
+                                        <motion.img
+                                            src={image}
+                                            alt="Machine outline specification"
+                                            style={isGrouped ? {} : { y: imageY }}
+                                            className='w-full max-h-[600px] object-contain opacity-60 mix-blend-multiply drop-shadow-xl'
+                                        />
+                                    </Fade>
+                                )}
+
+                            </div>
+                        </div>
+
+                    </div>
                 </Container>
             </div>
         </Section>

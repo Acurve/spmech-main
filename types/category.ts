@@ -3,7 +3,7 @@ import { Machine } from "./machine"
 export type Category = {
     _id: string,
     categoryName: string,
-    slug:string,
+    slug: string,
     commonAdvantages: string[],
     description: string,
     order: number,
@@ -11,9 +11,10 @@ export type Category = {
     secondaryImage: string,
     thirdImage: string,
     videoUrl: string,
+    pdfUrl: string,
     createdAt: string,
     updatedAt: string,
-    machines:Machine[]
+    machines: Machine[]
 }
 
 export type CategoryShaped = {

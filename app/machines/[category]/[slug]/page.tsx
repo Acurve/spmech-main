@@ -1,7 +1,7 @@
 import Main from "@/components/pages/machines/MachineMain";
 import { BACKEND_URL } from "@/constants/backendUrl";
 import { Machine } from "@/types/machine";
-import { getAllMachines, getMachineBySlug } from "@/utils/api/api";
+import { getAllMachines, getCategoryBySlug, getMachineBySlug } from "@/utils/api/api";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 type PageProps = {
@@ -13,21 +13,21 @@ type PageProps = {
 export const revalidate = false;
 export const dynamicParams = true;
 
-// export async function generateStaticParams() {
-//     const response = await getAllMachines()
-//     const machines = response.data.data
-//     const paths: { category: any; slug: string; }[] = []
+export async function generateStaticParams() {
+    const response = await getAllMachines()
+    const machines = response.data.data
+    const paths: { category: any; slug: string; }[] = []
 
-//     machines.forEach((mac: Machine) => {
-//         paths.push({
-//             category: typeof mac.categoryId !== "string" ? mac.categoryId.slug : "",
-//             slug: mac.slug
-//         })
-//     })
-//     return paths;
-// }
+    machines.forEach((mac: Machine) => {
+        paths.push({
+            category: typeof mac.categoryId !== "string" ? mac.categoryId.slug : "",
+            slug: mac.slug
+        })
+    })
+    return paths;
+}
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-    const { slug,category } = await params;
+    const { slug, category } = await params;
 
     const response = await getMachineBySlug(slug)
     if (!response) return { title: 'Machine Not Found | SP Mech Group' };
@@ -51,9 +51,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 const Page = async ({ params }: PageProps) => {
 
     const { category, slug } = await params;
-
+    const catResponse = await getCategoryBySlug(category)
+    if (!catResponse) notFound()
+    const cat = catResponse.data
+    const pdfUrl = cat.pdfUrl
     const response = await getMachineBySlug(slug)
-    console.log(response)
     const machine = response.data
     if (!response) notFound()
 
@@ -81,7 +83,7 @@ const Page = async ({ params }: PageProps) => {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
-            <Main machine={machine} />
+            <Main machine={machine} pdfUrl={pdfUrl} />
         </>
     )
 }

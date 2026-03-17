@@ -9,6 +9,7 @@ import { ProductContainer } from './CategoryPageProducts'
 import { type Category } from '@/types/category'
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'motion/react'
+import { notFound } from 'next/navigation'
 
 type CategoryMachines = {
     imageSrc: string,
@@ -29,7 +30,7 @@ const CategoryHeader = ({ categoryName, categoryDescription, CategoryType }: Cat
         target: ref,
         offset: ["start start", "end start"]
     });
-    
+
     // Parallax effect for the background text
     const textY = useTransform(scrollYProgress, [0, 1], ["0%", "80%"]);
 
@@ -61,7 +62,7 @@ const CategoryHeader = ({ categoryName, categoryDescription, CategoryType }: Cat
 
 const CategoryMain = ({ category }: { category: Category }) => {
 
-    
+    if (!category.machines || category.machines.length === 0) notFound()
 
     const finalMachines: CategoryMachines[] = category.machines.map((mac) => (
         {

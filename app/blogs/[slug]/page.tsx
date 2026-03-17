@@ -17,9 +17,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
     const response = await getBlogBySlug(slug)
     if (!response) return { title: 'Article Not Found | SP Mech Group' };
-    
+
     // API returns data inside a data object, check api.ts pattern
-    const blog = response.data 
+    const blog = response.data
 
     return {
         title: `${blog.title} | SP Mech Group`,
@@ -43,12 +43,12 @@ const Page = async ({ params }: PageProps) => {
     const { slug } = await params;
 
     const response = await getBlogBySlug(slug)
-    
+    console.log(response)
     if (!response || !response.data) {
         notFound()
     }
 
-    const blog = response.data;
+    const blog = response.data.blog;
 
     const jsonLd = {
         "@context": "https://schema.org",

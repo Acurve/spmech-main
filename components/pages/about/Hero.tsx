@@ -29,10 +29,10 @@ const Hero = () => {
                             <ImageParallax
                                 offset={["start center", "end start"]}
                                 className='hidden w-[35%] md:flex'
-                                imageSrc='42NPeS5Q4XJSBKB9WVXmoZUS39DmsBoQRS77rB6mpjYf4AYw4eKcZg4WeK2hgeUyGrPxtWF8mkfxUiEiKTi3i8pUPwz9muX' />
+                                imageSrc='https://spmech-assets-prod.s3.ap-south-1.amazonaws.com/assets/about/about-2.webp' />
                             <ImageParallax
                                 className='md:flex-1 '
-                                imageSrc='https://d3fmssennfe86p.cloudfront.net/en-us/wp-content/uploads/sites/4/2023/10/CNC-MANUFACTURERS-IN-INDIA-1.webp' />
+                                imageSrc='https://spmech-assets-prod.s3.ap-south-1.amazonaws.com/assets/about/about-1.webp' />
                         </div>
                         <Fade from='down' delay={0.5} triggerOnce>
                             <Text as='h1' size='2xl' className='font-medium md:w-[calc(65%-32px)] ml-auto'>About SP Engineering</Text>

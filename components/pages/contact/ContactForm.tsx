@@ -1,53 +1,78 @@
 "use client"
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import countryCodes from "@/constants/CountryCodes";
+import { BACKEND_URL } from "@/constants/backendUrl";
 import { cn } from "@/lib/utils";
 import contactFormSchema, { contactFormSchemaType } from "@/schemas/contact.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IconLoader, IconSend } from "@tabler/icons-react";
-import axios from "axios";
 import { AnimatePresence, motion } from "motion/react";
-import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 
-const ContactForm = ({className=""}:{className?:string}) => {
-    const [isSuccess, setIsSuccess] = useState(false);
-
+const ContactForm = ({ className = "" }: { className?: string }) => {
     const {
         control,
         handleSubmit,
-
+        reset,
         formState: { errors, isSubmitting }
     } = useForm<contactFormSchemaType>({
         resolver: zodResolver(contactFormSchema),
         defaultValues: {
             name: "",
             email: "",
-            countryCode: "+91",
-            phone: "",
+            phoneNumber: undefined,
             message: ""
         }
     });
 
-
     const onSubmit = async (data: contactFormSchemaType) => {
-        // Simulate API Call
-        await axios.post("/api/contacts");
-        console.log("Form submitted successfully:", data);
-        setIsSuccess(true);
+        const toastId = toast.loading("Submitting your inquiry...");
+
+        try {
+            const payload = {
+                ...data,
+                service: "General Inquiry"
+            };
+
+            const response = await fetch(`${BACKEND_URL}/contacts`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+
+            toast.success("Message sent successfully!", {
+                id: toastId,
+                description: "Our team will get back to you shortly."
+            });
+
+            reset();
+        } catch (error) {
+            toast.error("Failed to send message.", {
+                id: toastId,
+                description: "Please try again later or contact us directly."
+            });
+            console.error("Form submission error:", error);
+        }
     };
 
-    return (
-        <div className={cn("bg-background p-8 flex h-full", className)}>
-            <form onSubmit={handleSubmit(onSubmit)} className="gap-6 flex flex-col h-full">
+    const inputClasses = "w-full px-6 py-4 rounded-full border border-gray-200 bg-gray-50/50 transition-all duration-300 focus:bg-white focus:border-brand! focus:ring-4 focus:ring-brand/10 hover:border-gray-300 placeholder:text-gray-400 font-medium text-gray-900";
 
-                {/* ROW 1: Name & Email */}
-                <div className="grid grid-cols-1  gap-6">
-                    <div className="space-y-2">
-                        <label className="text-sm font-medium">Full Name</label>
+    return (
+        <div className={cn("bg-white p-8 md:p-10 flex h-full shadow-2xl shadow-gray-200/50 border border-gray-100", className)}>
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col h-full w-full justify-between gap-8">
+
+                <div className="space-y-6">
+                    {/* ROW 1: Name & Email */}
+                    <div className="flex flex-col gap-2">
+                        <label className="text-sm font-semibold text-gray-700 ml-2">Full Name</label>
                         <Controller
                             name="name"
                             control={control}
@@ -55,21 +80,19 @@ const ContactForm = ({className=""}:{className?:string}) => {
                                 <Input
                                     {...field}
                                     placeholder="John Doe"
-                                    className={`w-full px-5 py-5 rounded-full border transition-colors focus:border-brand! active:border-brand focus:outline-none`}
+                                    className={inputClasses}
                                 />
-
                             )}
                         />
-
                         <AnimatePresence>
                             {errors.name && (
-                                <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="text-destructive text-sm mt-1">{errors.name.message}</motion.p>
+                                <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="text-destructive text-sm ml-2 font-medium">{errors.name.message}</motion.p>
                             )}
                         </AnimatePresence>
                     </div>
 
-                    <div className="space-y-2">
-                        <label className="text-sm font-medium">Email Address</label>
+                    <div className="flex flex-col gap-2">
+                        <label className="text-sm font-semibold text-gray-700 ml-2">Email Address</label>
                         <Controller
                             name="email"
                             control={control}
@@ -77,92 +100,69 @@ const ContactForm = ({className=""}:{className?:string}) => {
                                 <Input
                                     {...field}
                                     placeholder="name@example.com"
-                                    className={`w-full px-5 py-5 rounded-full border transition-colors focus:border-brand! active:border-brand focus:outline-none`}
+                                    className={inputClasses}
                                 />
                             )}
                         />
                         <AnimatePresence>
                             {errors.email && (
-                                <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="text-destructive text-sm mt-1">{errors.email.message}</motion.p>
+                                <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="text-destructive text-sm ml-2 font-medium">{errors.email.message}</motion.p>
                             )}
                         </AnimatePresence>
                     </div>
-                </div>
 
-                {/* ROW 2: Phone */}
-                <div className="space-y-2">
-                    <label className="text-sm font-medium">Phone Number</label>
-                    <div className="flex gap-3">
+                    {/* ROW 2: Phone Number */}
+                    <div className="flex flex-col gap-2">
+                        <label className="text-sm font-semibold text-gray-700 ml-2">Phone Number</label>
                         <Controller
-                            name="countryCode"
+                            name="phoneNumber"
                             control={control}
-                            render={({ field }) => (
-                                <Select {...field} value={field.value} onValueChange={field.onChange}>
-                                    <SelectTrigger className="w-max p-5 rounded-full" >
-
-                                        <SelectValue />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectGroup>
-                                            {
-                                                countryCodes.map((country, index) => (
-
-                                                    <SelectItem key={`countryCode-${index}`} value={country.code}>{country.code}</SelectItem>
-                                                ))
-                                            }
-                                        </SelectGroup>
-                                    </SelectContent>
-                                </Select>
-                            )}
-                        />
-                        <Controller
-                            name="phone"
-                            control={control}
-                            render={({ field }) => (
+                            render={({ field: { onChange, value, ...field } }) => (
                                 <Input
                                     {...field}
-                                    placeholder=""
-                                    className={`w-full px-5 py-5 rounded-full border transition-colors focus:border-brand! active:border-brand focus:outline-none`}
+                                    type="number"
+                                    value={value || ""}
+                                    onChange={(e) => onChange(e.target.value ? Number(e.target.value) : undefined)}
+                                    placeholder="+1 000 000 0000"
+                                    className={inputClasses}
                                 />
                             )}
                         />
+                        <AnimatePresence>
+                            {errors.phoneNumber && (
+                                <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="text-destructive text-sm ml-2 font-medium">{errors.phoneNumber.message}</motion.p>
+                            )}
+                        </AnimatePresence>
                     </div>
-                    <AnimatePresence>
-                        {errors.phone && (
-                            <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="text-red-500 text-sm mt-1">{errors.phone.message}</motion.p>
-                        )}
-                    </AnimatePresence>
-                </div>
 
-
-
-                {/* ROW 3: Message */}
-                <div className="space-y-2">
-                    <label className="text-sm font-medium ">Project Details</label>
-                    <Controller
-                        name="message"
-                        control={control}
-                        render={({ field }) => (
-                            <Textarea
-                                {...field}
-                                rows={10}
-                                placeholder="Tell us about your technical specifications, timeline, and any special requirements..."
-                                className={`w-full px-5 py-5 rounded-2xl border transition-colors focus:border-brand! active:border-brand focus:outline-none`}
-                            />
-                        )}
-                    />
-                    <AnimatePresence>
-                        {errors.message && (
-                            <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="text-red-500 text-sm mt-1">{errors.message.message}</motion.p>
-                        )}
-                    </AnimatePresence>
+                    {/* ROW 3: Message */}
+                    <div className="flex flex-col gap-2">
+                        <label className="text-sm font-semibold text-gray-700 ml-2">Project Details</label>
+                        <Controller
+                            name="message"
+                            control={control}
+                            render={({ field }) => (
+                                <Textarea
+                                    {...field}
+                                    rows={6}
+                                    placeholder="Tell us about your technical specifications, timeline, and any special requirements..."
+                                    className={cn(inputClasses, "resize-none h-40 rounded-2xl")}
+                                />
+                            )}
+                        />
+                        <AnimatePresence>
+                            {errors.message && (
+                                <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="text-destructive text-sm ml-2 font-medium">{errors.message.message}</motion.p>
+                            )}
+                        </AnimatePresence>
+                    </div>
                 </div>
 
                 {/* SUBMIT BUTTON */}
                 <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full flex mt-auto h-13 rounded-full bg-brand items-center justify-center gap-2 text-background font-medium  disabled:opacity-70 disabled:cursor-not-allowed transition-all active:scale-[0.98] shadow-md shadow-brand/20 cursor-pointer hover:bg-brand/90 duration-300"
+                    className="group w-full flex h-[3.5rem] rounded-full bg-brand items-center justify-center gap-2 text-white font-semibold disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-[0_8px_25px_rgb(249,115,22,0.35)] hover:-translate-y-0.5 active:scale-[0.98]"
                 >
                     {isSubmitting ? (
                         <>
@@ -171,8 +171,8 @@ const ContactForm = ({className=""}:{className?:string}) => {
                         </>
                     ) : (
                         <>
-                            <IconSend className="w-5 h-5" />
-                            Send Message
+                            <IconSend className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                            Send Inquiry
                         </>
                     )}
                 </button>

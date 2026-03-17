@@ -7,15 +7,15 @@ import { notFound } from "next/navigation";
 export const revalidate = false;
 export const dynamicParams = true;
 
-// export async function generateStaticParams() {
-//     // Use your absolute EC2 URL here
-//     const response = await getAllCategories();
-//     const categories = response.data.data
+export async function generateStaticParams() {
+    // Use your absolute EC2 URL here
+    const response = await getAllCategories();
+    const categories = response.data.data
 
-//     return categories.map((product: any) => ({
-//         category: product.slug,
-//     }));
-// }
+    return categories.map((product: any) => ({
+        category: product.slug,
+    }));
+}
 
 
 type PageProps = {
@@ -61,7 +61,6 @@ const Page = async ({ params }: PageProps) => {
     if (!response) notFound()
     const cat = response.data
 
-    console.log(cat)
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "ItemList",

@@ -28,8 +28,10 @@ type AboutDetails = {
         __v: number
     }
 }
-
-const AboutParagraphs = () => {
+type AboutParagraphsProps = {
+    paragraphs: string[]
+}
+const AboutParagraphs = ({ paragraphs }: AboutParagraphsProps) => {
     const { isLoading, data, isError } = useQuery({
         queryKey: ["about"],
         queryFn: () => axios.get("/api/products/manufacturer")
@@ -39,9 +41,9 @@ const AboutParagraphs = () => {
     if (isLoading) return <MachinePageLoader />
 
     if (isError) return <>something went wrong retry again</>
-    
 
-    const about:AboutDetails = data!.data
+
+    const about: AboutDetails = data!.data
     return (
         <Section className=''>
             <Container className='md:flex gap-8 '>
@@ -53,7 +55,7 @@ const AboutParagraphs = () => {
                 </div>
                 <div className='flex-1'>
                     {
-                        about.data.profileText.map((text, index) => (
+                        paragraphs.map((text, index) => (
 
                             <ScrollRevealParagraph
                                 key={index}

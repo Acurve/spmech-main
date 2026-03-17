@@ -12,6 +12,7 @@ export type ManufacturerStats = {
     suffix: string
 }
 export type ManufacturerTimeline = {
+    _id: string,
     year: string,
     message: string,
     imageUrl: string,

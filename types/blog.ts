@@ -2,12 +2,20 @@ export type Blog = {
     _id: string;
     title: string;
     slug: string;
-    content: string;
-    description: string;
-    coverImage: string;
-    author: string;
-    isPublished: boolean;
-    tags: string[];
-    createdAt: string;
-    updatedAt: string;
+    data: string;
+    image: string;
+    order: number,
+    author: BlogAuthor,
+    isPublished: boolean,
+    metaTitle: string,
+    metaDescription: string,
+    tags: string[],
+    publishedAt: string,
+}
+
+export type BlogAuthor = {
+    _id: string,
+    name: string,
+    avatar: string,
+    slug: string
 }

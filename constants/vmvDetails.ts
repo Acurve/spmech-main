@@ -7,7 +7,7 @@ export type VMVDetail = {
     title: string,
     description: string | string[],
     icon: React.ForwardRefExoticComponent<IconProps & React.RefAttributes<SVGSVGElement>>
-    imageSrc?: string
+    imageSrc: string
 }
 
 const VMVDetails: Record<VMV, VMVDetail> = {
@@ -16,14 +16,14 @@ const VMVDetails: Record<VMV, VMVDetail> = {
         title: "vision",
         description: "To set the global standard for precision manufacturing—where every machine defines accuracy, reliability, and future-ready performance.",
         icon: IconBulb,
-        imageSrc: "images/vmv/vision.webp"
+        imageSrc: "https://spmech-assets-prod.s3.ap-south-1.amazonaws.com/assets/about/vision.webp"
     },
     mission: {
         id: "s18416f-asdg9d4-8614-sdge84",
         title: "mission",
         description: "We design and deliver CNC solutions that combine engineering excellence, material mastery, and long-term dependability—empowering manufacturers to build better, faster, and smarter.",
         icon: IconTargetArrow,
-        imageSrc: "images/vmv/mission.webp"
+        imageSrc: "https://spmech-assets-prod.s3.ap-south-1.amazonaws.com/assets/about/mission.webp"
     },
     values: {
         id: "s18416f-asdg9d4-8g614-sdge84",
@@ -34,7 +34,7 @@ const VMVDetails: Record<VMV, VMVDetail> = {
             "Decisions driven by testing, not assumptions."
         ],
         icon: IconDiamond,
-        imageSrc: "images/vmv/values.webp"
+        imageSrc: "https://spmech-assets-prod.s3.ap-south-1.amazonaws.com/assets/about/values.webp"
     },
 }
 export default VMVDetails

@@ -39,7 +39,7 @@ const NavbarCTA = ({ className = "" }: { className?: string }) => {
 
     return (
         <div className={cn("flex items-center justify-end gap-8", className)}>
-            <LinkTag variant="custom" className="hidden! sm:flex! ">
+            <LinkTag href="/contact" variant="custom" className="hidden! sm:flex! ">
                 <InteractiveHoverButton className="border-2">
 
                     <Text as="span" size="base" className="font-medium px-12">{CallToActionText}</Text>
@@ -69,17 +69,17 @@ const Navbar = async () => {
     const catRes = await fetch(`${BACKEND_URL}/products/categories`);
     const rawCategories = await catRes.json();
     const categories = rawCategories.data.data
-    const categoriesForDesktopNavigation:CategoryShaped[] = categories.map((cat:Category)=>(
+    const categoriesForDesktopNavigation: CategoryShaped[] = categories.map((cat: Category) => (
         {
-            id:cat._id,
-            videoSrc:cat.videoUrl,
-            name:cat.categoryName,
-            description:cat.description,
-            href:`/machines/${cat.slug}`,
-            image:{
-                primary:cat.primaryImage,
-                secondary:cat.secondaryImage,
-                outline:cat.thirdImage,
+            id: cat._id,
+            videoSrc: cat.videoUrl,
+            name: cat.categoryName,
+            description: cat.description,
+            href: `/machines/${cat.slug}`,
+            image: {
+                primary: cat.primaryImage,
+                secondary: cat.secondaryImage,
+                outline: cat.thirdImage,
             }
         }
     ))

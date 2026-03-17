@@ -3,6 +3,8 @@ import VMV from '@/components/pages/about/vmv/VMV';
 import Journey from '@/components/pages/about/Journey';
 import Hero from '@/components/pages/about/Hero';
 import { Metadata } from 'next';
+import { getManufacturerInfo } from '@/utils/api/api';
+import { ManufacturerInfo } from '@/types/manufacturer';
 
 
 export const metadata: Metadata = {
@@ -14,7 +16,7 @@ export const metadata: Metadata = {
     url: `${process.env.NEXT_PUBLIC_MAIN_URL}/about`,
     images: [
       {
-        url: '/og-about.jpg',
+        url: '/BrandLogo.svg',
         alt: 'Our Engineering Team',
       },
     ],
@@ -24,15 +26,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Page() {
-    return (
-        <>
-            <Hero />
-            <AboutParagraphs />
-            <VMV />
-            <Journey />
-        </>
+export default async function Page() {
+  const response = await getManufacturerInfo()
+  const footerDetails: Pick<ManufacturerInfo, "profileText" | "timeline"> = {
+    profileText: response.data.profileText,
+    timeline: response.data.timeline
+  }
+  return (
+    <>
+      <Hero />
+      <AboutParagraphs paragraphs={footerDetails.profileText} />
+      <VMV />
+      <Journey timeline={footerDetails.timeline} />
+    </>
 
-        
-    );
+
+  );
 }

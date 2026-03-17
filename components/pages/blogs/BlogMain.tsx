@@ -21,7 +21,7 @@ const BlogMain = ({ blog }: BlogMainProps) => {
     ]
 
     const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-    const formattedDate = new Date(blog.createdAt).toLocaleDateString(undefined, dateOptions);
+    const formattedDate = new Date(blog.publishedAt).toLocaleDateString(undefined, dateOptions);
 
     return (
         <div className="pt-24 pb-32 bg-[#FAFAFA] min-h-screen">
@@ -41,7 +41,7 @@ const BlogMain = ({ blog }: BlogMainProps) => {
                                 ))}
                             </div>
                         )}
-                        
+
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-gray-900 leading-[1.15]">
                             {blog.title}
                         </h1>
@@ -57,7 +57,7 @@ const BlogMain = ({ blog }: BlogMainProps) => {
                             <div className="flex items-center gap-2">
                                 <IconUser size={18} />
                                 <Text as="span" size="sm" className="font-medium tracking-wide">
-                                    {blog.author}
+                                    {blog.author.name}
                                 </Text>
                             </div>
                         </div>
@@ -65,9 +65,9 @@ const BlogMain = ({ blog }: BlogMainProps) => {
 
                     {/* Featured Image */}
                     <Fade from="up" className="relative aspect-[21/9] w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl shadow-gray-200/50 mb-16 lg:mb-24 bg-gray-100">
-                        <img 
-                            src={blog.coverImage || '/placeholder-blog.jpg'} 
-                            alt={blog.title} 
+                        <img
+                            src={blog.image || '/placeholder-blog.jpg'}
+                            alt={blog.title}
                             className="w-full h-full object-cover"
                         />
                     </Fade>
@@ -90,7 +90,7 @@ const BlogMain = ({ blog }: BlogMainProps) => {
                             prose-video:rounded-2xl prose-video:shadow-xl prose-video:my-12 prose-video:w-full
                             selection:bg-brand/20 selection:text-brand
                         ">
-                            {parse(blog.content || '')}
+                            {parse(blog.data || '')}
                         </div>
                     </Fade>
                 </article>

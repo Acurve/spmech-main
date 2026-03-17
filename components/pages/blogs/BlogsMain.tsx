@@ -16,23 +16,23 @@ type BlogsMainProps = {
 const BlogCard = ({ blog, index }: { blog: Blog, index: number }) => {
     // Format date nicely
     const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-    const formattedDate = new Date(blog.createdAt).toLocaleDateString(undefined, dateOptions);
+    const formattedDate = new Date(blog.publishedAt).toLocaleDateString(undefined, dateOptions);
 
     return (
         <Fade from="up" delay={index * 0.1}>
-            <LinkTag 
-                href={`/blogs/${blog.slug}`} 
-                variant="custom" 
+            <LinkTag
+                href={`/blogs/${blog.slug}`}
+                variant="custom"
                 className="group flex flex-col h-full bg-white rounded-2xl overflow-hidden border border-gray-100 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1"
             >
                 {/* Image Container */}
                 <div className="relative aspect-[16/9] w-full overflow-hidden bg-gray-50">
-                    <img 
-                        src={blog.coverImage || '/placeholder-blog.jpg'} 
-                        alt={blog.title} 
+                    <img
+                        src={blog.image || '/placeholder-blog.jpg'}
+                        alt={blog.title}
                         className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                     />
-                    
+
                     {/* Category Tag (Optional, assumes first tag represents category) */}
                     {blog.tags && blog.tags.length > 0 && (
                         <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-4 py-1.5 rounded-full z-10">
@@ -56,9 +56,9 @@ const BlogCard = ({ blog, index }: { blog: Blog, index: number }) => {
                         {blog.title}
                     </h3>
 
-                    <p className="text-gray-500 leading-relaxed line-clamp-3">
+                    {/* <p className="text-gray-500 leading-relaxed line-clamp-3">
                         {blog.description}
-                    </p>
+                    </p> */}
 
                     <div className="mt-auto pt-6 flex items-center gap-2 text-brand font-semibold">
                         <Text as="span" size="sm" className="uppercase tracking-widest relative">
