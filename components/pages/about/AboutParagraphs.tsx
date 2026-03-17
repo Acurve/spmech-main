@@ -32,18 +32,7 @@ type AboutParagraphsProps = {
     paragraphs: string[]
 }
 const AboutParagraphs = ({ paragraphs }: AboutParagraphsProps) => {
-    const { isLoading, data, isError } = useQuery({
-        queryKey: ["about"],
-        queryFn: () => axios.get("/api/products/manufacturer")
-    })
 
-
-    if (isLoading) return <MachinePageLoader />
-
-    if (isError) return <>something went wrong retry again</>
-
-
-    const about: AboutDetails = data!.data
     return (
         <Section className=''>
             <Container className='md:flex gap-8 '>
