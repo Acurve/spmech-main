@@ -3,31 +3,8 @@ import ScrollRevealParagraph from '@/components/animations/ScrollRevealParagraph
 
 import Container from '@/components/layout/Container'
 import Section from '@/components/layout/Section'
-import MachinePageLoader from '@/components/loaders/MachinePageLoader'
 import { Text } from '@/components/typography/Text'
-import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
 
-type AboutDetails = {
-    success: boolean,
-    message: string,
-    data: {
-        _id: string,
-        name: string,
-        logoText: string,
-        tagline: string,
-        profileText: string[],
-        contactDetails: {
-            address: string,
-            email: string,
-            customerCareNo: string,
-            mobileNo: string
-        },
-        createdAt: string,
-        updatedAt: string,
-        __v: number
-    }
-}
 type AboutParagraphsProps = {
     paragraphs: string[]
 }

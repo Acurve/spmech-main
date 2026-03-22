@@ -162,7 +162,7 @@ const ContactForm = ({ className = "" }: { className?: string }) => {
                 <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="group w-full flex h-[3.5rem] rounded-full bg-brand items-center justify-center gap-2 text-white font-semibold disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-[0_8px_25px_rgb(249,115,22,0.35)] hover:-translate-y-0.5 active:scale-[0.98]"
+                    className="group w-full flex h-14 rounded-full bg-brand items-center justify-center gap-2 text-white font-semibold disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-[0_8px_25px_rgb(249,115,22,0.35)] hover:-translate-y-0.5 active:scale-[0.98]"
                 >
                     {isSubmitting ? (
                         <>

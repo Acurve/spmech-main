@@ -64,7 +64,7 @@ const BlogMain = ({ blog }: BlogMainProps) => {
                     </Fade>
 
                     {/* Featured Image */}
-                    <Fade from="up" className="relative aspect-[21/9] w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl shadow-gray-200/50 mb-16 lg:mb-24 bg-gray-100">
+                    <Fade from="up" className="relative aspect-21/9 w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl shadow-gray-200/50 mb-16 lg:mb-24 bg-gray-100">
                         <img
                             src={blog.image || '/placeholder-blog.jpg'}
                             alt={blog.title}

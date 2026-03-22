@@ -32,10 +32,10 @@ const CategoryHeader = ({ categoryName, categoryDescription, CategoryType }: Cat
     });
 
     // Parallax effect for the background text
-    const textY = useTransform(scrollYProgress, [0, 1], ["0%", "80%"]);
+    const textY = useTransform(scrollYProgress, [0, 0.5], ["0%", "80%"]);
 
     return (
-        <div ref={ref} className="relative flex min-h-[70vh] lg:min-h-[85vh] flex-col items-center justify-center overflow-hidden bg-linear-to-b from-gray-50 to-white px-6 text-center">
+        <div ref={ref} className="relative flex min-h-[50vh] lg:min-h-[60vh] flex-col items-center justify-center overflow-hidden  text-center">
             <Fade
                 from='down'
                 className="relative z-10 mx-auto max-w-4xl"

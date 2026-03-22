@@ -23,14 +23,20 @@ export async function POST(request: NextRequest) {
             return setCORSHeaders(NextResponse.json({ message: 'Invalid secret token' }, { status: 401 }))
         }
 
+        if (body.page === "about") {
+            revalidatePath("/about", "page")
+        }
         // Revalidates the entire /machines route layout, which includes:
         // - /machines (if it exists)
         // - /machines/[category]
         // - /machines/[category]/[slug]
-        revalidatePath('/machines', 'layout')
+        else {
+            revalidatePath('/machines', 'layout')
+        }
 
         // Optionally revalidate the home page, in case categories or machine counts are displayed there
         revalidatePath('/', 'page')
+        revalidatePath('/', 'layout')
 
         return setCORSHeaders(NextResponse.json({
             revalidated: true,

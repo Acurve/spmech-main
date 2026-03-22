@@ -42,7 +42,7 @@ const PrivacyPolicy = () => {
 
             <Section className='py-16 md:py-24'>
                 <Container className="max-w-4xl">
-                    <Fade from="up" delay={0.2} className="bg-white rounded-[2rem] p-8 md:p-12 lg:p-16 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 space-y-10 prose prose-lg prose-gray max-w-none">
+                    <Fade from="up" delay={0.2} className="bg-white rounded-4xl p-8 md:p-12 lg:p-16 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 space-y-10 prose prose-lg prose-gray max-w-none">
 
                         <div className="space-y-4">
                             <Text as="h2" size="2xl" className="font-semibold text-gray-900">1. Information We Collect</Text>

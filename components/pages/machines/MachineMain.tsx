@@ -63,7 +63,7 @@ const MachineMain = ({ machine, pdfUrl }: { machine: Machine, pdfUrl: string }) 
                 <BreadCrumb links={specificProductCrumbs} isAnimated />
             </Container>
             <Hero machineDetails={heroMachineDetails} />
-            <FeatureDescription features={machine.featureDescription || {}} />
+            <FeatureDescription features={machine.featureDescriptions || {}} />
             <Specifications specifications={machine.specifications!} pdfUrl={pdfUrl} image={machine.outlineImage ? machine.outlineImage : ""} />
             <MachineInAction videoUrl={machine.videoUrl} />
             <CallToActionSideVideo />

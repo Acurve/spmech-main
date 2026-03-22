@@ -15,7 +15,7 @@ const HeroImageContainer = ({ images, altText = "machine image", className = "" 
     const [currentImage, setCurrentImage] = useState<string>(images[0])
 
     return (
-        <div className={cn('flex flex-col gap-6 lg:w-1/2 h-[90dvh] lg:h-full lg:min-h-[700px]', className)}>
+        <div className={cn('flex flex-col gap-6 lg:w-1/2 h-[60dvh] md:h-[90dvh] lg:h-full lg:min-h-[700px]', className)}>
 
             {/* Main Image Display with Crossfade */}
             <div className='relative bg-gray-50/80 p-4 rounded-2xl flex-1 flex items-center justify-center overflow-hidden border border-gray-100'>

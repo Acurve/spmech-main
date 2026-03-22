@@ -92,7 +92,7 @@ const Hero = () => {
     return (
         <Section className='flex flex-col pt-16 py-0 mb-24 gap-16'>
             <Container className='h-full w-full'>
-                <div className='relative w-full rounded-[2rem] overflow-hidden min-h-[max(calc(100vh-140px),700px)] shadow-2xl'>
+                <div className='relative w-full rounded-4xl overflow-hidden min-h-[max(calc(100vh-140px),700px)] shadow-2xl'>
 
                     {/* Background Images & Overlay */}
                     <img src="https://spmech-assets-prod.s3.ap-south-1.amazonaws.com/assets/about/vision.webp" alt="Background" className="absolute inset-0 w-full object-cover h-full" />
@@ -121,7 +121,7 @@ const Hero = () => {
                         </div>
 
                         <Fade from="up" delay={0.3} className="h-full">
-                            <ContactForm className='rounded-[1.5rem] h-full shadow-2xl border-none' />
+                            <ContactForm className='rounded-3xl h-full shadow-2xl border-none' />
                         </Fade>
                     </div>
                 </div>

@@ -14,25 +14,25 @@ type FeatureDescriptionProps = {
 }
 
 const FeatureDescription = ({ className = "", features }: FeatureDescriptionProps) => {
-    
+
     // Quick guard to prevent rendering empty sections
     if (!features || Object.keys(features).length === 0) return null;
 
     return (
         <Section className={cn("py-16 bg-white", className)}>
             <Container>
-                <div className='max-w-4xl'>
+                <div className='space-y-4'>
                     <Fade from='down'>
-                        <SectionHeader heading="Key Features & Advantages" className="mb-12" />
+                        <SectionHeader heading="Key Features" />
                     </Fade>
-                    
-                    <div className='grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10'>
+
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
                         {Object.entries(features).map(([title, description], index) => (
-                            <Fade 
-                                key={index} 
-                                from='up' 
+                            <Fade
+                                key={index}
+                                from='up'
                                 delay={index * 0.1}
-                                className='group flex gap-5'
+                                className='group flex gap-5 rounded-2xl p-4 bg-background'
                             >
                                 <div className='shrink-0 mt-1'>
                                     <div className='w-8 h-8 rounded-full bg-brand/10 flex items-center justify-center text-brand transition-transform duration-300 group-hover:scale-110 group-hover:bg-brand group-hover:text-white'>

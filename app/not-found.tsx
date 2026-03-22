@@ -12,7 +12,7 @@ export default async function NotFound() {
   return (
     <div className="bg-[#FAFAFA] min-h-[max(calc(100vh-140px),700px)] flex flex-col items-center justify-center py-24">
       <Container className="max-w-4xl w-full flex flex-col items-center justify-center h-full">
-        <Fade from="up" className="w-full flex flex-col items-center justify-center text-center space-y-6 bg-white rounded-[2rem] p-8 md:p-16 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 overflow-hidden relative">
+        <Fade from="up" className="w-full flex flex-col items-center justify-center text-center space-y-6 bg-white rounded-4xl p-8 md:p-16 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 overflow-hidden relative">
 
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,132,42,0.03)_0%,transparent_70%)] pointer-events-none" />
 

@@ -13,7 +13,7 @@ export type Machine = {
     order: number,
     slug: string,
     specifications?: Record<string, string | Record<string, string>>,
-    featureDescription?: Record<string, string>,
+    featureDescriptions?: Record<string, string>,
     status: string,
     videoUrl: string,
     createdAt: string,

@@ -44,7 +44,7 @@ export const MachineVideo = ({ className = "", url }: MachineVideoProps) => {
                     scale: isMobile ? 1 : scale,
                     borderRadius: isMobile ? "1rem" : borderRadius,
                 }}
-                className={cn("h-[60vh] md:h-[80vh] lg:h-[90dvh] w-full relative overflow-hidden shadow-2xl origin-bottom", className)}
+                className={cn("h-[70vh] md:h-[80vh] lg:h-[90dvh] w-full relative overflow-hidden shadow-2xl origin-bottom", className)}
             >
                 {/* Cinematic Dark Overlay */}
                 {!isMobile && (
@@ -75,8 +75,8 @@ const MachineInAction = ({ videoUrl }: MachineInActionProps) => {
     return (
         <Section id='machine-video' className="py-16 lg:py-24 bg-white">
             <Container>
-                <div className='space-y-12 lg:space-y-16'>
-                    <Fade from='down'>
+                <div className='space-y-4 lg:space-y-8'>
+                    <Fade triggerOnce from='down'>
 
                         <SectionHeader heading="Machine In Action" className="mb-0" />
 

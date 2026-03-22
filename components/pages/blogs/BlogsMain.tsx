@@ -26,7 +26,7 @@ const BlogCard = ({ blog, index }: { blog: Blog, index: number }) => {
                 className="group flex flex-col h-full bg-white rounded-2xl overflow-hidden border border-gray-100 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1"
             >
                 {/* Image Container */}
-                <div className="relative aspect-[16/9] w-full overflow-hidden bg-gray-50">
+                <div className="relative aspect-video w-full overflow-hidden bg-gray-50">
                     <img
                         src={blog.image || '/placeholder-blog.jpg'}
                         alt={blog.title}

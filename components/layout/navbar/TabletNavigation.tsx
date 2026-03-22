@@ -10,16 +10,18 @@ import { useLenis } from 'lenis/react'
 import { Text } from '@/components/typography/Text'
 import { CallToActionText } from '@/constants/callToAction'
 import { DesktopNavigationProps } from './Navbar'
+import { usePathname } from 'next/navigation'
 
 
 
 
-type TabletNavigation = {
+type TabletNavigationProps = {
   className?: string,
   categories: DesktopNavigationProps[]
 }
 
-const TabletNavigation = ({ className = "",categories }: TabletNavigation) => {
+const TabletNavigation = ({ className = "", categories }: TabletNavigationProps) => {
+  console.log(categories)
   const { isOpen } = useTabletNavigation()
 
   const [isTabletNavigationDropdownOpen, setIsTabletNavigationDropdownOpen] = useState(false)
@@ -27,6 +29,10 @@ const TabletNavigation = ({ className = "",categories }: TabletNavigation) => {
   const lenis = useLenis()
 
   const scrollYRef = useRef(0)
+  const pathname = usePathname()
+  useEffect(() => {
+    setIsTabletNavigationDropdownOpen(false)
+  }, [pathname])
 
   useEffect(() => {
     if (!lenis) return
@@ -168,7 +174,7 @@ export const TabletNavigationDropdown = ({
     >
       <Container className="flex w-full">
 
-        <div className='space-y-6 mb-16 pt-6'>
+        <div className='space-y-6 pt-6'>
           {subLinks.map((link, index) => (
             <motion.div
               key={link.id}
@@ -184,7 +190,7 @@ export const TabletNavigationDropdown = ({
               }}
             >
               <LinkTag href={link.href} variant="custom" className='text-muted-foreground hover:text-black'>
-                <div className='sm:flex hidden'>
+                <div className=''>
                   <Text as='span' size='xl' className='font-medium'>{link.name}</Text>
                 </div>
 
