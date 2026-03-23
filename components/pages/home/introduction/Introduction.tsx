@@ -8,7 +8,7 @@ import { Text } from '@/components/typography/Text'
 const Introduction = () => {
 
     return (
-        <Section className='min-h-max py-40' id='introduction'>
+        <Section className='min-h-max! py-40 flex items-center' id='introduction'>
             <Container>
                 <div className='grid gap-12 lg:grid-cols-2'>
 

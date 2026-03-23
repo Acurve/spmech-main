@@ -8,10 +8,10 @@ import { HeroVideoContextProvider } from '@/contexts/heroVideoContext'
 import { CategoryShaped } from '@/types/category'
 
 type HeroProps = {
-  categories:CategoryShaped[]
+  categories: CategoryShaped[]
 }
 
-const Hero = ({categories}:HeroProps) => {
+const Hero = ({ categories }: HeroProps) => {
 
 
   return (
@@ -21,7 +21,7 @@ const Hero = ({categories}:HeroProps) => {
           <Container className=''>
             {/* main hero section's text start from here */}
             <div className='flex items-end h-64 lg:h-96 pb-4'>
-              <Text as='h1' size='3xl' className='pr-24 leading-none'>
+              <Text as='h1' size='3xl' className='md:pr-24 leading-none'>
 
                 <TypewriterEffect>
                   <span className='text-brand'>SP&nbsp; Engineering </span> Exist to  <br />
@@ -36,12 +36,12 @@ const Hero = ({categories}:HeroProps) => {
             </div>
           </Container>
           <div className="relative w-dvw h-[120dvh]">
-            <Fade from='down' delay={5.5} triggerOnce>
+            <Fade from='down' delay={2.5} triggerOnce>
               <div className=" h-[120dvh]">
 
-                <HeroVideo 
+                <HeroVideo
 
-                className='border border-destructive sticky top-0 h-dvh' />
+                  className='border border-destructive sticky top-0 h-dvh' />
               </div>
             </Fade>
           </div>

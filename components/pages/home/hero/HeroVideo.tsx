@@ -98,7 +98,7 @@ const HeroVideoOverlay = () => {
             {/* Gradient overlay for readability */}
             <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent pointer-events-none -z-10" />
 
-            <Container className="py-12 flex flex-col lg:flex-row lg:justify-between w-full gap-10">
+            <Container className="py-12  flex flex-col lg:flex-row lg:justify-between w-full gap-10">
                 <div className="flex items-start lg:items-center gap-6 w-max lg:max-w-xl">
                     <div className="mt-2 lg:mt-0">
                         <HeroVideoPlayPauseBtn />
@@ -127,7 +127,7 @@ const HeroVideoOverlayText = () => {
                 >
 
                     <Text as="h3" size="xl">{currentCategory.name}</Text>
-                    <Text size="base">{currentCategory.description}</Text>
+                    <Text size="sm" className="font-normal">{currentCategory.description}</Text>
                 </Fade>
 
             </AnimatePresence>
@@ -140,7 +140,7 @@ const HeroVideoOverlayOtherMachines = () => {
     const { currentCategory, setCurrentCategory, categories } = useHeroVideo()
     const isMobile = useIsMobile()
     return (
-        <div className="w-max lg:w-auto">
+        <div className="w-max lg:w-auto mt-auto">
             <ul className="flex gap-2 snap-x no-scrollbar">
                 {categories.map((category) => {
                     const isActive = currentCategory === category;
@@ -154,7 +154,7 @@ const HeroVideoOverlayOtherMachines = () => {
                                 className={cn(
                                     "flex w-28 aspect-square md:w-36  transition-all duration-300 overflow-hidden group text-background rounded-2xl bg-foreground",
                                     isActive
-                                        ? "bg-primary"
+                                        ? "bg-primary border-2 border-background"
                                         : "bg-muted hover:bg-primary"
                                 )}
                             >
@@ -163,8 +163,8 @@ const HeroVideoOverlayOtherMachines = () => {
                                     className={`absolute h-full  bottom-0 object-contain w-full transition-transform duration-700  group-hover:scale-105`}
                                     alt={category.name}
                                 />
-                                <div className="bg-linear-to-b from-transparent to-black w-full h-full absolute group-hover:text-white flex items-end justify-center">
-                                    <Text size="xs" className="font-semibold transition-all duration-300 mb-3">
+                                <div className="bg-linear-to-b p-2 from-transparent via-black/70 to-black w-full h-full absolute group-hover:text-white flex items-end justify-center">
+                                    <Text size="xs" className="font-medium transition-all duration-300 mb-3">
                                         {category.name}
                                     </Text>
 

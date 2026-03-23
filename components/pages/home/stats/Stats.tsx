@@ -12,10 +12,9 @@ import { getManufacturerInfo } from '@/utils/api/api';
 export default async function Stats() {
   const response = await getManufacturerInfo()
   const data = response?.data
-  console.log(data)
   const stats = data.stats
   return (
-    <Section className='mt-24'>
+    <Section className='pt-0'>
       <Container>
         <div>
           {/* heading */}

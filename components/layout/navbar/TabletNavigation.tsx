@@ -21,7 +21,6 @@ type TabletNavigationProps = {
 }
 
 const TabletNavigation = ({ className = "", categories }: TabletNavigationProps) => {
-  console.log(categories)
   const { isOpen } = useTabletNavigation()
 
   const [isTabletNavigationDropdownOpen, setIsTabletNavigationDropdownOpen] = useState(false)

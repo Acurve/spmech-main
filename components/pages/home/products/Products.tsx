@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import { IconArrowRight } from '@tabler/icons-react';
 import SectionHeader from '@/components/shared/SectionHeader';
 import { CategoryShaped } from '@/types/category';
+import Fade from '@/components/animations/Fade';
 
 type CategoryShapedForProductSection = Pick<CategoryShaped, "image" | "name" | "href">
 
@@ -57,10 +58,12 @@ const Products = ({ categories }: ProductsProps) => {
                     <SectionHeader heading="CNC & SPMs" eyeBrow='_products' />
 
                     <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-4'>
-                        {categories.map((category) => (
-                            <LinkTag href={category.href} variant='custom' key={`category-${category.name}`} className='group/product'>
-                                <SingleProductContainer  {...category} />
-                            </LinkTag>
+                        {categories.map((category, index) => (
+                            <Fade from='down' key={`category-${category.name}`} delay={index * 0.2} triggerOnce>
+                                <LinkTag href={category.href} variant='custom' className='group/product'>
+                                    <SingleProductContainer {...category} />
+                                </LinkTag>
+                            </Fade>
                         ))
 
                         }
