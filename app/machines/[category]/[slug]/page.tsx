@@ -35,6 +35,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return {
         title: `${machine.modelName} | SP Mech Group`,
         description: machine.description.substring(0, 155), // Perfect SEO length
+        keywords: [`${machine.modelName}`, "hinges", "locks", "hardware", "architectural", "industrial", "commercial", "SP Mech Group", "hinges manufacturer", "lock manufacturer", "cnc manufacturer", "hinges machine", "lock machine", "cnc machine"],
+        authors: [{ name: "SP Mech Group" }],
+        creator: "SP Mech Group",
+        publisher: "SP Mech Group",
         openGraph: {
             title: machine.modelName,
             description: machine.description,

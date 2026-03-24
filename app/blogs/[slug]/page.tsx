@@ -37,6 +37,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return {
         title: `${blog.title} | SP Mech Group`,
         description: blog.metaDescription,
+        keywords: [`${blog.title}`, "hinges", "locks", "hardware", "architectural", "industrial", "commercial", "SP Mech Group", "hinges manufacturer", "lock manufacturer", "cnc manufacturer", "hinges machine", "lock machine", "cnc machine"],
+        authors: [{ name: "SP Mech Group" }],
+        creator: "SP Mech Group",
+        publisher: "SP Mech Group",
         openGraph: {
             title: blog.title,
             description: blog.metaDescription,

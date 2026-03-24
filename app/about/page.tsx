@@ -9,7 +9,11 @@ import { ManufacturerInfo } from '@/types/manufacturer';
 
 export const metadata: Metadata = {
   title: 'About Us | SP Mech Group - Decades of Engineering Excellence',
-  description: 'Learn about the journey of SP Mech Group. Our commitment to quality, innovation in machine manufacturing, and our global impact in the hardware industry.',
+  description: 'Know about the journey of SP Mech Group. Our commitment to quality, innovation in machine manufacturing, and our global impact in the hardware industry.',
+  keywords: ["about us", "SP Mech Group", "hinges", "locks", "hardware", "architectural", "industrial", "commercial", "SP Mech Group", "hinges manufacturer", "lock manufacturer", "cnc manufacturer", "hinges machine", "lock machine", "cnc machine"],
+  authors: [{ name: "SP Mech Group" }],
+  creator: "SP Mech Group",
+  publisher: "SP Mech Group",
   openGraph: {
     title: 'The Story of SP Mech Group',
     description: 'From local manufacturing to global machine supply. Discover our mission and values.',

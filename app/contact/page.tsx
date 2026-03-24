@@ -6,6 +6,38 @@ import { IconHome } from '@tabler/icons-react'
 import Fade from '@/components/animations/Fade'
 import { Text } from '@/components/typography/Text'
 import WorldMap from '@/components/ui/world-map'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: "Contact | SP Mech Group",
+  description: "SP Mech Group is a leading manufacturer of high-quality hinges, locks, and other hardware products. We offer a wide range of products for various applications, including architectural, industrial, and commercial. Our products are made from the finest materials and are designed to meet the highest standards of quality and performance.",
+  keywords: ["hinges", "locks", "hardware", "architectural", "industrial", "commercial", "SP Mech Group", "hinges manufacturer", "lock manufacturer", "cnc manufacturer", "hinges machine", "lock machine", "cnc machine"],
+  authors: [{ name: "SP Mech Group" }],
+  creator: "SP Mech Group",
+  publisher: "SP Mech Group",
+  openGraph: {
+    title: "Contact | SP Mech Group",
+    description: "SP Mech Group is a leading manufacturer of high-quality hinges, locks, and other hardware products. We offer a wide range of products for various applications, including architectural, industrial, and commercial. Our products are made from the finest materials and are designed to meet the highest standards of quality and performance.",
+    url: "https://spmechgroup.com/contact",
+    siteName: "SP Mech Group",
+    images: [
+      {
+        url: "https://spmechgroup.com/BrandLogo.svg",
+        width: 1200,
+        height: 630,
+        alt: "SP Mech Group",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact | SP Mech Group",
+    description: "SP Mech Group is a leading manufacturer of high-quality hinges, locks, and other hardware products. We offer a wide range of products for various applications, including architectural, industrial, and commercial. Our products are made from the finest materials and are designed to meet the highest standards of quality and performance.",
+    images: ["https://spmechgroup.com/BrandLogo.svg"],
+  },
+};
 
 const page = () => {
   const ContactBreadCrumbs: BreadCrumbType[] = [

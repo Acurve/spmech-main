@@ -35,7 +35,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         // 2. Dynamic title based on the category name
         title: `${cat.categoryName} Machines | Premium Industrial Equipment`,
         description: `Explore our high-end range of ${cat.categoryName} machines. Built for precision, durability, and industrial efficiency.`,
-
+        keywords: [`${cat.categoryName}`, "hinges", "locks", "hardware", "architectural", "industrial", "commercial", "SP Mech Group", "hinges manufacturer", "lock manufacturer", "cnc manufacturer", "hinges machine", "lock machine", "cnc machine"],
+        authors: [{ name: "SP Mech Group" }],
+        creator: "SP Mech Group",
+        publisher: "SP Mech Group",
         openGraph: {
             title: `${cat.categoryName} | SP Mech Group`,
             description: `Professional-grade ${cat.categoryName} machinery designed for high-performance manufacturing.`,
