@@ -7,7 +7,6 @@ import { Text } from "@/components/typography/Text"
 import { IconHome, IconCalendarEvent, IconUser, IconTag } from "@tabler/icons-react"
 import { Blog } from "@/types/blog"
 import parse from 'html-react-parser'
-import Image from "next/image"
 
 type BlogMainProps = {
     blog: Blog
@@ -57,14 +56,14 @@ const BlogMain = ({ blog }: BlogMainProps) => {
                             <div className="flex items-center gap-2">
                                 <IconUser size={18} />
                                 <Text as="span" size="sm" className="font-medium tracking-wide">
-                                    {blog.author.name}
+                                    {blog.author?.name || "Acurve Team"}
                                 </Text>
                             </div>
                         </div>
                     </Fade>
 
                     {/* Featured Image */}
-                    <Fade from="up" className="relative aspect-21/9 w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl shadow-gray-200/50 mb-16 lg:mb-24 bg-gray-100">
+                    <Fade from="down" className="relative aspect-21/9 w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl shadow-gray-200/50 mb-16 lg:mb-24 bg-gray-100">
                         <img
                             src={blog.image || '/placeholder-blog.jpg'}
                             alt={blog.title}
@@ -73,8 +72,7 @@ const BlogMain = ({ blog }: BlogMainProps) => {
                     </Fade>
 
                     {/* Parsed HTML Content */}
-                    <Fade from="up" delay={0.2} className="relative z-10 w-full max-w-3xl mx-auto">
-                        <div className="
+                    <div className="
                             prose prose-lg prose-gray max-w-none w-full
                             prose-headings:font-medium prose-headings:tracking-tight prose-headings:text-gray-900
                             prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
@@ -90,9 +88,8 @@ const BlogMain = ({ blog }: BlogMainProps) => {
                             prose-video:rounded-2xl prose-video:shadow-xl prose-video:my-12 prose-video:w-full
                             selection:bg-brand/20 selection:text-brand
                         ">
-                            {parse(blog.data || '')}
-                        </div>
-                    </Fade>
+                        {parse(blog.data || '')}
+                    </div>
                 </article>
 
             </Container>

@@ -1,4 +1,4 @@
-import { categoriesList as source, CategoryDetails } from "./categories"
+import { CategoryShaped } from "@/types/category"
 
 type BaseNavigationItems = {
     id: string,
@@ -12,7 +12,7 @@ type LinkNavigationItems = BaseNavigationItems & {
     subLinks?: never
 }
 
-export type SubLink = Pick<CategoryDetails, "name" | "description" | "href"> & { id: string, imageSrc: string }
+export type SubLink = Pick<CategoryShaped, "name" | "description" | "href"> & { id: string, imageSrc: string }
 export type DropdownNavigationItems = BaseNavigationItems & {
     type: "dropdown"
     subLinks?: SubLink[],

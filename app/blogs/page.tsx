@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     title: "Insights & News | SP Mech Group",
     description: "Read the latest insights, news, and technical updates from the industry experts at SP Mech Group.",
     openGraph: {
-        title: "Insights & News | SP Mech Group",
-        description: "Read the latest insights, news, and technical updates from the industry experts at SP Mech Group.",
+        title: "Blogs, Insights & News | SP Mech Group",
+        description: "Read the latest blogs, insights, news, and technical updates from the industry experts at SP Mech Group.",
         url: `${process.env.NEXT_PUBLIC_MAIN_URL}/blogs`,
         type: 'website',
     },

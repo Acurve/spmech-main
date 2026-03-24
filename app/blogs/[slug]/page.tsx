@@ -1,5 +1,6 @@
 import Main from "@/components/pages/blogs/BlogMain";
-import { getBlogBySlug } from "@/utils/api/api";
+import { Blog } from "@/types/blog";
+import { getAllBlogs, getBlogBySlug } from "@/utils/api/api";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -11,6 +12,18 @@ type PageProps = {
         slug: string
     }>
 }
+export async function generateStaticParams() {
+    const response = await getAllBlogs()
+    const blogs = response.data.data
+    const paths: { slug: string; }[] = []
+
+    blogs.forEach((blog: Blog) => {
+        paths.push({
+            slug: blog.slug
+        })
+    })
+    return paths;
+}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { slug } = await params;
@@ -19,19 +32,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     if (!response) return { title: 'Article Not Found | SP Mech Group' };
 
     // API returns data inside a data object, check api.ts pattern
-    const blog = response.data
+    const blog: Blog = response.data.blog
 
     return {
         title: `${blog.title} | SP Mech Group`,
-        description: blog.description,
+        description: blog.metaDescription,
         openGraph: {
             title: blog.title,
-            description: blog.description,
-            images: [blog.coverImage],
+            description: blog.metaDescription,
+            images: [blog.image],
             type: 'article',
-            publishedTime: blog.createdAt,
-            tags: blog.tags,
-            authors: [blog.author],
+            publishedTime: blog.publishedAt,
+            authors: [blog.author?.name || "Acurve Team"],
         },
         alternates: {
             canonical: `${process.env.NEXT_PUBLIC_MAIN_URL}/blogs/${slug}`,
@@ -43,7 +55,6 @@ const Page = async ({ params }: PageProps) => {
     const { slug } = await params;
 
     const response = await getBlogBySlug(slug)
-    console.log(response)
     if (!response || !response.data) {
         notFound()
     }

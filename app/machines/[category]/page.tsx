@@ -1,5 +1,4 @@
 import Main from "@/components/pages/machines/CategoryMain";
-import { BACKEND_URL } from "@/constants/backendUrl";
 import { getAllCategories, getCategoryBySlug } from "@/utils/api/api";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";

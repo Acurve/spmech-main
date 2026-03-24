@@ -1,7 +1,7 @@
 "use client"
 import { cn } from "@/lib/utils"
 import { motion, useMotionTemplate, useScroll, UseScrollOptions, useTransform, } from "motion/react"
-import { PropsWithChildren, useEffect, useRef, useState } from "react"
+import { PropsWithChildren, useRef } from "react"
 
 type TextRevealProps = PropsWithChildren<{
     offset?: UseScrollOptions["offset"],

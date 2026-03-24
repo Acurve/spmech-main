@@ -28,7 +28,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.7,
     }));
 
-  
+    const blogRes = await fetch(`${BACKEND_URL}/blogs`)
+    const rawBlogs = await blogRes.json()
+    const blogs = rawBlogs.data.data
+
+    // generate machine urls
+    const blogEntries = blogs.map((blog: any) => ({
+        url: `${BASE_URL}/blogs/${blog.slug}`,
+        lastModified: new Date(blog.updatedAt ?? blog.publishedAt ?? blog.createdAt),
+        priority: 0.7,
+    }));
+
+
 
     return [
         { url: BASE_URL, lastModified: new Date(), priority: 1 },
@@ -36,5 +47,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         { url: `${BASE_URL}/blogs`, lastModified: new Date(), priority: 0.6 },
         ...categoryEntries,
         ...machineEntries,
+        ...blogEntries,
     ];
 }

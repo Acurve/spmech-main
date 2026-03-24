@@ -30,6 +30,12 @@ export async function POST(request: NextRequest) {
         // - /machines (if it exists)
         // - /machines/[category]
         // - /machines/[category]/[slug]
+        else if (body.page === "blogs") {
+            revalidatePath("/blogs", "page")
+        }
+        else if (body.page === "blog") {
+            revalidatePath(`/blogs/${body.slug}`, "page")
+        }
         else {
             revalidatePath('/machines', 'layout')
         }

@@ -1,9 +1,8 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { motion, useMotionValue, animate, AnimatePresence } from "motion/react";
-import { ArrowRight, ChevronLeft, ChevronRight, Cpu, Play, Settings, ShieldCheck } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { Text } from "@/components/typography/Text";
-import Container from "@/components/layout/Container";
 import useIsMobile from "@/hooks/useIsMobile";
 import LinkTag from "@/components/LinkTag";
 
@@ -32,7 +31,7 @@ interface CarouselItemImageProps {
 /**
  * Component for the Image section of the Carousel Item
  */
-const CarouselItemImage = ({ imageSrc, name, isMobile, activeWidthPx, isActive }: CarouselItemImageProps) => {
+const CarouselItemImage = ({ imageSrc, name, isMobile, activeWidthPx }: CarouselItemImageProps) => {
     return (
         <div
             className="relative shrink-0 h-1/2 md:h-full py-8"

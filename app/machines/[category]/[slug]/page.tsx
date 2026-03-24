@@ -1,5 +1,4 @@
 import Main from "@/components/pages/machines/MachineMain";
-import { BACKEND_URL } from "@/constants/backendUrl";
 import { Machine } from "@/types/machine";
 import { getAllMachines, getCategoryBySlug, getMachineBySlug } from "@/utils/api/api";
 import { Metadata } from "next";

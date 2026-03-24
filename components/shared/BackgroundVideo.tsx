@@ -1,7 +1,7 @@
 "use client"
 
 import { cn } from "@/lib/utils";
-import { IconPlayerPause, IconPlayerPauseFilled, IconPlayerPlayFilled } from "@tabler/icons-react";
+import { IconPlayerPauseFilled, IconPlayerPlayFilled } from "@tabler/icons-react";
 import { useEffect, useRef, useState } from "react";
 
 
@@ -60,7 +60,7 @@ const BackgroundVideo = (
                 <source src={videoSrc} />
             </video>
             {withOverLay && <div className={cn("absolute bg-black/50 inset-0", overLayClassName)} />}
-            {withPlayPauseBtn &&  <PlayPauseBtn isPlaying={isPlaying} setIsPlaying={setIsPlaying}/> }
+            {withPlayPauseBtn && <PlayPauseBtn isPlaying={isPlaying} setIsPlaying={setIsPlaying} />}
         </>
     )
 }

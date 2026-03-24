@@ -11,6 +11,9 @@ export type Blog = {
     metaDescription: string,
     tags: string[],
     publishedAt: string,
+    createdAt: string,
+    updatedAt: string,
+    __v: number,
 }
 
 export type BlogAuthor = {

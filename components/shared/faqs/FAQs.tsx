@@ -4,7 +4,6 @@ import Container from '../../layout/Container'
 import { cn } from '@/lib/utils'
 import FAQItem, { type FAQ as FAQType } from './FAQItem'
 import { useState } from 'react'
-import { Text } from '@/components/typography/Text'
 import SectionHeader from '../SectionHeader'
 
 type FAQsProps = {
@@ -23,14 +22,14 @@ const FAQs = ({ className = "", faqList }: FAQsProps) => {
                     <div>
 
                         <SectionHeader
-                        className='md:grid-cols-1'
+                            className='md:grid-cols-1'
                             heading={<>Common <br className="hidden md:block" /> Inquiries</>}
                             description='Everything you need to know about our operational methodology and service architecture.'
                             eyeBrow='_FAQs'
                             descriptionContainerClassName='md:items-start'
                             descriptionTextClassName='md:text-start'
                         />
-                        
+
                     </div>
                     <div className='lg:w-[50%]'>
                         <div className="border-t border-foreground!">

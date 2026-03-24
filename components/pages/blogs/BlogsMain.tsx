@@ -7,7 +7,6 @@ import { Text } from "@/components/typography/Text"
 import { IconHome, IconArrowRight, IconCalendarEvent } from "@tabler/icons-react"
 import { Blog } from "@/types/blog"
 import LinkTag from "@/components/LinkTag"
-import { cn } from "@/lib/utils"
 
 type BlogsMainProps = {
     blogs: Blog[]

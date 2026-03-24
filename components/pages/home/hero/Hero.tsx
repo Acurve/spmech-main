@@ -23,7 +23,9 @@ const Hero = ({ categories }: HeroProps) => {
             <div className='flex items-end h-64 lg:h-96 pb-4'>
               <Text as='h1' size='3xl' className='md:pr-24 leading-none'>
 
-                <TypewriterEffect>
+                <TypewriterEffect
+                  persistenceKey='hero-heading'
+                >
                   <span className='text-brand'>SP&nbsp; Engineering </span> Exist to  <br />
                   Deliver the Future of CNC <br />
                   Manufacturing: <span className='text-brand'> Precision at Scale</span>

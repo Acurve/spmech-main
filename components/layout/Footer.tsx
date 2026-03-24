@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import Container from './Container'
 import { Text } from '../typography/Text'
-import { IconBrandFacebook, IconBrandInstagram, IconBrandLinkedin, IconBrandYoutube, IconHeadphones, IconHeartFilled, IconLocation, IconMail, IconPhone } from '@tabler/icons-react'
+import { IconBrandInstagram, IconBrandLinkedin, IconBrandYoutube, IconHeadphones, IconHeartFilled, IconLocation, IconMail, IconPhone } from '@tabler/icons-react'
 import LinkTag from '../LinkTag'
 import { Dancing_Script } from "next/font/google"
 import { cn } from '@/lib/utils'
@@ -83,7 +83,7 @@ const FooterTop = ({ footerDetails }: { footerDetails: ManufacturerInfo }) => {
         <div className="flex flex-col">
 
           <Text as='span' size='lg' className={cn(dancingScript.className, "font-extrabold")}>
-            <TypewriterEffect cursorClassName='hidden'>manufacturing by</TypewriterEffect>
+            <TypewriterEffect cursorClassName='hidden' persistenceKey='footer-manufacturing-by'>manufacturing by</TypewriterEffect>
           </Text>
           <Fade from='down' triggerOnce delay={1.5} className='flex flex-col'>
 

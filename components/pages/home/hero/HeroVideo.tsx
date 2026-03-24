@@ -9,9 +9,6 @@ import LinkTag from "@/components/LinkTag";
 import { cn } from "@/lib/utils";
 import useIsMobile from "@/hooks/useIsMobile";
 import Fade from "@/components/animations/Fade";
-import { Category } from "@/constants/categories";
-import { useCategories } from "@/hooks/useCategories";
-import { CategoryShaped } from "@/types/category";
 
 
 const BackgroundVideo = () => {

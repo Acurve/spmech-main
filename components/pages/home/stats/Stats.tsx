@@ -1,7 +1,6 @@
 import Container from '@/components/layout/Container';
 import Section from '@/components/layout/Section';
 import { Text } from '@/components/typography/Text';
-import React from 'react';
 import StatItem from './StatItem';
 import { Accuracy, Experience, MachineInstalled } from '@/constants/statSvgs';
 import SectionHeader from '@/components/shared/SectionHeader';

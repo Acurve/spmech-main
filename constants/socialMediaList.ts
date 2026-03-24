@@ -1,11 +1,5 @@
-import { IconBrandFacebook, IconBrandInstagram, IconBrandLinkedin, IconBrandYoutube, IconProps } from "@tabler/icons-react"
-import { ComponentType } from "react"
+import { IconBrandFacebook, IconBrandInstagram, IconBrandLinkedin, IconBrandYoutube } from "@tabler/icons-react"
 
-type SocialMedia = {
-    name: string,
-    href: string,
-    icon?: ComponentType<IconProps>
-}
 const socialMediaList = [
     {
         name: "instagram",

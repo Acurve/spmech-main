@@ -26,121 +26,122 @@ const SPMechLogo = ({ className = "w-72 aspect-square" }) => {
         opacity: 0,
 
     }
-    const playAnimation = () => {
-        controls1.set(initial)
-        controls2.set(initial)
-        controls3.set(initial)
-        controls4.set(initial)
-        controls5.set(initial)
-        controls6.set(initial)
-        controls7.set(tmInitial)
-
-
-        controls1.start({
-            pathLength: 1,
-            fill: "#070303",
-            transition: {
-                pathLength: {
-                    duration: 1.5,
-                    ease: "easeInOut"
-                },
-                fill: {
-                    delay: 1.3,
-                    duration: 0.5
-                }
-            },
-        })
-        controls2.start({
-            pathLength: 1,
-            fill: "#F5842A",
-            transition: {
-                pathLength: {
-                    duration: 1.5,
-                    ease: "easeInOut",
-                },
-                fill: {
-                    delay: 1.3,
-                    duration: 0.5
-                }
-            },
-        })
-        controls3.start({
-            pathLength: 1,
-            fill: "#070303",
-            transition: {
-                pathLength: {
-                    duration: 1.5,
-                    ease: "easeInOut"
-                },
-                fill: {
-                    delay: 1.3,
-                    duration: 0.5
-                }
-            },
-        })
-        controls4.start({
-            pathLength: 1,
-            fill: "#070303",
-            transition: {
-                pathLength: {
-                    duration: 2.5,
-                    ease: "easeInOut"
-                },
-                fill: {
-                    delay: 1.3,
-                    duration: 0.5
-                }
-            },
-        })
-
-
-        controls5.start({
-            pathLength: 1,
-            fill: "#070303",
-            transition: {
-                pathLength: {
-                    duration: 1.5,
-                    ease: "easeInOut"
-                },
-                fill: {
-                    delay: 1.3,
-                    duration: 0.5
-                }
-            },
-
-        })
-        controls6.start({
-            pathLength: 1,
-            fill: "#F5842A",
-            transition: {
-                pathLength: {
-                    duration: 1.5,
-                    ease: "easeInOut"
-                },
-                fill: {
-                    delay: 1.3,
-                    duration: 0.5
-                }
-            },
-
-        })
-        controls7.start({
-            opacity: 1,
-            transition: {
-                ease: "easeInOut",
-                duration: 0.3,
-                delay: 1.7
-            }
-        })
-
-    }
     useEffect(() => {
-    playAnimation()
+        const playAnimation = () => {
+            controls1.set(initial)
+            controls2.set(initial)
+            controls3.set(initial)
+            controls4.set(initial)
+            controls5.set(initial)
+            controls6.set(initial)
+            controls7.set(tmInitial)
 
-    const interval = setInterval(playAnimation, 3000)
 
-    return () => clearInterval(interval)
-}, [])
+            controls1.start({
+                pathLength: 1,
+                fill: "#070303",
+                transition: {
+                    pathLength: {
+                        duration: 1.5,
+                        ease: "easeInOut"
+                    },
+                    fill: {
+                        delay: 1.3,
+                        duration: 0.5
+                    }
+                },
+            })
+            controls2.start({
+                pathLength: 1,
+                fill: "#F5842A",
+                transition: {
+                    pathLength: {
+                        duration: 1.5,
+                        ease: "easeInOut",
+                    },
+                    fill: {
+                        delay: 1.3,
+                        duration: 0.5
+                    }
+                },
+            })
+            controls3.start({
+                pathLength: 1,
+                fill: "#070303",
+                transition: {
+                    pathLength: {
+                        duration: 1.5,
+                        ease: "easeInOut"
+                    },
+                    fill: {
+                        delay: 1.3,
+                        duration: 0.5
+                    }
+                },
+            })
+            controls4.start({
+                pathLength: 1,
+                fill: "#070303",
+                transition: {
+                    pathLength: {
+                        duration: 2.5,
+                        ease: "easeInOut"
+                    },
+                    fill: {
+                        delay: 1.3,
+                        duration: 0.5
+                    }
+                },
+            })
+
+
+            controls5.start({
+                pathLength: 1,
+                fill: "#070303",
+                transition: {
+                    pathLength: {
+                        duration: 1.5,
+                        ease: "easeInOut"
+                    },
+                    fill: {
+                        delay: 1.3,
+                        duration: 0.5
+                    }
+                },
+
+            })
+            controls6.start({
+                pathLength: 1,
+                fill: "#F5842A",
+                transition: {
+                    pathLength: {
+                        duration: 1.5,
+                        ease: "easeInOut"
+                    },
+                    fill: {
+                        delay: 1.3,
+                        duration: 0.5
+                    }
+                },
+
+            })
+            controls7.start({
+                opacity: 1,
+                transition: {
+                    ease: "easeInOut",
+                    duration: 0.3,
+                    delay: 1.7
+                }
+            })
+
+        }
+
+        playAnimation()
+
+        const interval = setInterval(playAnimation, 3000)
+
+        return () => clearInterval(interval)
+    }, [])
 
 
     return (

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: '/BrandLogo.svg',
-        alt: 'Our Engineering Team',
+        alt: 'About SP Mech Group',
       },
     ],
   },

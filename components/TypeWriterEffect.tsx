@@ -20,6 +20,7 @@ interface TypewriterEffectProps {
     className?: string;
     cursorClassName?: string;
     onComplete?: () => void;
+    persistenceKey: string;
 }
 
 const TypewriterEffect: React.FC<TypewriterEffectProps> = ({
@@ -27,12 +28,16 @@ const TypewriterEffect: React.FC<TypewriterEffectProps> = ({
     speed = 50,
     delay = 500,
     className = "",
-    cursorClassName = "bg-brand/40",
+    cursorClassName = "bg-primary/50 ml-4",
+    persistenceKey,
     onComplete
 }) => {
     const [displayedCharCount, setDisplayedCharCount] = useState(0);
     const [isStarted, setIsStarted] = useState(false);
     const [isFinished, setIsFinished] = useState(false);
+
+    const isFinishedOneTime = sessionStorage.getItem(persistenceKey);
+
 
     // ── Ref attached to the outer wrapper so useInView tracks the real element ──
     const containerRef = useRef<HTMLSpanElement>(null);
@@ -74,6 +79,9 @@ const TypewriterEffect: React.FC<TypewriterEffectProps> = ({
         } else {
             setIsFinished(true);
             onComplete?.();
+            if (persistenceKey) {
+                sessionStorage.setItem(persistenceKey, "true");
+            }
         }
     }, [isStarted, displayedCharCount, totalLength, speed, isFinished, onComplete]);
 
@@ -130,6 +138,11 @@ const TypewriterEffect: React.FC<TypewriterEffectProps> = ({
         });
     };
 
+    if (isFinishedOneTime) {
+        return (
+            <>{children}</>
+        )
+    }
     return (
         // containerRef lives here — this is what useInView observes
         <span ref={containerRef} className={cn("inline", className)}>

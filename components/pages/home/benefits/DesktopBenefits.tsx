@@ -10,7 +10,6 @@ import { cn } from '@/lib/utils'
 import { useInView } from 'motion/react'
 import { Text } from '@/components/typography/Text'
 import SectionHeader from '@/components/shared/SectionHeader'
-import TypewriterEffect from '@/components/TypeWriterEffect'
 
 
 type Benefit = Pick<Benefits, "id" | "description" | "heading" | "mainBenefitStat" | "icon">
@@ -86,7 +85,7 @@ const CardItem = ({
                     >
                         {/* <TypewriterEffect delay={0} speed={0}> */}
 
-                            {benefit.description}
+                        {benefit.description}
                         {/* </TypewriterEffect> */}
                     </Text>
                 </div>
@@ -161,7 +160,7 @@ const DesktopBenefits = ({ className }: { className?: string }) => {
 
 
     const carouselItems = benefits.map((benefit) => ({ id: benefit.id, videoSrc: benefit.videoSrc }))
-    const cardItems = benefits.map(({ id, description, mainBenefitStat, heading, icon,videoSrc }) => ({ id, heading, mainBenefitStat, description, icon,videoSrc }))
+    const cardItems = benefits.map(({ id, description, mainBenefitStat, heading, icon, videoSrc }) => ({ id, heading, mainBenefitStat, description, icon, videoSrc }))
     const [activeIndex, setActiveIndex] = useState<number>(0)
     return (
         <Section className={cn("bg-border mt-24", className)}>

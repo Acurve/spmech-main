@@ -5,7 +5,7 @@ import SectionHeader from '@/components/shared/SectionHeader'
 import { Text } from '@/components/typography/Text'
 import { cn } from '@/lib/utils'
 import { ManufacturerTimeline } from '@/types/manufacturer'
-import { IconTriangle, IconTriangleFilled } from '@tabler/icons-react'
+import { IconTriangleFilled } from '@tabler/icons-react'
 
 type SingleJourneyCardProps = {
     snap: Snap,

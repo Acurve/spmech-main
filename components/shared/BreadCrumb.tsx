@@ -1,4 +1,4 @@
-import { IconChevronRight, IconHome, ReactNode } from "@tabler/icons-react";
+import { IconChevronRight, ReactNode } from "@tabler/icons-react";
 import LinkTag from "../LinkTag";
 import { Text } from "../typography/Text";
 import type { SubLink } from "@/constants/navigationLinks";
@@ -24,19 +24,19 @@ const BreadCrumb = ({ links, className = "", isAnimated = false }: BreadCrumbPro
 
                     const itemContent = (
                         <>
-                            <LinkTag 
-                                href={link.href || "#"} 
-                                notLink={isNotLink} 
+                            <LinkTag
+                                href={link.href || "#"}
+                                notLink={isNotLink}
                                 className="flex items-center gap-1.5 hover:opacity-80 transition-opacity"
                             >
                                 {link.icon && <span className="flex items-center">{link.icon}</span>}
                                 <Text as="span">{link.name}</Text>
                             </LinkTag>
                             {!isLastLink && (
-                                <IconChevronRight 
-                                    size={14} 
-                                    className="text-gray-400 ml-2" 
-                                    aria-hidden="true" 
+                                <IconChevronRight
+                                    size={14}
+                                    className="text-gray-400 ml-2"
+                                    aria-hidden="true"
                                 />
                             )}
                         </>

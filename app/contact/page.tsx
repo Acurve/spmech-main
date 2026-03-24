@@ -2,20 +2,10 @@ import Container from '@/components/layout/Container'
 import Section from '@/components/layout/Section'
 import Hero from '@/components/pages/contact/Hero'
 import BreadCrumb, { BreadCrumb as BreadCrumbType } from '@/components/shared/BreadCrumb'
-import { DottedMap } from '@/components/ui/dotted-map'
 import { IconHome } from '@tabler/icons-react'
 import Fade from '@/components/animations/Fade'
 import { Text } from '@/components/typography/Text'
 import WorldMap from '@/components/ui/world-map'
-
-// Jamnagar Coordinates
-const markers = [
-  {
-    lat: 22.4707,
-    lng: 70.0577,
-    size: 0.5,
-  }
-]
 
 const page = () => {
   const ContactBreadCrumbs: BreadCrumbType[] = [
@@ -48,7 +38,6 @@ const page = () => {
           <Fade from="up" delay={0.2} className="relative bg-white rounded-3xl p-8 md:p-12 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 overflow-hidden">
             {/* Decorative radial gradient for map backdrop */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,132,42,0.03)_0%,transparent_70%)] pointer-events-none" />
-            {/* <DottedMap dotRadius={0.3} markerColor='#F5842A' markers={markers} className="opacity-80" /> */}
             <WorldMap
               lineColor='#F5842A'
               dots={[
