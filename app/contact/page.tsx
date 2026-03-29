@@ -60,14 +60,14 @@ const page = () => {
         <Hero />
       </div>
 
-      <Section className='min-h-max pb-32 pt-0'>
-        <Container>
-          <Fade from="up" className="flex flex-col items-center justify-center text-center space-y-4 mb-16">
+      <Section className='min-h-max pb-16 lg:mb-32 pt-0'>
+        <Container className='px-0 sm:px-0 lg:px-12'>
+          <Fade triggerOnce from="up" className="flex flex-col items-center justify-center text-center space-y-4 mb-16">
             <Text as="h2" size="3xl" className="font-medium tracking-tight text-gray-900">Global Reach</Text>
             <Text as="p" size="base" className="text-gray-500 max-w-2xl">Equipping manufacturers around the world from our headquarters in Jamnagar, Gujarat.</Text>
           </Fade>
 
-          <Fade from="up" delay={0.2} className="relative bg-white rounded-3xl p-8 md:p-12 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 overflow-hidden">
+          <Fade triggerOnce from="down" delay={0.2} className="relative bg-white lg:rounded-3xl p-4 sm:p-8 md:p-12 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 overflow-hidden">
             {/* Decorative radial gradient for map backdrop */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,132,42,0.03)_0%,transparent_70%)] pointer-events-none" />
             <WorldMap

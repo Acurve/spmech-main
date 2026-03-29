@@ -1,24 +1,19 @@
-import { IconBrandFacebook, IconBrandInstagram, IconBrandLinkedin, IconBrandYoutube } from "@tabler/icons-react"
+import { IconBrandInstagram, IconBrandLinkedin, IconBrandYoutube } from "@tabler/icons-react"
 
 const socialMediaList = [
     {
         name: "instagram",
-        href: "/instagram",
+        href: "https://www.instagram.com/s.p.engineering_official/#",
         icon: IconBrandInstagram,
     },
     {
-        name: "facebook",
-        href: "/facebook",
-        icon: IconBrandFacebook,
-    },
-    {
         name: "youtube",
-        href: "/youtube",
+        href: "https://www.youtube.com/@spmechgroup",
         icon: IconBrandYoutube,
     },
     {
         name: "linkedin",
-        href: "/linkedin",
+        href: "https://www.linkedin.com/in/s-p-mach-637b76341/",
         icon: IconBrandLinkedin,
     },
 ]

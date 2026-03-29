@@ -123,7 +123,7 @@ const ContactForm = ({ className = "" }: { className?: string }) => {
                                     type="number"
                                     value={value || ""}
                                     onChange={(e) => onChange(e.target.value ? Number(e.target.value) : undefined)}
-                                    placeholder="+1 000 000 0000"
+                                    placeholder="e.g. +91 98765 43210"
                                     className={inputClasses}
                                 />
                             )}

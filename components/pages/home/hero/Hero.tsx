@@ -38,7 +38,7 @@ const Hero = ({ categories }: HeroProps) => {
             </div>
           </Container>
           <div className="relative w-dvw h-[120dvh]">
-            <Fade from='down' delay={2.5} triggerOnce>
+            <Fade from='down' delay={2.5} persistenceKey='hero-heading' triggerOnce>
               <div className=" h-[120dvh]">
 
                 <HeroVideo

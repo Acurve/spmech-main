@@ -10,7 +10,7 @@ const Hero = () => {
     const aboutBreadCrumbs: BreadCrumbType[] = [
         {
             name: "Home",
-            href: "/home",
+            href: "/",
             icon: <IconHome />
         },
         {

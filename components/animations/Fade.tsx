@@ -15,6 +15,7 @@ type FadeProps = {
   triggerOnce?: boolean
   threshold?: number
   ease?: Easing
+  persistenceKey?: string
 } & HTMLMotionProps<"div">
 
 const Fade = ({
@@ -27,6 +28,7 @@ const Fade = ({
   triggerOnce = false,
   threshold = 0.1,
   ease = "easeOut",
+  persistenceKey,
   ...rest
 }: FadeProps) => {
   const ref = useRef<HTMLDivElement | null>(null)
@@ -51,6 +53,8 @@ const Fade = ({
     }
   }
 
+  const shouldNotBeDelayed = persistenceKey ? sessionStorage.getItem(persistenceKey) : false
+
   return (
     <motion.div
       ref={ref}
@@ -58,7 +62,7 @@ const Fade = ({
       animate={isInView ? { x: 0, y: 0, opacity: 1 } : getInitialPosition()}
       transition={{
         duration,
-        delay,
+        delay: shouldNotBeDelayed ? 0 : delay,
         ease
       }}
       className={cn(className)}

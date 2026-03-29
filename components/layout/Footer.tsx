@@ -1,7 +1,6 @@
-import { ReactNode } from 'react'
 import Container from './Container'
 import { Text } from '../typography/Text'
-import { IconBrandInstagram, IconBrandLinkedin, IconBrandYoutube, IconHeadphones, IconHeartFilled, IconLocation, IconMail, IconPhone } from '@tabler/icons-react'
+import { Icon, IconBrandInstagram, IconBrandLinkedin, IconBrandYoutube, IconHeadphones, IconHeartFilled, IconLocation, IconMail, IconPhone } from '@tabler/icons-react'
 import LinkTag from '../LinkTag'
 import { Dancing_Script } from "next/font/google"
 import { cn } from '@/lib/utils'
@@ -15,21 +14,37 @@ const dancingScript = Dancing_Script({
 })
 
 type FooterContactDetailsItemProps = {
-  icon: ReactNode,
+  Icon: Icon,
   itemName: string,
   itemValue: string,
   href: string,
-  className?: string
+  className?: string,
+  multiple?: boolean
 }
-const FooterContactDetailsItem = ({ icon, itemName, itemValue, href, className }: FooterContactDetailsItemProps) => {
+const FooterContactDetailsItem = ({ Icon, itemName, itemValue, href, className, multiple = false }: FooterContactDetailsItemProps) => {
   return (
-    <li className={cn('flex gap-4', className)}>
-      {icon}
-      <div className='flex flex-col gap'>
-        <Text as='span' size='sm' className='font-semibold'>{itemName}</Text>
-        <LinkTag href={href} target='_blank' variant='custom' className='text-black/80 hover:text-black transition-colors duration-300'>
-          <Text as='span' size='sm' className='font-medium'>{itemValue}</Text>
-        </LinkTag>
+    <li className={cn('flex gap-2', className)}>
+      <Icon className='text-brand w-8' />
+      <div className='flex flex-col gap flex-1'>
+        <Text as='span' size='sm' className='font-semibold w-max'>{itemName}</Text>
+        {
+          multiple && itemValue.split(",").length > 1 ?
+            <>
+              {itemValue.split(",").map((value, index) => {
+                const prefix = href.split(":")[0]
+                const newHref = `${prefix}:${value.trim()}`
+                return (
+                  <LinkTag key={index} href={newHref} target='_blank' variant='custom' className='text-black/80 hover:text-black transition-colors duration-300 w-max'>
+                    <Text as='span' size='sm' className='font-medium'>{value}</Text>
+                  </LinkTag>
+                )
+              })}
+            </>
+            :
+            <LinkTag href={href} target='_blank' variant='custom' className='text-black/80 hover:text-black transition-colors duration-300'>
+              <Text as='span' size='sm' className='font-medium'>{itemValue}</Text>
+            </LinkTag>
+        }
       </div>
     </li>
   )
@@ -42,10 +57,29 @@ const FooterContactDetails = ({ className = '', contactDetails }: { className?: 
         <Text as='span' size='base' className='font-bold'>Get In Touch</Text>
 
         <ul className='space-y-4'>
-          <FooterContactDetailsItem href={`mailto:${contactDetails?.email}`} icon={<IconMail />} itemName='Email' itemValue={contactDetails?.email!} />
-          <FooterContactDetailsItem href={`tel:${contactDetails?.mobileNo}`} icon={<IconPhone />} itemName='Phone' itemValue={contactDetails?.mobileNo!} />
-          <FooterContactDetailsItem href={`tel:${contactDetails?.customerCareNo}`} icon={<IconHeadphones />} itemName='Customer Care' itemValue={contactDetails?.customerCareNo!} />
-          <FooterContactDetailsItem href='https://www.google.com/maps/place/S.+P.+ENGINEERING/@22.4289782,70.037116,814m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3957159937799399:0xd2288a0f1c874be7!8m2!3d22.4289782!4d70.0396909!16s%2Fg%2F11fwcw49hh?entry=ttu&g_ep=EgoyMDI2MDMxMS4wIKXMDSoASAFQAw%3D%3D' icon={<IconLocation />} className='' itemName='Address' itemValue={contactDetails?.address!} />
+          <FooterContactDetailsItem
+            href={`mailto:${contactDetails?.email}`}
+            Icon={IconMail} itemName='Email'
+            itemValue={contactDetails?.email!}
+            multiple />
+
+          <FooterContactDetailsItem
+            href={`tel:${contactDetails?.mobileNo}`}
+            Icon={IconPhone} itemName='Phone'
+            itemValue={contactDetails?.mobileNo!}
+            multiple />
+
+          <FooterContactDetailsItem
+            href={`tel:${contactDetails?.customerCareNo}`}
+            Icon={IconHeadphones} itemName='Customer Care'
+            itemValue={contactDetails?.customerCareNo!}
+            multiple />
+
+          <FooterContactDetailsItem
+            href='https://www.google.com/maps/place/S.+P.+ENGINEERING/@22.4289782,70.037116,814m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3957159937799399:0xd2288a0f1c874be7!8m2!3d22.4289782!4d70.0396909!16s%2Fg%2F11fwcw49hh?entry=ttu&g_ep=EgoyMDI2MDMxMS4wIKXMDSoASAFQAw%3D%3D'
+            Icon={IconLocation}
+            itemName='Address'
+            itemValue={contactDetails?.address!} />
         </ul>
       </Fade>
     </div>
@@ -85,9 +119,9 @@ const FooterTop = ({ footerDetails }: { footerDetails: ManufacturerInfo }) => {
           <Text as='span' size='lg' className={cn(dancingScript.className, "font-extrabold")}>
             <TypewriterEffect cursorClassName='hidden' persistenceKey='footer-manufacturing-by'>manufacturing by</TypewriterEffect>
           </Text>
-          <Fade from='down' triggerOnce delay={1.5} className='flex flex-col'>
+          <Fade from='down' triggerOnce delay={1.5} className='flex flex-col gap-1'>
 
-            <Text size='2xl' className="font-medium hidden min-[480px]:block">{footerDetails.name}</Text>
+            <Text size='2xl' className="font-medium text-brand">{footerDetails.name}</Text>
             <Text as='span' size='sm' className='min-[480px]:w-[60%]!'>SP Engineering is a trusted global manufacturer of high-performance CNC and special-purpose machines for modern industries.</Text>
           </Fade>
 
@@ -115,9 +149,9 @@ const FooterMiddle = () => {
     <div className='flex flex-col lg:flex-row gap-10 lg:gap-0'>
       <div className='lg:w-[50%]'>
         <div className='flex gap-8'>
-          <a href="https://www.instagram.com/s.p.engineering_official/#" target='_blank'><IconBrandInstagram /></a>
-          <a href="https://www.youtube.com/@spmechgroup" target='_blank'><IconBrandYoutube /></a>
-          <a href="https://www.linkedin.com/in/s-p-mach-637b76341/" target='_blank'><IconBrandLinkedin /></a>
+          <a href="https://www.instagram.com/s.p.engineering_official/#" target='_blank'><IconBrandInstagram className='hover:text-brand transition-colors duration-300' /></a>
+          <a href="https://www.youtube.com/@spmechgroup" target='_blank'><IconBrandYoutube className='hover:text-brand transition-colors duration-300' /></a>
+          <a href="https://www.linkedin.com/in/s-p-mach-637b76341/" target='_blank'><IconBrandLinkedin className='hover:text-brand transition-colors duration-300' /></a>
 
         </div>
       </div>

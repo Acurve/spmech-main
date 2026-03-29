@@ -6,7 +6,9 @@ import Navbar from "@/components/layout/navbar/Navbar";
 import { Google_Sans_Flex } from "next/font/google"
 
 const googleSansFlex = Google_Sans_Flex({
-  subsets: ["latin"]
+  subsets: ["latin"],
+  display: "swap",
+  adjustFontFallback: false
 })
 
 
@@ -37,6 +39,7 @@ const googleSansFlex = Google_Sans_Flex({
 //   ],
 // })
 export const metadata: Metadata = {
+  metadataBase: new URL("https://spmechgroup.com"),
   title: "SP Mech Group",
   description: "SP Mech Group is a leading manufacturer of high-quality hinges, locks, and other hardware products. We offer a wide range of products for various applications, including architectural, industrial, and commercial. Our products are made from the finest materials and are designed to meet the highest standards of quality and performance.",
   keywords: ["hinges", "locks", "hardware", "architectural", "industrial", "commercial", "SP Mech Group", "hinges manufacturer", "lock manufacturer", "cnc manufacturer", "hinges machine", "lock machine", "cnc machine"],
@@ -50,7 +53,7 @@ export const metadata: Metadata = {
     siteName: "SP Mech Group",
     images: [
       {
-        url: "https://spmechgroup.com/BrandLogo.svg",
+        url: "/BrandLogo.svg",
         width: 1200,
         height: 630,
         alt: "SP Mech Group",
@@ -63,7 +66,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "SP Mech Group",
     description: "SP Mech Group is a leading manufacturer of high-quality hinges, locks, and other hardware products. We offer a wide range of products for various applications, including architectural, industrial, and commercial. Our products are made from the finest materials and are designed to meet the highest standards of quality and performance.",
-    images: ["https://spmechgroup.com/BrandLogo.svg"],
+    images: ["/BrandLogo.svg"],
   },
 };
 import LenisProvider from "@/components/providers/LenisProvider";

@@ -16,7 +16,7 @@ const ContactDetailsBar = async ({ className }: { className?: string }) => {
         <div className={cn('grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-gray-900', className)}>
 
             {/* Location Card */}
-            <Fade from="up" delay={0.4} className="group flex flex-col p-8 rounded-3xl bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand/30">
+            <Fade triggerOnce from="up" delay={0.4} className="group flex flex-col p-8 rounded-3xl bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand/30">
                 <div className="w-14 h-14 rounded-2xl bg-brand/5 flex items-center justify-center text-brand mb-6 transition-transform duration-300 group-hover:scale-110 group-hover:bg-brand/10">
                     <IconMapPin className="w-7 h-7" stroke={1.5} />
                 </div>
@@ -31,7 +31,7 @@ const ContactDetailsBar = async ({ className }: { className?: string }) => {
             </Fade>
 
             {/* Social Media Card */}
-            <Fade from="up" delay={0.5} className="group flex flex-col p-8 rounded-3xl bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand/30">
+            <Fade triggerOnce from="up" delay={0.5} className="group flex flex-col p-8 rounded-3xl bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand/30">
                 <div className="w-14 h-14 rounded-2xl bg-brand/5 flex items-center justify-center text-brand mb-6 transition-transform duration-300 group-hover:scale-110 group-hover:bg-brand/10">
                     <IconShare className="w-7 h-7" stroke={1.5} />
                 </div>
@@ -39,7 +39,7 @@ const ContactDetailsBar = async ({ className }: { className?: string }) => {
                     <Text as="h3" size="lg" className="font-semibold tracking-tight text-gray-900">Social Media</Text>
                     <div className="flex flex-col space-y-2.5">
                         {socialMediaList.map((socialMedia, index) => (
-                            <LinkTag key={`contact-hero-social-${index}`} href={socialMedia.href} variant="custom" className="w-max inline-block">
+                            <LinkTag key={`contact-hero-social-${index}`} href={socialMedia.href} variant="custom" className="w-max inline-block" target='_blank'>
                                 <Text size="sm" className="font-medium text-gray-500 transition-colors duration-300 hover:text-brand flex items-center gap-2">
                                     {socialMedia.name}
                                 </Text>
@@ -50,7 +50,7 @@ const ContactDetailsBar = async ({ className }: { className?: string }) => {
             </Fade>
 
             {/* Email Card */}
-            <Fade from="up" delay={0.6} className="group flex flex-col p-8 rounded-3xl bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand/30">
+            <Fade triggerOnce from="up" delay={0.6} className="group flex flex-col p-8 rounded-3xl bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand/30">
                 <div className="w-14 h-14 rounded-2xl bg-brand/5 flex items-center justify-center text-brand mb-6 transition-transform duration-300 group-hover:scale-110 group-hover:bg-brand/10">
                     <IconMail className="w-7 h-7" stroke={1.5} />
                 </div>
@@ -65,7 +65,7 @@ const ContactDetailsBar = async ({ className }: { className?: string }) => {
             </Fade>
 
             {/* Phone Card */}
-            <Fade from="up" delay={0.7} className="group flex flex-col p-8 rounded-3xl bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand/30">
+            <Fade triggerOnce from="up" delay={0.7} className="group flex flex-col p-8 rounded-3xl bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand/30">
                 <div className="w-14 h-14 rounded-2xl bg-brand/5 flex items-center justify-center text-brand mb-6 transition-transform duration-300 group-hover:scale-110 group-hover:bg-brand/10">
                     <IconPhone className="w-7 h-7" stroke={1.5} />
                 </div>
@@ -76,11 +76,23 @@ const ContactDetailsBar = async ({ className }: { className?: string }) => {
                             {data.contactDetails.customerCareNo}
                         </Text>
                     </LinkTag>
-                    <LinkTag href={`tel:${data.contactDetails.mobileNo}`} variant="custom" className="w-max inline-block">
-                        <Text size="sm" className="font-medium text-gray-500 transition-colors duration-300 hover:text-brand">
-                            {data.contactDetails.mobileNo}
-                        </Text>
-                    </LinkTag>
+                    {
+                        data.contactDetails.mobileNo?.split(",").length > 1 ? (
+                            data.contactDetails.mobileNo.split(",").map((mobileNo: string, index: number) => (
+                                <LinkTag key={`contact-hero-mobile-${index}`} href={`tel:${mobileNo}`} variant="custom" className="w-max inline-block">
+                                    <Text size="sm" className="font-medium text-gray-500 transition-colors duration-300 hover:text-brand">
+                                        {mobileNo}
+                                    </Text>
+                                </LinkTag>
+                            ))
+                        ) : (
+                            <LinkTag href={`tel:${data.contactDetails.mobileNo}`} variant="custom" className="w-max inline-block">
+                                <Text size="sm" className="font-medium text-gray-500 transition-colors duration-300 hover:text-brand">
+                                    {data.contactDetails.mobileNo}
+                                </Text>
+                            </LinkTag>
+                        )
+                    }
                 </div>
             </Fade>
 
@@ -91,8 +103,8 @@ const ContactDetailsBar = async ({ className }: { className?: string }) => {
 const Hero = () => {
     return (
         <Section className='flex flex-col pt-16 py-0 mb-24 gap-16'>
-            <Container className='h-full w-full'>
-                <div className='relative w-full rounded-4xl overflow-hidden min-h-[max(calc(100vh-140px),700px)] shadow-2xl'>
+            <Container className='h-full w-full px-0'>
+                <div className='relative w-full sm:rounded-4xl overflow-hidden min-h-[max(calc(100vh-140px),700px)] shadow-2xl'>
 
                     {/* Background Images & Overlay */}
                     <img src="https://spmech-assets-prod.s3.ap-south-1.amazonaws.com/assets/about/vision.webp" alt="Background" className="absolute inset-0 w-full object-cover h-full" />
@@ -102,25 +114,25 @@ const Hero = () => {
                     <div className='grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] z-10 p-8 md:p-12 lg:p-16 gap-12 lg:gap-24 h-full relative'>
 
                         <div className='flex flex-col justify-center py-8 lg:py-0'>
-                            <Fade from="down" className="mb-4">
+                            <Fade triggerOnce from="down" className="mb-4">
                                 <Text as="span" size="sm" className="font-bold text-brand uppercase tracking-widest">
                                     Get In Touch
                                 </Text>
                             </Fade>
-                            <Fade from="down" delay={0.1}>
+                            <Fade triggerOnce from="down" delay={0.1}>
                                 <h1 className="text-5xl lg:text-7xl font-medium tracking-tight text-white mb-6 leading-[1.1]">
                                     You Have Questions,<br />
                                     We Have Answers.
                                 </h1>
                             </Fade>
-                            <Fade from="down" delay={0.2}>
+                            <Fade triggerOnce from="down" delay={0.2}>
                                 <p className="text-lg text-white/90 max-w-lg leading-relaxed">
                                     Our engineering team is ready to assist you with technical specifications, international shipping inquiries, or custom machinery requests.
                                 </p>
                             </Fade>
                         </div>
 
-                        <Fade from="up" delay={0.3} className="h-full">
+                        <Fade triggerOnce from="up" delay={0.3} className="h-full">
                             <ContactForm className='rounded-3xl h-full shadow-2xl border-none' />
                         </Fade>
                     </div>
