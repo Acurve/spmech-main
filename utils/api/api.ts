@@ -30,11 +30,11 @@ export const getAllMachines = async () => {
     const response = await fetch(`${BACKEND_URL}/products/machines`, {
       next: { tags: [`machine-all`] }
     });
-    
+
     if (!response.ok) {
       throw new Error(`Failed to fetch machines: ${response.status}`);
     }
-    
+
     const data = await response.json();
     return data;
 
@@ -149,3 +149,22 @@ export const getAllBlogs = async () => {
     return null;
   }
 };
+
+export const getAllClients = async () => {
+  try {
+    const response = await fetch(`${BACKEND_URL}/clients`, {
+      next: { tags: [`client-all`] }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch clients: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+
+  } catch (error) {
+    console.error(`Error fetching clients: `, error);
+    return null;
+  }
+}

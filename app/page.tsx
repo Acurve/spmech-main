@@ -12,6 +12,7 @@ import { CallToActionBackgroundVideo } from "@/components/shared/CallToAction";
 import { Category, CategoryShaped } from "@/types/category";
 import { Metadata } from "next";
 import { getAllCategories } from "@/utils/api/api";
+import Clients from "@/components/shared/Clients";
 
 export const metadata: Metadata = {
   title: 'SP Mech Group | Leading Industrial Machine Manufacturers',
@@ -56,7 +57,7 @@ const Home = async () => {
   ))
   return (
     <>
-      <Hero categories={categoriesShaped}/>
+      <Hero categories={categoriesShaped} />
       <Introduction />
       <Products categories={categoriesShaped} />
       <Features />
@@ -65,6 +66,7 @@ const Home = async () => {
       <Differentiator />
       <Ease />
       <FAQs className="mt-24" faqList={heroFaqData} />
+      <Clients />
       <CallToActionBackgroundVideo />
     </>
   );

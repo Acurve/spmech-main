@@ -91,6 +91,8 @@ export const ScrollRevealWrapper: React.FC<ScrollRevealWrapperProps> = ({
                     progress,
                     (v) => `linear-gradient(${gradientDir}, ${fillColor} ${v}%, ${baseColor} ${v}%)`
                 ),
+                // @ts-ignore
+                '--reveal-progress': useTransform(progress, (v) => `${v}%`),
             }}
         >
             {children}
